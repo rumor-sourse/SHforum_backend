@@ -21,7 +21,7 @@ func CreatePost(p *models.Post) (err error) {
 	return
 }
 
-func GetPostById(pid int64) (data *response.PostResponse, err error) {
+func GetPostById(pid int64) (data *response.PostDetailResponse, err error) {
 	//查询帖子详情
 	post, err := mysql.GetPostById(pid)
 	if err != nil {
@@ -47,15 +47,25 @@ func GetPostById(pid int64) (data *response.PostResponse, err error) {
 		return
 	}
 	//组合数据
-	data = &response.PostResponse{
+	data = &response.PostDetailResponse{
 		AuthorName: user.Username,
-		Post:       post,
-		Community:  community,
+		CommunityResponse: &response.CommunityResponse{
+			ID:   community.ID,
+			Name: community.Name,
+		},
+		PostResponse: &response.PostResponse{
+			ID:          post.ID,
+			Title:       post.Title,
+			Content:     post.Content,
+			AuthorID:    post.AuthorID,
+			CommunityID: post.CommunityID,
+			Status:      post.Status,
+		},
 	}
 	return
 }
 
-func GetPostList(page, size int64) (data []*response.PostResponse, err error) {
+func GetPostList(page, size int64) (data []*response.PostDetailResponse, err error) {
 	//查询帖子列表
 	posts, err := mysql.GetPostList(page, size)
 	if err != nil {
@@ -84,17 +94,27 @@ func GetPostList(page, size int64) (data []*response.PostResponse, err error) {
 			continue
 		}
 		//组合数据
-		postDetail := &response.PostResponse{
+		postDetail := &response.PostDetailResponse{
 			AuthorName: user.Username,
-			Post:       post,
-			Community:  community,
+			CommunityResponse: &response.CommunityResponse{
+				ID:   community.ID,
+				Name: community.Name,
+			},
+			PostResponse: &response.PostResponse{
+				ID:          post.ID,
+				Title:       post.Title,
+				Content:     post.Content,
+				AuthorID:    post.AuthorID,
+				CommunityID: post.CommunityID,
+				Status:      post.Status,
+			},
 		}
 		data = append(data, postDetail)
 	}
 	return
 }
 
-func GetPostList2(p *models.ParamPostList) (data []*response.PostResponse, err error) {
+func GetPostList2(p *models.ParamPostList) (data []*response.PostDetailResponse, err error) {
 	//从redis拿到所有的id
 	ids, err := redis.GetPostIDsInOrder(p)
 	if err != nil {
@@ -134,18 +154,28 @@ func GetPostList2(p *models.ParamPostList) (data []*response.PostResponse, err e
 			continue
 		}
 		//组合数据
-		postDetail := &response.PostResponse{
+		postDetail := &response.PostDetailResponse{
 			AuthorName: user.Username,
 			VoteNum:    voteData[idx],
-			Post:       post,
-			Community:  community,
+			CommunityResponse: &response.CommunityResponse{
+				ID:   community.ID,
+				Name: community.Name,
+			},
+			PostResponse: &response.PostResponse{
+				ID:          post.ID,
+				Title:       post.Title,
+				Content:     post.Content,
+				AuthorID:    post.AuthorID,
+				CommunityID: post.CommunityID,
+				Status:      post.Status,
+			},
 		}
 		data = append(data, postDetail)
 	}
 	return
 }
 
-func GetCommunityPostList(p *models.ParamPostList) (data []*response.PostResponse, err error) {
+func GetCommunityPostList(p *models.ParamPostList) (data []*response.PostDetailResponse, err error) {
 	//从redis拿到所有的id
 	ids, err := redis.GetCommunityPostIDsInOrder(p)
 	if err != nil {
@@ -185,11 +215,21 @@ func GetCommunityPostList(p *models.ParamPostList) (data []*response.PostRespons
 			continue
 		}
 		//组合数据
-		postDetail := &response.PostResponse{
+		postDetail := &response.PostDetailResponse{
 			AuthorName: user.Username,
 			VoteNum:    voteData[idx],
-			Post:       post,
-			Community:  community,
+			CommunityResponse: &response.CommunityResponse{
+				ID:   community.ID,
+				Name: community.Name,
+			},
+			PostResponse: &response.PostResponse{
+				ID:          post.ID,
+				Title:       post.Title,
+				Content:     post.Content,
+				AuthorID:    post.AuthorID,
+				CommunityID: post.CommunityID,
+				Status:      post.Status,
+			},
 		}
 		data = append(data, postDetail)
 	}
@@ -197,7 +237,7 @@ func GetCommunityPostList(p *models.ParamPostList) (data []*response.PostRespons
 }
 
 // GetPostListNew 将两个查询列表的函数合二为一
-func GetPostListNew(p *models.ParamPostList) (data []*response.PostResponse, err error) {
+func GetPostListNew(p *models.ParamPostList) (data []*response.PostDetailResponse, err error) {
 	if p.CommunityID == 0 {
 		//查询所有的帖子
 		data, err = GetPostList2(p)

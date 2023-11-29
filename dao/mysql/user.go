@@ -15,7 +15,7 @@ func CheckUserExist(username string) (err error) {
 	//select count(userid) from user where username=?
 	var user *models.User
 	var count int64
-	db.Debug().Model(user).Where("username=?", username).Select("userid").Count(&count)
+	db.Debug().Model(user).Where("username=?", username).Select("user_id").Count(&count)
 	if count > 0 {
 		return ErrorUserExist
 	}
@@ -26,7 +26,10 @@ func CheckUserExist(username string) (err error) {
 func InsertUser(user *models.User) (err error) {
 	//insert into user(userid, username, password, email) values(?, ?, ?, ?)
 	user.Password = encryptPassword(user.Password)
-	db.Debug().Create(user)
+	result := db.Debug().Create(user)
+	if result.Error != nil {
+		return result.Error
+	}
 	return
 }
 
@@ -41,7 +44,7 @@ func encryptPassword(opassword string) string {
 func Login(user *models.User) (err error) {
 	oPassword := user.Password
 	//select userid, username, password from user where username=?
-	result := db.Debug().Select("userid", "username", "password").Where("username=?", user.Username).First(user)
+	result := db.Debug().Select("user_id", "username", "password").Where("username=?", user.Username).First(user)
 	if errors.Is(result.Error, gorm.ErrRecordNotFound) {
 		return ErrorUserNotExist
 	}
@@ -60,7 +63,7 @@ func Login(user *models.User) (err error) {
 func GetUserById(uid int64) (data *models.User, err error) {
 	data = new(models.User)
 	//select user_id, username from user where user_id = ?
-	result := db.Debug().Select("userid", "username").Where("userid = ?", uid).First(data)
+	result := db.Debug().Select("user_id", "username").Where("user_id = ?", uid).First(data)
 	if errors.Is(result.Error, gorm.ErrRecordNotFound) {
 		err = ErrorInvalidID
 	}

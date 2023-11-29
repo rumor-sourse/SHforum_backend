@@ -16,7 +16,7 @@ func CreatePost(p *models.Post) (err error) {
 func GetPostById(pid int64) (data *models.Post, err error) {
 	//select post_id, title, content, author_id, community_id, create_time from post where post_id = ?
 	data = new(models.Post)
-	db.Debug().Select("id", "title", "content", "authorid", "communityid").Where("id = ?", pid).First(data)
+	db.Debug().Select("id", "title", "content", "author_id", "community_id").Where("id = ?", pid).First(data)
 	return
 }
 
@@ -24,7 +24,7 @@ func GetPostById(pid int64) (data *models.Post, err error) {
 func GetPostList(page, size int64) (data []*models.Post, err error) {
 	//select post_id, title, content, author_id, community_id from post order by create_time desc limit ?,?
 	data = make([]*models.Post, 0, 2)
-	result := db.Debug().Select("id", "title", "content", "authorid", "communityid").Order("createtime desc").Limit(int(size)).Offset(int((page - 1) * size)).Find(&data)
+	result := db.Debug().Select("id", "title", "content", "author_id", "community_id").Order("created_at desc").Limit(int(size)).Offset(int((page - 1) * size)).Find(&data)
 	if result.Error != nil {
 		return nil, result.Error
 	}
@@ -35,7 +35,7 @@ func GetPostList(page, size int64) (data []*models.Post, err error) {
 func GetPostListByIDs(ids []string) (postList []*models.Post, err error) {
 	//`select post_id, title, content, author_id, community_id from post where post_id in (?) order by FIND_IN_SET(post_id, ?)`
 	postList = make([]*models.Post, len(ids))
-	db.Debug().Select("id", "title", "content", "authorid", "communityid").
+	db.Debug().Select("id", "title", "content", "author_id", "community_id").
 		Where("id IN ?", ids).Clauses(clause.OrderBy{
 		Expression: clause.Expr{SQL: "FIELD(id,?)", Vars: []interface{}{ids}, WithoutParentheses: true},
 	}).Find(&postList)

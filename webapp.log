@@ -2439,3 +2439,51 @@
 {"level":"INFO","time":"2023-11-28T17:19:29.618+0800","caller":"logger/logger.go:75","msg":"/api/v1/signup","status":200,"method":"POST","path":"/api/v1/signup","query":"","ip":"::1","user-agent":"PostmanRuntime/7.35.0","errors":"","cost":0.0040897}
 {"level":"INFO","time":"2023-11-28T22:41:47.307+0800","caller":"SHforum_backend/main.go:93","msg":"Shutdown Server ..."}
 {"level":"INFO","time":"2023-11-28T22:41:47.338+0800","caller":"SHforum_backend/main.go:102","msg":"Server exiting"}
+{"level":"DEBUG","time":"2023-11-29T21:16:21.402+0800","caller":"SHforum_backend/main.go:49","msg":"logger init success..."}
+{"level":"INFO","time":"2023-11-29T21:17:07.268+0800","caller":"logger/logger.go:75","msg":"/api/v1/user/signup","status":200,"method":"POST","path":"/api/v1/user/signup","query":"","ip":"::1","user-agent":"PostmanRuntime/7.35.0","errors":"","cost":0.0126797}
+{"level":"INFO","time":"2023-11-29T21:18:43.311+0800","caller":"SHforum_backend/main.go:93","msg":"Shutdown Server ..."}
+{"level":"INFO","time":"2023-11-29T21:18:43.312+0800","caller":"SHforum_backend/main.go:102","msg":"Server exiting"}
+{"level":"DEBUG","time":"2023-11-29T21:21:22.378+0800","caller":"SHforum_backend/main.go:49","msg":"logger init success..."}
+{"level":"INFO","time":"2023-11-29T21:21:37.002+0800","caller":"logger/logger.go:75","msg":"/api/v1/user/signup","status":200,"method":"POST","path":"/api/v1/user/signup","query":"","ip":"::1","user-agent":"PostmanRuntime/7.35.0","errors":"","cost":0.0127589}
+{"level":"INFO","time":"2023-11-29T21:24:17.009+0800","caller":"SHforum_backend/main.go:93","msg":"Shutdown Server ..."}
+{"level":"INFO","time":"2023-11-29T21:24:17.009+0800","caller":"SHforum_backend/main.go:102","msg":"Server exiting"}
+{"level":"DEBUG","time":"2023-11-29T21:24:28.302+0800","caller":"SHforum_backend/main.go:49","msg":"logger init success..."}
+{"level":"INFO","time":"2023-11-29T21:24:51.500+0800","caller":"logger/logger.go:75","msg":"/api/v1/user/signup","status":200,"method":"POST","path":"/api/v1/user/signup","query":"","ip":"::1","user-agent":"PostmanRuntime/7.35.0","errors":"","cost":0.0186376}
+{"level":"INFO","time":"2023-11-29T21:25:31.171+0800","caller":"logger/logger.go:75","msg":"/api/v1/user/login","status":200,"method":"POST","path":"/api/v1/user/login","query":"","ip":"::1","user-agent":"PostmanRuntime/7.35.0","errors":"","cost":0.0021451}
+{"level":"INFO","time":"2023-11-29T21:26:15.090+0800","caller":"logger/logger.go:75","msg":"/api/v1/community/","status":200,"method":"GET","path":"/api/v1/community/","query":"","ip":"::1","user-agent":"PostmanRuntime/7.35.0","errors":"","cost":0.0010082}
+{"level":"INFO","time":"2023-11-29T21:29:48.306+0800","caller":"logger/logger.go:75","msg":"/api/v1/community/","status":200,"method":"GET","path":"/api/v1/community/","query":"","ip":"::1","user-agent":"PostmanRuntime/7.35.0","errors":"","cost":0.0009931}
+{"level":"INFO","time":"2023-11-29T21:31:17.086+0800","caller":"logger/logger.go:75","msg":"/api/v1/post","status":200,"method":"POST","path":"/api/v1/post","query":"","ip":"::1","user-agent":"PostmanRuntime/7.35.0","errors":"","cost":0.0085505}
+{"level":"INFO","time":"2023-11-29T21:34:57.862+0800","caller":"SHforum_backend/main.go:93","msg":"Shutdown Server ..."}
+{"level":"INFO","time":"2023-11-29T21:34:57.864+0800","caller":"SHforum_backend/main.go:102","msg":"Server exiting"}
+{"level":"DEBUG","time":"2023-11-29T21:35:09.878+0800","caller":"SHforum_backend/main.go:49","msg":"logger init success..."}
+{"level":"INFO","time":"2023-11-29T21:35:13.612+0800","caller":"logger/logger.go:75","msg":"/api/v1/post","status":200,"method":"POST","path":"/api/v1/post","query":"","ip":"::1","user-agent":"PostmanRuntime/7.35.0","errors":"","cost":0.0241868}
+{"level":"INFO","time":"2023-11-29T21:37:03.330+0800","caller":"SHforum_backend/main.go:93","msg":"Shutdown Server ..."}
+{"level":"INFO","time":"2023-11-29T21:37:03.331+0800","caller":"SHforum_backend/main.go:102","msg":"Server exiting"}
+{"level":"DEBUG","time":"2023-11-29T21:37:15.891+0800","caller":"SHforum_backend/main.go:49","msg":"logger init success..."}
+{"level":"INFO","time":"2023-11-29T21:38:13.138+0800","caller":"logger/logger.go:75","msg":"/api/v1/user/signup","status":200,"method":"POST","path":"/api/v1/user/signup","query":"","ip":"::1","user-agent":"PostmanRuntime/7.35.0","errors":"","cost":0.0126646}
+{"level":"INFO","time":"2023-11-29T21:39:19.694+0800","caller":"logger/logger.go:75","msg":"/api/v1/user/login","status":200,"method":"POST","path":"/api/v1/user/login","query":"","ip":"::1","user-agent":"PostmanRuntime/7.35.0","errors":"","cost":0.0062706}
+{"level":"INFO","time":"2023-11-29T21:39:37.452+0800","caller":"logger/logger.go:75","msg":"/api/v1/community/","status":200,"method":"GET","path":"/api/v1/community/","query":"","ip":"::1","user-agent":"PostmanRuntime/7.35.0","errors":"","cost":0.0023786}
+{"level":"INFO","time":"2023-11-29T21:39:51.960+0800","caller":"logger/logger.go:75","msg":"/api/v1/post","status":200,"method":"POST","path":"/api/v1/post","query":"","ip":"::1","user-agent":"PostmanRuntime/7.35.0","errors":"","cost":0.0174323}
+{"level":"INFO","time":"2023-11-29T21:40:16.317+0800","caller":"logger/logger.go:75","msg":"/api/v1/post","status":200,"method":"POST","path":"/api/v1/post","query":"","ip":"::1","user-agent":"PostmanRuntime/7.35.0","errors":"","cost":0.0087725}
+{"level":"INFO","time":"2023-11-29T21:40:35.834+0800","caller":"logger/logger.go:75","msg":"/api/v1/post","status":200,"method":"POST","path":"/api/v1/post","query":"","ip":"::1","user-agent":"PostmanRuntime/7.35.0","errors":"","cost":0.0250309}
+{"level":"INFO","time":"2023-11-29T21:40:52.780+0800","caller":"logger/logger.go:75","msg":"/api/v1/post","status":200,"method":"POST","path":"/api/v1/post","query":"","ip":"::1","user-agent":"PostmanRuntime/7.35.0","errors":"","cost":0.0063555}
+{"level":"ERROR","time":"2023-11-29T21:41:28.522+0800","caller":"logic/post.go:62","msg":"mysql.GetPostList(page, size) failed","page":1,"size":10,"error":"Error 1054 (42S22): Unknown column 'create_at' in 'order clause'"}
+{"level":"ERROR","time":"2023-11-29T21:41:28.525+0800","caller":"controllers/post.go:62","msg":"logic.GetPostList() failed","error":"Error 1054 (42S22): Unknown column 'create_at' in 'order clause'"}
+{"level":"INFO","time":"2023-11-29T21:41:28.527+0800","caller":"logger/logger.go:75","msg":"/api/v1/posts","status":200,"method":"GET","path":"/api/v1/posts","query":"","ip":"::1","user-agent":"PostmanRuntime/7.35.0","errors":"","cost":0.0074825}
+{"level":"INFO","time":"2023-11-29T21:42:26.655+0800","caller":"SHforum_backend/main.go:93","msg":"Shutdown Server ..."}
+{"level":"INFO","time":"2023-11-29T21:42:26.656+0800","caller":"SHforum_backend/main.go:102","msg":"Server exiting"}
+{"level":"DEBUG","time":"2023-11-29T21:42:34.173+0800","caller":"SHforum_backend/main.go:49","msg":"logger init success..."}
+{"level":"ERROR","time":"2023-11-29T21:42:38.607+0800","caller":"logic/post.go:73","msg":"mysql.GetUserById(post.AuthorID) failed","author_id":6725530749505536,"error":"无效的ID"}
+{"level":"ERROR","time":"2023-11-29T21:42:38.609+0800","caller":"logic/post.go:73","msg":"mysql.GetUserById(post.AuthorID) failed","author_id":6725530749505536,"error":"无效的ID"}
+{"level":"ERROR","time":"2023-11-29T21:42:38.611+0800","caller":"logic/post.go:73","msg":"mysql.GetUserById(post.AuthorID) failed","author_id":6725530749505536,"error":"无效的ID"}
+{"level":"ERROR","time":"2023-11-29T21:42:38.613+0800","caller":"logic/post.go:73","msg":"mysql.GetUserById(post.AuthorID) failed","author_id":6725530749505536,"error":"无效的ID"}
+{"level":"INFO","time":"2023-11-29T21:42:38.614+0800","caller":"logger/logger.go:75","msg":"/api/v1/posts","status":200,"method":"GET","path":"/api/v1/posts","query":"","ip":"::1","user-agent":"PostmanRuntime/7.35.0","errors":"","cost":0.0255376}
+{"level":"ERROR","time":"2023-11-29T21:43:51.400+0800","caller":"logic/post.go:73","msg":"mysql.GetUserById(post.AuthorID) failed","author_id":6725530749505536,"error":"无效的ID"}
+{"level":"ERROR","time":"2023-11-29T21:43:51.402+0800","caller":"logic/post.go:73","msg":"mysql.GetUserById(post.AuthorID) failed","author_id":6725530749505536,"error":"无效的ID"}
+{"level":"ERROR","time":"2023-11-29T21:43:51.405+0800","caller":"logic/post.go:73","msg":"mysql.GetUserById(post.AuthorID) failed","author_id":6725530749505536,"error":"无效的ID"}
+{"level":"ERROR","time":"2023-11-29T21:43:51.408+0800","caller":"logic/post.go:73","msg":"mysql.GetUserById(post.AuthorID) failed","author_id":6725530749505536,"error":"无效的ID"}
+{"level":"INFO","time":"2023-11-29T21:43:51.408+0800","caller":"logger/logger.go:75","msg":"/api/v1/posts","status":200,"method":"GET","path":"/api/v1/posts","query":"","ip":"::1","user-agent":"PostmanRuntime/7.35.0","errors":"","cost":0.0101385}
+{"level":"INFO","time":"2023-11-29T21:44:52.588+0800","caller":"logger/logger.go:75","msg":"/api/v1/post","status":200,"method":"POST","path":"/api/v1/post","query":"","ip":"::1","user-agent":"PostmanRuntime/7.35.0","errors":"","cost":0.0178118}
+{"level":"INFO","time":"2023-11-29T21:45:25.113+0800","caller":"logger/logger.go:75","msg":"/api/v1/posts","status":200,"method":"GET","path":"/api/v1/posts","query":"","ip":"::1","user-agent":"PostmanRuntime/7.35.0","errors":"","cost":0.0304475}
+{"level":"INFO","time":"2023-11-29T21:54:27.930+0800","caller":"SHforum_backend/main.go:93","msg":"Shutdown Server ..."}
+{"level":"INFO","time":"2023-11-29T21:54:27.931+0800","caller":"SHforum_backend/main.go:102","msg":"Server exiting"}
