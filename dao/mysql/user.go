@@ -14,11 +14,12 @@ const secret = "SHforum_backend"
 func CheckUserExist(username string) (err error) {
 	//select count(user_id) from user where username=?
 	var user *models.User
-	result := db.Debug().Where("username=?", username).Select("user_id").First(user)
-	if errors.Is(result.Error, gorm.ErrRecordNotFound) {
-		return err
+	var count int64
+	db.Debug().Model(user).Where("username=?", username).Select("user_id").Count(&count)
+	if count > 0 {
+		return ErrorUserExist
 	}
-	return ErrorUserExist
+	return nil
 }
 
 // InsertUser 向数据库中插入一条新的用户记录

@@ -1,6 +1,7 @@
 package mysql
 
 import (
+	"SHforum_backend/models"
 	"SHforum_backend/settings"
 	"fmt"
 	_ "github.com/go-sql-driver/mysql"
@@ -27,5 +28,20 @@ func Init(cfg *settings.MySQLConfig) (err error) {
 	sqlDB, err := db.DB()
 	sqlDB.SetMaxIdleConns(cfg.MaxIdleConns)
 	sqlDB.SetMaxOpenConns(cfg.MaxOpenConns)
+	err = db.AutoMigrate(&models.User{})
+	if err != nil {
+		zap.L().Error("auto migrate user tables failed", zap.Error(err))
+		return err
+	}
+	err = db.AutoMigrate(&models.Community{})
+	if err != nil {
+		zap.L().Error("auto migrate community tables failed", zap.Error(err))
+		return err
+	}
+	err = db.AutoMigrate(&models.Post{})
+	if err != nil {
+		zap.L().Error("auto migrate post tables failed", zap.Error(err))
+		return err
+	}
 	return
 }

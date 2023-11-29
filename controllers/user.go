@@ -27,14 +27,6 @@ func SignUpHandler(c *gin.Context) {
 		ResponseErrorWithMsg(c, CodeInvalidParam, removeTopStruct(errs.Translate(trans)))
 		return
 	}
-	//手动对参数进行校验（tag中已经做了校验，这里不需要）
-	/*	if len(p.Username) == 0 || len(p.Password) == 0 || len(p.RePassword) == 0 || p.RePassword != p.Password {
-		zap.L().Error("SignUp with invalid param")
-		c.JSON(http.StatusBadRequest, gin.H{
-			"msg": "请求参数有误",
-		})
-		return
-	}*/
 	fmt.Println(p)
 	// 2、业务处理
 	if err := logic.SignUp(p); err != nil {
