@@ -11,6 +11,7 @@ type ParamSignUp struct {
 	Password   string `json:"password" binding:"required"`
 	RePassword string `json:"re_password" binding:"required,eqfield=Password"`
 	Email      string `json:"email" binding:"required,email"`
+	Code       string `json:"code" binding:"required,len=6"`
 }
 
 type ParamLogin struct {

@@ -2487,3 +2487,23 @@
 {"level":"INFO","time":"2023-11-29T21:45:25.113+0800","caller":"logger/logger.go:75","msg":"/api/v1/posts","status":200,"method":"GET","path":"/api/v1/posts","query":"","ip":"::1","user-agent":"PostmanRuntime/7.35.0","errors":"","cost":0.0304475}
 {"level":"INFO","time":"2023-11-29T21:54:27.930+0800","caller":"SHforum_backend/main.go:93","msg":"Shutdown Server ..."}
 {"level":"INFO","time":"2023-11-29T21:54:27.931+0800","caller":"SHforum_backend/main.go:102","msg":"Server exiting"}
+{"level":"DEBUG","time":"2023-11-29T22:01:23.407+0800","caller":"SHforum_backend/main.go:49","msg":"logger init success..."}
+{"level":"INFO","time":"2023-11-29T22:01:27.282+0800","caller":"logger/logger.go:75","msg":"/api/v1/posts","status":200,"method":"GET","path":"/api/v1/posts","query":"","ip":"::1","user-agent":"PostmanRuntime/7.35.0","errors":"","cost":0.0233143}
+{"level":"INFO","time":"2023-11-29T22:02:27.028+0800","caller":"logger/logger.go:75","msg":"/api/v1/post/6729307548291072","status":200,"method":"GET","path":"/api/v1/post/6729307548291072","query":"","ip":"::1","user-agent":"PostmanRuntime/7.35.0","errors":"","cost":0.0065597}
+{"level":"INFO","time":"2023-11-29T22:03:22.827+0800","caller":"logger/logger.go:75","msg":"/api/v1/posts","status":200,"method":"GET","path":"/api/v1/posts","query":"page=1&size=2","ip":"::1","user-agent":"PostmanRuntime/7.35.0","errors":"","cost":0.006618}
+{"level":"DEBUG","time":"2023-11-29T22:05:01.744+0800","caller":"logic/vote.go:11","msg":"VoteForPost","userID":6728893088141312,"postID":"6729307548291072","direction":1}
+{"level":"INFO","time":"2023-11-29T22:05:01.756+0800","caller":"logger/logger.go:75","msg":"/api/v1/vote","status":200,"method":"POST","path":"/api/v1/vote","query":"","ip":"::1","user-agent":"PostmanRuntime/7.35.0","errors":"","cost":0.0143627}
+{"level":"INFO","time":"2023-11-29T22:11:25.898+0800","caller":"logger/logger.go:75","msg":"/api/v1/posts2","status":200,"method":"GET","path":"/api/v1/posts2","query":"","ip":"::1","user-agent":"PostmanRuntime/7.35.0","errors":"","cost":0.030699}
+{"level":"INFO","time":"2023-11-29T22:15:18.335+0800","caller":"logger/logger.go:75","msg":"/api/v1/user/signup","status":200,"method":"POST","path":"/api/v1/user/signup","query":"","ip":"::1","user-agent":"PostmanRuntime/7.35.0","errors":"","cost":0.0175413}
+{"level":"INFO","time":"2023-11-29T22:15:34.646+0800","caller":"logger/logger.go:75","msg":"/api/v1/user/login","status":200,"method":"POST","path":"/api/v1/user/login","query":"","ip":"::1","user-agent":"PostmanRuntime/7.35.0","errors":"","cost":0.0065538}
+{"level":"DEBUG","time":"2023-11-29T22:15:57.453+0800","caller":"logic/vote.go:11","msg":"VoteForPost","userID":6738226236624896,"postID":"6729307548291072","direction":1}
+{"level":"INFO","time":"2023-11-29T22:15:57.456+0800","caller":"logger/logger.go:75","msg":"/api/v1/vote","status":200,"method":"POST","path":"/api/v1/vote","query":"","ip":"::1","user-agent":"PostmanRuntime/7.35.0","errors":"","cost":0.00321}
+{"level":"INFO","time":"2023-11-29T22:28:41.359+0800","caller":"SHforum_backend/main.go:93","msg":"Shutdown Server ..."}
+{"level":"INFO","time":"2023-11-29T22:28:41.367+0800","caller":"SHforum_backend/main.go:102","msg":"Server exiting"}
+{"level":"DEBUG","time":"2023-11-29T23:27:06.887+0800","caller":"SHforum_backend/main.go:49","msg":"logger init success..."}
+{"level":"INFO","time":"2023-11-29T23:34:03.373+0800","caller":"logger/logger.go:75","msg":"/api/v1/user/sendcode","status":200,"method":"GET","path":"/api/v1/user/sendcode","query":"email=3619644902@qq.com","ip":"::1","user-agent":"PostmanRuntime/7.35.0","errors":"","cost":1.4997542}
+{"level":"INFO","time":"2023-11-29T23:34:53.020+0800","caller":"SHforum_backend/main.go:93","msg":"Shutdown Server ..."}
+{"level":"INFO","time":"2023-11-29T23:34:53.021+0800","caller":"SHforum_backend/main.go:102","msg":"Server exiting"}
+{"level":"DEBUG","time":"2023-11-29T23:35:07.956+0800","caller":"SHforum_backend/main.go:49","msg":"logger init success..."}
+{"level":"INFO","time":"2023-11-29T23:35:50.102+0800","caller":"SHforum_backend/main.go:93","msg":"Shutdown Server ..."}
+{"level":"INFO","time":"2023-11-29T23:35:50.103+0800","caller":"SHforum_backend/main.go:102","msg":"Server exiting"}

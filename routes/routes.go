@@ -29,6 +29,8 @@ func SetUp(mode string) *gin.Engine {
 	{
 		userRouter.POST("/signup", controllers.SignUpHandler)
 		userRouter.POST("/login", controllers.LoginHandler)
+		//发送邮箱验证码
+		userRouter.GET("/sendcode", controllers.SendCodeHandler)
 	}
 	communityRouter := v1.Group("/community")
 	{

@@ -9,8 +9,16 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"
 	"go.uber.org/zap"
+	"math/rand"
+	"time"
 )
 
+const (
+	Charset       = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+	NumberCharset = "0123456789"
+)
+
+// SignUpHandler 处理注册请求的函数
 func SignUpHandler(c *gin.Context) {
 	// 1、获取参数和参数校验
 	p := new(models.ParamSignUp)
@@ -41,6 +49,7 @@ func SignUpHandler(c *gin.Context) {
 	ResponseSuccess(c, nil)
 }
 
+// LoginHandler 处理登录请求的函数
 func LoginHandler(c *gin.Context) {
 	// 1、获取参数和参数校验
 	p := new(models.ParamLogin)
@@ -75,4 +84,43 @@ func LoginHandler(c *gin.Context) {
 		"username": loginresp.Name,
 		"token":    loginresp.Token,
 	})
+}
+
+func randomInteger(length int) string {
+	rand.Seed(time.Now().UnixNano())
+
+	b := make([]byte, length)
+	for i := 0; i < length; i++ {
+		b[i] = NumberCharset[rand.Intn(len(NumberCharset))]
+	}
+
+	return string(b)
+}
+
+func randomString(length int) string {
+	rand.Seed(time.Now().UnixNano())
+
+	b := make([]byte, length)
+	for i := 0; i < length; i++ {
+		b[i] = Charset[rand.Intn(len(Charset))]
+	}
+
+	return string(b)
+}
+
+// SendCodeHandler 发送邮箱验证码
+func SendCodeHandler(c *gin.Context) {
+	email := c.Query("email")
+	if len(email) == 0 {
+		ResponseError(c, CodeEmailEmpty)
+		return
+	}
+
+	code := randomInteger(6)
+	err := logic.SendCode(email, code)
+	if err != nil {
+		ResponseError(c, CodeServerBusy)
+		return
+	}
+	ResponseSuccess(c, nil)
 }

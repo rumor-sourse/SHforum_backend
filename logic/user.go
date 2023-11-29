@@ -2,10 +2,12 @@ package logic
 
 import (
 	"SHforum_backend/dao/mysql"
+	"SHforum_backend/dao/redis"
 	"SHforum_backend/models"
 	"SHforum_backend/models/response"
 	"SHforum_backend/pkg/jwt"
 	"SHforum_backend/pkg/snowflake"
+	"SHforum_backend/util"
 )
 
 func SignUp(p *models.ParamSignUp) (err error) {
@@ -22,6 +24,10 @@ func SignUp(p *models.ParamSignUp) (err error) {
 		Username: p.Username,
 		Password: p.Password,
 		Email:    p.Email,
+	}
+	rcode, err := redis.GetCode(p.Email)
+	if rcode != p.Code {
+		return err
 	}
 	//3、保存用户信息
 	return mysql.InsertUser(user)
@@ -46,5 +52,14 @@ func Login(p *models.ParamLogin) (userresp *response.UserResponse, err error) {
 		Name:   user.Username,
 		Token:  token,
 	}
+	return
+}
+
+func SendCode(email string, code string) (err error) {
+	err = util.SendEmailWithCode([]string{email}, code)
+	if err != nil {
+		return err
+	}
+	redis.SaveCode(email, code)
 	return
 }
