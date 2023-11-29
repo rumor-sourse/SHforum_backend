@@ -3,6 +3,7 @@ package logic
 import (
 	"SHforum_backend/dao/mysql"
 	"SHforum_backend/models"
+	"SHforum_backend/models/response"
 	"SHforum_backend/pkg/jwt"
 	"SHforum_backend/pkg/snowflake"
 )
@@ -20,13 +21,14 @@ func SignUp(p *models.ParamSignUp) (err error) {
 		UserID:   userId,
 		Username: p.Username,
 		Password: p.Password,
+		Email:    p.Email,
 	}
 	//3、保存用户信息
 	return mysql.InsertUser(user)
 }
 
-func Login(p *models.ParamLogin) (user *models.User, err error) {
-	user = &models.User{
+func Login(p *models.ParamLogin) (userresp *response.UserResponse, err error) {
+	user := &models.User{
 		Username: p.Username,
 		Password: p.Password,
 	}
@@ -39,6 +41,10 @@ func Login(p *models.ParamLogin) (user *models.User, err error) {
 	if err != nil {
 		return nil, err
 	}
-	user.Token = token
+	userresp = &response.UserResponse{
+		UserID: user.UserID,
+		Name:   user.Username,
+		Token:  token,
+	}
 	return
 }

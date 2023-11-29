@@ -24,7 +24,6 @@ func init() {
 
 func TestCreatePost(t *testing.T) {
 	err := CreatePost(&models.Post{
-		ID:          10,
 		AuthorID:    1,
 		CommunityID: 1,
 		Title:       "test",

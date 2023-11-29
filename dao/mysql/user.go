@@ -12,10 +12,10 @@ const secret = "SHforum_backend"
 
 // CheckUserExist 检查用户是否存在
 func CheckUserExist(username string) (err error) {
-	//select count(user_id) from user where username=?
+	//select count(userid) from user where username=?
 	var user *models.User
 	var count int64
-	db.Debug().Model(user).Where("username=?", username).Select("user_id").Count(&count)
+	db.Debug().Model(user).Where("username=?", username).Select("userid").Count(&count)
 	if count > 0 {
 		return ErrorUserExist
 	}
@@ -24,10 +24,8 @@ func CheckUserExist(username string) (err error) {
 
 // InsertUser 向数据库中插入一条新的用户记录
 func InsertUser(user *models.User) (err error) {
-	//对密码进行加密
+	//insert into user(userid, username, password, email) values(?, ?, ?, ?)
 	user.Password = encryptPassword(user.Password)
-	//执行SQL语句入库
-	//insert into user(user_id, username, password) values(?, ?, ?)
 	db.Debug().Create(user)
 	return
 }
@@ -42,8 +40,8 @@ func encryptPassword(opassword string) string {
 // Login 用户登录
 func Login(user *models.User) (err error) {
 	oPassword := user.Password
-	//select user_id, username, password from user where username=?
-	result := db.Debug().Select("user_id", "username", "password").Where("username=?", user.Username).First(user)
+	//select userid, username, password from user where username=?
+	result := db.Debug().Select("userid", "username", "password").Where("username=?", user.Username).First(user)
 	if errors.Is(result.Error, gorm.ErrRecordNotFound) {
 		return ErrorUserNotExist
 	}
@@ -62,7 +60,7 @@ func Login(user *models.User) (err error) {
 func GetUserById(uid int64) (data *models.User, err error) {
 	data = new(models.User)
 	//select user_id, username from user where user_id = ?
-	result := db.Debug().Select("user_id", "username").Where("user_id = ?", uid).First(data)
+	result := db.Debug().Select("userid", "username").Where("userid = ?", uid).First(data)
 	if errors.Is(result.Error, gorm.ErrRecordNotFound) {
 		err = ErrorInvalidID
 	}

@@ -27,7 +27,6 @@ func SignUpHandler(c *gin.Context) {
 		ResponseErrorWithMsg(c, CodeInvalidParam, removeTopStruct(errs.Translate(trans)))
 		return
 	}
-	fmt.Println(p)
 	// 2、业务处理
 	if err := logic.SignUp(p); err != nil {
 		zap.L().Error("logic.SignUp failed", zap.Error(err))
@@ -59,7 +58,7 @@ func LoginHandler(c *gin.Context) {
 		return
 	}
 	// 2、业务逻辑处理
-	user, err := logic.Login(p)
+	loginresp, err := logic.Login(p)
 	if err != nil {
 		zap.L().Error("logic.Login failed", zap.String("username", p.Username), zap.Error(err))
 		if errors.Is(err, mysql.ErrorUserNotExist) {
@@ -72,8 +71,8 @@ func LoginHandler(c *gin.Context) {
 
 	// 3、返回响应
 	ResponseSuccess(c, gin.H{
-		"user_id":   fmt.Sprintf("%d", user.UserID), //可能会失真
-		"user_name": user.Username,
-		"token":     user.Token,
+		"userID":   fmt.Sprintf("%d", loginresp.UserID), //可能会失真
+		"username": loginresp.Name,
+		"token":    loginresp.Token,
 	})
 }

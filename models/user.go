@@ -1,8 +1,11 @@
 package models
 
+import "gorm.io/gorm"
+
 type User struct {
-	UserID   int64  `db:"user_id"`
-	Username string `db:"username"`
-	Password string `db:"password"`
-	Token    string
+	gorm.Model
+	UserID   int64  `gorm:"not null;" json:"userid"`
+	Username string `gorm:"type:varchar(100);not null;" json:"username"`
+	Password string `gorm:"type:varchar(100);not null" json:"password"`
+	Email    string `gorm:"type:varchar(100);not null;unique" json:"email"`
 }
