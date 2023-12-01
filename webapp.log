@@ -2507,3 +2507,23 @@
 {"level":"DEBUG","time":"2023-11-29T23:35:07.956+0800","caller":"SHforum_backend/main.go:49","msg":"logger init success..."}
 {"level":"INFO","time":"2023-11-29T23:35:50.102+0800","caller":"SHforum_backend/main.go:93","msg":"Shutdown Server ..."}
 {"level":"INFO","time":"2023-11-29T23:35:50.103+0800","caller":"SHforum_backend/main.go:102","msg":"Server exiting"}
+{"level":"DEBUG","time":"2023-11-29T23:36:01.500+0800","caller":"SHforum_backend/main.go:49","msg":"logger init success..."}
+{"level":"INFO","time":"2023-11-29T23:36:05.783+0800","caller":"logger/logger.go:75","msg":"/api/v1/user/sendcode","status":200,"method":"GET","path":"/api/v1/user/sendcode","query":"email=3619644902@qq.com","ip":"::1","user-agent":"PostmanRuntime/7.35.0","errors":"","cost":1.4323726}
+{"level":"INFO","time":"2023-11-29T23:36:44.386+0800","caller":"logger/logger.go:75","msg":"/api/v1/user/signup","status":200,"method":"POST","path":"/api/v1/user/signup","query":"","ip":"::1","user-agent":"PostmanRuntime/7.35.0","errors":"","cost":0.0101377}
+{"level":"INFO","time":"2023-11-29T23:43:11.291+0800","caller":"SHforum_backend/main.go:93","msg":"Shutdown Server ..."}
+{"level":"INFO","time":"2023-11-29T23:43:11.292+0800","caller":"SHforum_backend/main.go:102","msg":"Server exiting"}
+{"level":"DEBUG","time":"2023-12-01T15:54:42.869+0800","caller":"SHforum_backend/main.go:50","msg":"logger init success..."}
+{"level":"INFO","time":"2023-12-01T15:57:08.307+0800","caller":"logger/logger.go:75","msg":"/api/v1/user/sendcode","status":200,"method":"GET","path":"/api/v1/user/sendcode","query":"email=charminghacker@163.com","ip":"::1","user-agent":"PostmanRuntime/7.35.0","errors":"","cost":0.0458103}
+{"level":"INFO","time":"2023-12-01T15:59:40.608+0800","caller":"logger/logger.go:75","msg":"/api/v1/user/sendcode","status":200,"method":"GET","path":"/api/v1/user/sendcode","query":"email=charminghacker@163.com","ip":"::1","user-agent":"PostmanRuntime/7.35.0","errors":"","cost":0.0078257}
+{"level":"INFO","time":"2023-12-01T15:59:55.084+0800","caller":"logger/logger.go:75","msg":"/api/v1/user/sendcode","status":200,"method":"GET","path":"/api/v1/user/sendcode","query":"email=charminghacker@163.com","ip":"::1","user-agent":"PostmanRuntime/7.35.0","errors":"","cost":0.0114728}
+{"level":"INFO","time":"2023-12-01T16:00:27.552+0800","caller":"SHforum_backend/main.go:98","msg":"Shutdown Server ..."}
+{"level":"INFO","time":"2023-12-01T16:00:27.554+0800","caller":"SHforum_backend/main.go:107","msg":"Server exiting"}
+{"level":"DEBUG","time":"2023-12-01T16:02:51.171+0800","caller":"SHforum_backend/main.go:50","msg":"logger init success..."}
+{"level":"INFO","time":"2023-12-01T16:03:06.426+0800","caller":"logger/logger.go:75","msg":"/api/v1/user/sendcode","status":200,"method":"GET","path":"/api/v1/user/sendcode","query":"email=charminghacker@163.com","ip":"::1","user-agent":"PostmanRuntime/7.35.0","errors":"","cost":0.02533}
+{"level":"INFO","time":"2023-12-01T16:04:35.419+0800","caller":"logger/logger.go:75","msg":"/api/v1/user/sendcode","status":200,"method":"GET","path":"/api/v1/user/sendcode","query":"email=charminghacker@163.com","ip":"::1","user-agent":"PostmanRuntime/7.35.0","errors":"","cost":0.0345459}
+{"level":"INFO","time":"2023-12-01T16:07:46.789+0800","caller":"SHforum_backend/main.go:98","msg":"Shutdown Server ..."}
+{"level":"INFO","time":"2023-12-01T16:07:46.789+0800","caller":"SHforum_backend/main.go:107","msg":"Server exiting"}
+{"level":"DEBUG","time":"2023-12-01T16:07:51.171+0800","caller":"SHforum_backend/main.go:50","msg":"logger init success..."}
+{"level":"INFO","time":"2023-12-01T16:07:58.868+0800","caller":"logger/logger.go:75","msg":"/api/v1/user/sendcode","status":200,"method":"GET","path":"/api/v1/user/sendcode","query":"email=charminghacker@163.com","ip":"::1","user-agent":"PostmanRuntime/7.35.0","errors":"","cost":0.0280422}
+{"level":"INFO","time":"2023-12-01T16:30:15.103+0800","caller":"SHforum_backend/main.go:98","msg":"Shutdown Server ..."}
+{"level":"INFO","time":"2023-12-01T16:30:15.104+0800","caller":"SHforum_backend/main.go:107","msg":"Server exiting"}

@@ -5,6 +5,7 @@ import (
 	"SHforum_backend/dao/mysql"
 	"SHforum_backend/dao/redis"
 	"SHforum_backend/logger"
+	"SHforum_backend/logic/rabbitmq"
 	"SHforum_backend/pkg/snowflake"
 	"SHforum_backend/routes"
 	"SHforum_backend/settings"
@@ -58,7 +59,11 @@ func main() {
 		return
 	}
 	defer redis.Close()
-
+	//5、初始胡Rabbitmq
+	if err := rabbitmq.InitRabbitMQ(settings.Conf.RabbitMQConfig); err != nil {
+		fmt.Printf("init rabbitmq failed, err:%v\n", err)
+		return
+	}
 	if err := snowflake.Init(settings.Conf.StartTime, settings.Conf.MachineID); err != nil {
 		fmt.Printf("init snowflake failed, err:%v\n", err)
 		return

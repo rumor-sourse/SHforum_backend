@@ -117,10 +117,16 @@ func SendCodeHandler(c *gin.Context) {
 	}
 
 	code := randomInteger(6)
-	err := logic.SendCode(email, code)
+	/*	err := logic.SendCode(email, code)
+		if err != nil {
+			ResponseError(c, CodeServerBusy)
+			return
+		}*/
+	err := logic.MQSendCodeMessage(email, code)
 	if err != nil {
 		ResponseError(c, CodeServerBusy)
 		return
 	}
+	logic.MQReceiveCodeMessage()
 	ResponseSuccess(c, nil)
 }

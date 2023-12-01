@@ -16,10 +16,11 @@ type AppConfig struct {
 	StartTime string `mapstructure:"start_time"`
 	MachineID int64  `mapstructure:"machine_id"`
 
-	*AuthConfig  `mapstructure:"auth"`
-	*LogConfig   `mapstructure:"log"`
-	*MySQLConfig `mapstructure:"mysql"`
-	*RedisConfig `mapstructure:"redis"`
+	*AuthConfig     `mapstructure:"auth"`
+	*LogConfig      `mapstructure:"log"`
+	*MySQLConfig    `mapstructure:"mysql"`
+	*RedisConfig    `mapstructure:"redis"`
+	*RabbitMQConfig `mapstructure:"rabbitmq"`
 }
 
 type AuthConfig struct {
@@ -50,6 +51,14 @@ type RedisConfig struct {
 	Password string `mapstructure:"password"`
 	DB       int    `mapstructure:"db"`
 	PoolSize int    `mapstructure:"pool_size"`
+}
+
+type RabbitMQConfig struct {
+	Host     string `mapstructure:"host"`
+	Port     int    `mapstructure:"port"`
+	User     string `mapstructure:"user"`
+	Password string `mapstructure:"password"`
+	Vhost    string `mapstructure:"vhost"`
 }
 
 func Init() (err error) {

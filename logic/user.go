@@ -3,11 +3,11 @@ package logic
 import (
 	"SHforum_backend/dao/mysql"
 	"SHforum_backend/dao/redis"
+	"SHforum_backend/logic/rabbitmq"
 	"SHforum_backend/models"
 	"SHforum_backend/models/response"
 	"SHforum_backend/pkg/jwt"
 	"SHforum_backend/pkg/snowflake"
-	"SHforum_backend/util"
 )
 
 func SignUp(p *models.ParamSignUp) (err error) {
@@ -55,11 +55,22 @@ func Login(p *models.ParamLogin) (userresp *response.UserResponse, err error) {
 	return
 }
 
-func SendCode(email string, code string) (err error) {
+func MQSendCodeMessage(email string, code string) (err error) {
+	rmq := rabbitmq.NewRabbitMQSimple("send_code")
+	rmq.PublishSendCodeMessage(email, code)
+	return nil
+}
+
+/*func SendCode(email string, code string) (err error) {
 	err = util.SendEmailWithCode([]string{email}, code)
 	if err != nil {
 		return err
 	}
 	redis.SaveCode(email, code)
 	return
+}*/
+
+func MQReceiveCodeMessage() {
+	rmq := rabbitmq.NewRabbitMQSimple("send_code")
+	rmq.ConsumeCodeMessage()
 }
