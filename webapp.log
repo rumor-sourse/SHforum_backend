@@ -2527,3 +2527,22 @@
 {"level":"INFO","time":"2023-12-01T16:07:58.868+0800","caller":"logger/logger.go:75","msg":"/api/v1/user/sendcode","status":200,"method":"GET","path":"/api/v1/user/sendcode","query":"email=charminghacker@163.com","ip":"::1","user-agent":"PostmanRuntime/7.35.0","errors":"","cost":0.0280422}
 {"level":"INFO","time":"2023-12-01T16:30:15.103+0800","caller":"SHforum_backend/main.go:98","msg":"Shutdown Server ..."}
 {"level":"INFO","time":"2023-12-01T16:30:15.104+0800","caller":"SHforum_backend/main.go:107","msg":"Server exiting"}
+{"level":"DEBUG","time":"2023-12-01T17:39:29.800+0800","caller":"SHforum_backend/main.go:50","msg":"logger init success..."}
+{"level":"INFO","time":"2023-12-01T17:40:45.630+0800","caller":"logger/logger.go:75","msg":"/api/v1/user/login","status":200,"method":"POST","path":"/api/v1/user/login","query":"","ip":"::1","user-agent":"PostmanRuntime/7.35.0","errors":"","cost":0.005795}
+{"level":"INFO","time":"2023-12-01T17:42:36.406+0800","caller":"logger/logger.go:75","msg":"/api/v1/user/login","status":404,"method":"GET","path":"/api/v1/user/login","query":"","ip":"::1","user-agent":"PostmanRuntime/7.35.0","errors":"","cost":0}
+{"level":"INFO","time":"2023-12-01T17:42:52.398+0800","caller":"logger/logger.go:75","msg":"/api/v1/user/follow","status":404,"method":"GET","path":"/api/v1/user/follow","query":"","ip":"::1","user-agent":"PostmanRuntime/7.35.0","errors":"","cost":0}
+{"level":"INFO","time":"2023-12-01T17:43:00.652+0800","caller":"logger/logger.go:75","msg":"/api/v1/user/follow","status":200,"method":"POST","path":"/api/v1/user/follow","query":"","ip":"::1","user-agent":"PostmanRuntime/7.35.0","errors":"","cost":0}
+{"level":"INFO","time":"2023-12-01T17:44:03.824+0800","caller":"logger/logger.go:75","msg":"/api/v1/user/follow","status":200,"method":"POST","path":"/api/v1/user/follow","query":"","ip":"::1","user-agent":"PostmanRuntime/7.35.0","errors":"","cost":0}
+{"level":"INFO","time":"2023-12-01T17:45:33.067+0800","caller":"SHforum_backend/main.go:98","msg":"Shutdown Server ..."}
+{"level":"INFO","time":"2023-12-01T17:45:33.069+0800","caller":"SHforum_backend/main.go:107","msg":"Server exiting"}
+{"level":"DEBUG","time":"2023-12-01T17:46:08.742+0800","caller":"SHforum_backend/main.go:50","msg":"logger init success..."}
+{"level":"INFO","time":"2023-12-01T17:46:19.222+0800","caller":"logger/logger.go:75","msg":"/api/v1/user/follow","status":200,"method":"POST","path":"/api/v1/user/follow","query":"","ip":"::1","user-agent":"PostmanRuntime/7.35.0","errors":"","cost":0.0157998}
+{"level":"INFO","time":"2023-12-01T17:47:05.327+0800","caller":"logger/logger.go:75","msg":"/api/v1/user/follow","status":200,"method":"POST","path":"/api/v1/user/follow","query":"","ip":"::1","user-agent":"PostmanRuntime/7.35.0","errors":"","cost":0.0171608}
+{"level":"INFO","time":"2023-12-01T17:48:40.633+0800","caller":"logger/logger.go:75","msg":"/api/v1/user/unfollow","status":200,"method":"POST","path":"/api/v1/user/unfollow","query":"","ip":"::1","user-agent":"PostmanRuntime/7.35.0","errors":"","cost":0.001819}
+{"level":"INFO","time":"2023-12-01T17:51:20.495+0800","caller":"SHforum_backend/main.go:98","msg":"Shutdown Server ..."}
+{"level":"INFO","time":"2023-12-01T17:51:20.496+0800","caller":"SHforum_backend/main.go:107","msg":"Server exiting"}
+{"level":"DEBUG","time":"2023-12-01T17:51:29.886+0800","caller":"SHforum_backend/main.go:50","msg":"logger init success..."}
+{"level":"INFO","time":"2023-12-01T17:51:35.450+0800","caller":"logger/logger.go:75","msg":"/api/v1/user/unfollow","status":200,"method":"POST","path":"/api/v1/user/unfollow","query":"","ip":"::1","user-agent":"PostmanRuntime/7.35.0","errors":"","cost":0.0067291}
+{"level":"INFO","time":"2023-12-01T17:52:39.577+0800","caller":"logger/logger.go:75","msg":"/api/v1/user/follow","status":200,"method":"POST","path":"/api/v1/user/follow","query":"","ip":"::1","user-agent":"PostmanRuntime/7.35.0","errors":"","cost":0.0154487}
+{"level":"INFO","time":"2023-12-01T22:16:44.743+0800","caller":"SHforum_backend/main.go:98","msg":"Shutdown Server ..."}
+{"level":"INFO","time":"2023-12-01T22:16:44.749+0800","caller":"SHforum_backend/main.go:107","msg":"Server exiting"}

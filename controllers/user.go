@@ -9,8 +9,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"
 	"go.uber.org/zap"
-	"math/rand"
-	"time"
+	"strconv"
 )
 
 const (
@@ -86,28 +85,6 @@ func LoginHandler(c *gin.Context) {
 	})
 }
 
-func randomInteger(length int) string {
-	rand.Seed(time.Now().UnixNano())
-
-	b := make([]byte, length)
-	for i := 0; i < length; i++ {
-		b[i] = NumberCharset[rand.Intn(len(NumberCharset))]
-	}
-
-	return string(b)
-}
-
-func randomString(length int) string {
-	rand.Seed(time.Now().UnixNano())
-
-	b := make([]byte, length)
-	for i := 0; i < length; i++ {
-		b[i] = Charset[rand.Intn(len(Charset))]
-	}
-
-	return string(b)
-}
-
 // SendCodeHandler 发送邮箱验证码
 func SendCodeHandler(c *gin.Context) {
 	email := c.Query("email")
@@ -128,5 +105,55 @@ func SendCodeHandler(c *gin.Context) {
 		return
 	}
 	logic.MQReceiveCodeMessage()
+	ResponseSuccess(c, nil)
+}
+
+// FollowHandler 关注用户
+func FollowHandler(c *gin.Context) {
+	p := c.PostForm("followeduser")
+	if len(p) == 0 {
+		ResponseError(c, CodeInvalidParam)
+		return
+	}
+	userID, err := getCurrentUserID(c)
+	if err != nil {
+		ResponseError(c, CodeNeedLogin)
+		return
+	}
+	followeduser, err := strconv.ParseInt(p, 10, 64)
+	if err != nil {
+		ResponseError(c, CodeInvalidParam)
+		return
+	}
+	err = logic.Follow(userID, followeduser)
+	if err != nil {
+		ResponseError(c, CodeServerBusy)
+		return
+	}
+	ResponseSuccess(c, nil)
+}
+
+// UnFollowHandler 取消关注用户
+func UnFollowHandler(c *gin.Context) {
+	p := c.PostForm("followeduser")
+	if len(p) == 0 {
+		ResponseError(c, CodeInvalidParam)
+		return
+	}
+	userID, err := getCurrentUserID(c)
+	if err != nil {
+		ResponseError(c, CodeNeedLogin)
+		return
+	}
+	followeduser, err := strconv.ParseInt(p, 10, 64)
+	if err != nil {
+		ResponseError(c, CodeInvalidParam)
+		return
+	}
+	err = logic.UnFollow(userID, followeduser)
+	if err != nil {
+		ResponseError(c, CodeServerBusy)
+		return
+	}
 	ResponseSuccess(c, nil)
 }

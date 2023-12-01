@@ -69,3 +69,37 @@ func GetUserById(uid int64) (data *models.User, err error) {
 	}
 	return
 }
+
+// Follow 关注：userId关注了followeduser
+func Follow(userId int64, followeduser int64) (err error) {
+	//insert into follow(user_id, followed_user) values(?, ?)
+	follow := &models.Follow{
+		UserID:       userId,
+		FollowedUser: followeduser,
+	}
+	result := db.Debug().Create(follow)
+	if result.Error != nil {
+		return result.Error
+	}
+	return
+}
+
+// UnFollow 取消关注：userId取消关注了followeduser
+func UnFollow(userId int64, followeduser int64) (err error) {
+	//delete from follow where user_id=? and followed_user=?
+	result := db.Debug().Where("user_id=? and followed_user=?", userId, followeduser).Delete(&models.Follow{})
+	if result.Error != nil {
+		return result.Error
+	}
+	return
+}
+
+// GetFollowList 获取关注用户列表
+func GetFollowList(userId int64) (followList []*models.Follow, err error) {
+	//select user_id, followed_user from follow where user_id=?
+	result := db.Debug().Select("user_id", "followed_user").Where("user_id=?", userId).Find(&followList)
+	if result.Error != nil {
+		return nil, result.Error
+	}
+	return
+}

@@ -74,3 +74,11 @@ func MQReceiveCodeMessage() {
 	rmq := rabbitmq.NewRabbitMQSimple("send_code")
 	rmq.ConsumeCodeMessage()
 }
+
+func Follow(userId int64, followeduser int64) (err error) {
+	return mysql.Follow(userId, followeduser)
+}
+
+func UnFollow(userId int64, followeduser int64) (err error) {
+	return mysql.UnFollow(userId, followeduser)
+}

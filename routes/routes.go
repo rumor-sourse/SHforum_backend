@@ -31,6 +31,13 @@ func SetUp(mode string) *gin.Engine {
 		userRouter.POST("/login", controllers.LoginHandler)
 		//发送邮箱验证码
 		userRouter.GET("/sendcode", controllers.SendCodeHandler)
+		userRouter.Use(middlewares.JWTAuthMiddleware())
+		{
+			//关注用户
+			userRouter.POST("/follow", controllers.FollowHandler)
+			//取消关注
+			userRouter.POST("/unfollow", controllers.UnFollowHandler)
+		}
 	}
 	communityRouter := v1.Group("/community")
 	{
@@ -43,7 +50,6 @@ func SetUp(mode string) *gin.Engine {
 	//根据时间或分数获取帖子列表
 	v1.GET("/posts2", controllers.GetPostListHandler2)
 	v1.Use(middlewares.JWTAuthMiddleware()) //应用JWT认证中间件
-
 	{
 		v1.POST("/post", controllers.CreatePostHandler)
 		v1.POST("/vote", controllers.PostVoteController)
