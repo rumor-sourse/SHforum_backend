@@ -30,7 +30,7 @@ func CreatePostHandler(c *gin.Context) {
 		ResponseError(c, CodeServerBusy)
 		return
 	}
-	//告诉关注该用户的人，有新的帖子了
+	//查找该用户所有粉丝
 
 	// 返回响应
 	ResponseSuccess(c, nil)

@@ -22,6 +22,18 @@ func CheckUserExist(username string) (err error) {
 	return nil
 }
 
+// CheckFollowExist 检查是否已经关注
+func CheckFollowExist(userId int64, followeduser int64) (err error) {
+	//select count(userid) from user where username=?
+	var follow *models.Follow
+	var count int64
+	db.Debug().Model(follow).Where("user_id=? and followed_user=?", userId, followeduser).Select("user_id").Count(&count)
+	if count > 0 {
+		return ErrorFollowExist
+	}
+	return nil
+}
+
 // InsertUser 向数据库中插入一条新的用户记录
 func InsertUser(user *models.User) (err error) {
 	//insert into user(userid, username, password, email) values(?, ?, ?, ?)
@@ -72,32 +84,74 @@ func GetUserById(uid int64) (data *models.User, err error) {
 
 // Follow 关注：userId关注了followeduser
 func Follow(userId int64, followeduser int64) (err error) {
+	//检查是否已经关注
+	if err := CheckFollowExist(userId, followeduser); err != nil {
+		return err
+	}
+	tx := db.Begin()
+	defer func() {
+		if r := recover(); r != nil {
+			tx.Rollback()
+		}
+	}()
 	//insert into follow(user_id, followed_user) values(?, ?)
 	follow := &models.Follow{
 		UserID:       userId,
 		FollowedUser: followeduser,
 	}
-	result := db.Debug().Create(follow)
-	if result.Error != nil {
-		return result.Error
+	fan := &models.Fan{
+		UserID:  followeduser,
+		FanUser: userId,
 	}
-	return
+	if err := tx.Error; err != nil {
+		return err
+	}
+
+	if err := tx.Debug().Create(follow).Error; err != nil {
+		tx.Rollback()
+		return err
+	}
+
+	if err := tx.Debug().Create(fan).Error; err != nil {
+		tx.Rollback()
+		return err
+	}
+
+	return tx.Commit().Error
 }
 
 // UnFollow 取消关注：userId取消关注了followeduser
 func UnFollow(userId int64, followeduser int64) (err error) {
-	//delete from follow where user_id=? and followed_user=?
-	result := db.Debug().Where("user_id=? and followed_user=?", userId, followeduser).Delete(&models.Follow{})
-	if result.Error != nil {
-		return result.Error
+	tx := db.Begin()
+	defer func() {
+		if r := recover(); r != nil {
+			tx.Rollback()
+		}
+	}()
+	if err := tx.Error; err != nil {
+		return err
 	}
-	return
+	//delete from follow where user_id=? and followed_user=?
+	tx.Debug().Where("user_id=? and followed_user=?", userId, followeduser).Delete(&models.Follow{})
+	//delete from fan where user_id=? and fan_user=?
+	tx.Debug().Where("user_id=? and fan_user=?", followeduser, userId).Delete(&models.Fan{})
+	return tx.Commit().Error
 }
 
 // GetFollowList 获取关注用户列表
 func GetFollowList(userId int64) (followList []*models.Follow, err error) {
 	//select user_id, followed_user from follow where user_id=?
 	result := db.Debug().Select("user_id", "followed_user").Where("user_id=?", userId).Find(&followList)
+	if result.Error != nil {
+		return nil, result.Error
+	}
+	return
+}
+
+// GetFanList 获取粉丝列表
+func GetFanList(userId int64) (fanList []*models.Fan, err error) {
+	//select user_id, fan_user from fan where user_id=?
+	result := db.Debug().Select("user_id", "fan_user").Where("user_id=?", userId).Find(&fanList)
 	if result.Error != nil {
 		return nil, result.Error
 	}
