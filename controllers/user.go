@@ -99,11 +99,7 @@ func SendCodeHandler(c *gin.Context) {
 			ResponseError(c, CodeServerBusy)
 			return
 		}*/
-	err := logic.MQSendCodeMessage(email, code)
-	if err != nil {
-		ResponseError(c, CodeServerBusy)
-		return
-	}
+	logic.MQSendCodeMessage(email, code)
 	logic.MQReceiveCodeMessage()
 	ResponseSuccess(c, nil)
 }

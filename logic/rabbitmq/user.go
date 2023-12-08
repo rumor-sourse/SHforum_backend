@@ -9,20 +9,6 @@ import (
 	"time"
 )
 
-// NewRabbitMQSimple 创建RabbitMQ简单模式实例
-func NewRabbitMQSimple(queueName string) *RabbitMQ {
-	//创建RabbitMQ实例
-	rabbitmq := NewRabbitMQ(queueName, "", "")
-	var err error
-	//获取connection
-	rabbitmq.conn, err = amqp.Dial(rabbitmq.MQurl)
-	rabbitmq.failOnErr(err, "failed to connect rabbitmq!")
-	//获取channel
-	rabbitmq.channel, err = rabbitmq.conn.Channel()
-	rabbitmq.failOnErr(err, "failed to open a channel")
-	return rabbitmq
-}
-
 type SendCodeMessage struct {
 	Email string `json:"email"`
 	Code  string `json:"code"`

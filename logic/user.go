@@ -55,12 +55,6 @@ func Login(p *models.ParamLogin) (userresp *response.UserResponse, err error) {
 	return
 }
 
-func MQSendCodeMessage(email string, code string) (err error) {
-	rmq := rabbitmq.NewRabbitMQSimple("send_code")
-	rmq.PublishSendCodeMessage(email, code)
-	return nil
-}
-
 /*func SendCode(email string, code string) (err error) {
 	err = util.SendEmailWithCode([]string{email}, code)
 	if err != nil {
@@ -69,6 +63,11 @@ func MQSendCodeMessage(email string, code string) (err error) {
 	redis.SaveCode(email, code)
 	return
 }*/
+
+func MQSendCodeMessage(email string, code string) {
+	rmq := rabbitmq.NewRabbitMQSimple("send_code")
+	rmq.PublishSendCodeMessage(email, code)
+}
 
 func MQReceiveCodeMessage() {
 	rmq := rabbitmq.NewRabbitMQSimple("send_code")
@@ -81,4 +80,15 @@ func Follow(userId int64, followeduser int64) (err error) {
 
 func UnFollow(userId int64, followeduser int64) (err error) {
 	return mysql.UnFollow(userId, followeduser)
+}
+
+func GetFanList(userId int64) (fans []int64, err error) {
+	list, err := mysql.GetFanList(userId)
+	if err != nil {
+		return nil, err
+	}
+	for _, v := range list {
+		fans = append(fans, v.FanUser)
+	}
+	return
 }

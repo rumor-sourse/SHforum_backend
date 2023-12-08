@@ -140,8 +140,8 @@ func UnFollow(userId int64, followeduser int64) (err error) {
 
 // GetFollowList 获取关注用户列表
 func GetFollowList(userId int64) (followList []*models.Follow, err error) {
-	//select user_id, followed_user from follow where user_id=?
-	result := db.Debug().Select("user_id", "followed_user").Where("user_id=?", userId).Find(&followList)
+	//select followed_user from follow where user_id=?
+	result := db.Debug().Select("followed_user").Where("user_id=?", userId).Find(&followList)
 	if result.Error != nil {
 		return nil, result.Error
 	}
@@ -150,8 +150,8 @@ func GetFollowList(userId int64) (followList []*models.Follow, err error) {
 
 // GetFanList 获取粉丝列表
 func GetFanList(userId int64) (fanList []*models.Fan, err error) {
-	//select user_id, fan_user from fan where user_id=?
-	result := db.Debug().Select("user_id", "fan_user").Where("user_id=?", userId).Find(&fanList)
+	//select fan_user from fan where user_id=?
+	result := db.Debug().Select("fan_user").Where("user_id=?", userId).Find(&fanList)
 	if result.Error != nil {
 		return nil, result.Error
 	}

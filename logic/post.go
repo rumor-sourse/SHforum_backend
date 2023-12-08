@@ -3,21 +3,27 @@ package logic
 import (
 	"SHforum_backend/dao/mysql"
 	"SHforum_backend/dao/redis"
+	"SHforum_backend/logic/rabbitmq"
 	"SHforum_backend/models"
 	"SHforum_backend/models/response"
 	"SHforum_backend/pkg/snowflake"
+	"fmt"
 	"go.uber.org/zap"
 )
 
 func CreatePost(p *models.Post) (err error) {
-	//1、生成post_id
+	//生成post_id
 	p.ID = uint(snowflake.GenID())
-	//2、保存到数据库
+	//保存到数据库
 	err = mysql.CreatePost(p)
 	if err != nil {
 		return err
 	}
+	//把帖子保存到redis
 	err = redis.CreatePost(int64(p.ID), p.CommunityID)
+	if err != nil {
+		return err
+	}
 	return
 }
 
@@ -250,4 +256,25 @@ func GetPostListNew(p *models.ParamPostList) (data []*response.PostDetailRespons
 		return nil, err
 	}
 	return
+}
+
+func MQSendCreatePostMessage(userID int64) {
+	rmq := rabbitmq.NewRabbitMQPubSub("new_post")
+	defer rmq.Destroy()
+	msg := fmt.Sprintf("您关注的用户%d创建了一条新帖子", userID)
+	rmq.PublishCreatePostMessage(msg)
+}
+
+func MQReceiveCreatePostMessage(userID int64) {
+	//查找该用户所有粉丝
+	fans, err := GetFanList(userID)
+	if err != nil {
+		zap.L().Error("logic.GetFanList() failed", zap.Error(err))
+		return
+	}
+	rmq := rabbitmq.NewRabbitMQPubSub("new_post")
+	defer rmq.Destroy()
+	for _, fan := range fans {
+		rmq.ConsumeCreatePostMessage(userID, fan)
+	}
 }

@@ -28,7 +28,7 @@ func Init(cfg *settings.MySQLConfig) (err error) {
 	sqlDB, err := db.DB()
 	sqlDB.SetMaxIdleConns(cfg.MaxIdleConns)
 	sqlDB.SetMaxOpenConns(cfg.MaxOpenConns)
-	err = db.AutoMigrate(&models.User{}, &models.Community{}, &models.Post{}, &models.Follow{}, &models.Fan{})
+	err = db.AutoMigrate(&models.User{}, &models.Community{}, &models.Post{}, &models.Follow{}, &models.Fan{}, &models.Message{})
 	if err != nil {
 		zap.L().Error("auto migrate tables failed", zap.Error(err))
 		return err

@@ -47,3 +47,31 @@ func (r *RabbitMQ) failOnErr(err error, msg string) {
 		zap.L().Panic(msg, zap.Error(err))
 	}
 }
+
+// NewRabbitMQSimple 创建RabbitMQ简单模式实例
+func NewRabbitMQSimple(queueName string) *RabbitMQ {
+	//创建RabbitMQ实例
+	rabbitmq := NewRabbitMQ(queueName, "", "")
+	var err error
+	//获取connection
+	rabbitmq.conn, err = amqp.Dial(rabbitmq.MQurl)
+	rabbitmq.failOnErr(err, "failed to connect rabbitmq!")
+	//获取channel
+	rabbitmq.channel, err = rabbitmq.conn.Channel()
+	rabbitmq.failOnErr(err, "failed to open a channel")
+	return rabbitmq
+}
+
+// NewRabbitMQPubSub 创建RabbitMQ订阅模式实例
+func NewRabbitMQPubSub(exchangeName string) *RabbitMQ {
+	//创建RabbitMQ实例
+	rabbitmq := NewRabbitMQ("", exchangeName, "")
+	var err error
+	//获取connection
+	rabbitmq.conn, err = amqp.Dial(rabbitmq.MQurl)
+	rabbitmq.failOnErr(err, "failed to connect rabbitmq!")
+	//获取channel
+	rabbitmq.channel, err = rabbitmq.conn.Channel()
+	rabbitmq.failOnErr(err, "failed to open a channel")
+	return rabbitmq
+}

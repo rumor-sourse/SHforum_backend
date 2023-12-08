@@ -30,8 +30,10 @@ func CreatePostHandler(c *gin.Context) {
 		ResponseError(c, CodeServerBusy)
 		return
 	}
-	//查找该用户所有粉丝
-
+	//创建消费者
+	go logic.MQReceiveCreatePostMessage(userID)
+	//创建生产者告诉其粉丝有新帖子产生
+	go logic.MQSendCreatePostMessage(userID)
 	// 返回响应
 	ResponseSuccess(c, nil)
 }
