@@ -100,7 +100,6 @@ func SendCodeHandler(c *gin.Context) {
 			return
 		}*/
 	logic.MQSendCodeMessage(email, code)
-	logic.MQReceiveCodeMessage()
 	ResponseSuccess(c, nil)
 }
 

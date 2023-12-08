@@ -87,7 +87,7 @@ func (r *RabbitMQ) ConsumeCodeMessage() {
 		nil,   // args
 	)
 	r.failOnErr(err, "Failed to register a consumer")
-
+	forever := make(chan bool)
 	//启用协程处理消息
 	go func() {
 		for d := range msgs {
@@ -101,4 +101,5 @@ func (r *RabbitMQ) ConsumeCodeMessage() {
 			redis.SaveCode(mes.Email, mes.Code)
 		}
 	}()
+	<-forever
 }

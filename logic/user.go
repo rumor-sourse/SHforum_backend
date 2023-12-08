@@ -66,11 +66,13 @@ func Login(p *models.ParamLogin) (userresp *response.UserResponse, err error) {
 
 func MQSendCodeMessage(email string, code string) {
 	rmq := rabbitmq.NewRabbitMQSimple("send_code")
+	defer rmq.Destroy()
 	rmq.PublishSendCodeMessage(email, code)
 }
 
 func MQReceiveCodeMessage() {
 	rmq := rabbitmq.NewRabbitMQSimple("send_code")
+	defer rmq.Destroy()
 	rmq.ConsumeCodeMessage()
 }
 
