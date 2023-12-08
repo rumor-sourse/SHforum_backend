@@ -5,8 +5,9 @@ import (
 	"SHforum_backend/dao/mysql"
 	"SHforum_backend/dao/redis"
 	"SHforum_backend/logger"
-	"SHforum_backend/logic/rabbitmq"
+	"SHforum_backend/logic"
 	"SHforum_backend/pkg/snowflake"
+	"SHforum_backend/rabbitmq"
 	"SHforum_backend/routes"
 	"SHforum_backend/settings"
 	"context"
@@ -86,7 +87,7 @@ func main() {
 			zap.L().Fatal("listen: %s\n", zap.Error(err))
 		}
 	}()
-
+	go logic.MQReceiveCreatePostMessage()
 	// 等待中断信号来优雅地关闭服务器，为关闭服务器操作设置一个5秒的超时
 	quit := make(chan os.Signal, 1) // 创建一个接收信号的通道
 	// kill 默认会发送 syscall.SIGTERM 信号

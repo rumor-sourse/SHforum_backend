@@ -3,11 +3,11 @@ package logic
 import (
 	"SHforum_backend/dao/mysql"
 	"SHforum_backend/dao/redis"
-	"SHforum_backend/logic/rabbitmq"
 	"SHforum_backend/models"
 	"SHforum_backend/models/response"
 	"SHforum_backend/pkg/jwt"
 	"SHforum_backend/pkg/snowflake"
+	"SHforum_backend/rabbitmq"
 )
 
 func SignUp(p *models.ParamSignUp) (err error) {
