@@ -2698,3 +2698,10 @@
 {"level":"INFO","time":"2023-12-08T16:57:27.225+0800","caller":"logger/logger.go:75","msg":"/api/v1/post","status":200,"method":"POST","path":"/api/v1/post","query":"","ip":"::1","user-agent":"PostmanRuntime/7.35.0","errors":"","cost":0.029579}
 {"level":"INFO","time":"2023-12-08T16:58:02.907+0800","caller":"SHforum_backend/main.go:99","msg":"Shutdown Server ..."}
 {"level":"INFO","time":"2023-12-08T16:58:02.908+0800","caller":"SHforum_backend/main.go:108","msg":"Server exiting"}
+{"level":"DEBUG","time":"2023-12-08T16:59:28.910+0800","caller":"SHforum_backend/main.go:51","msg":"logger init success..."}
+{"level":"INFO","time":"2023-12-08T16:59:31.763+0800","caller":"logger/logger.go:75","msg":"/api/v1/user/sendcode","status":200,"method":"GET","path":"/api/v1/user/sendcode","query":"email=charminghacker@163.com","ip":"::1","user-agent":"PostmanRuntime/7.35.0","errors":"","cost":0.0063306}
+{"level":"INFO","time":"2023-12-08T17:03:51.028+0800","caller":"SHforum_backend/main.go:100","msg":"Shutdown Server ..."}
+{"level":"INFO","time":"2023-12-08T17:03:51.029+0800","caller":"SHforum_backend/main.go:109","msg":"Server exiting"}
+{"level":"DEBUG","time":"2023-12-08T17:30:43.689+0800","caller":"SHforum_backend/main.go:51","msg":"logger init success..."}
+{"level":"INFO","time":"2023-12-08T17:30:52.703+0800","caller":"SHforum_backend/main.go:100","msg":"Shutdown Server ..."}
+{"level":"INFO","time":"2023-12-08T17:30:52.704+0800","caller":"SHforum_backend/main.go:109","msg":"Server exiting"}

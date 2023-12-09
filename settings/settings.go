@@ -21,6 +21,7 @@ type AppConfig struct {
 	*MySQLConfig    `mapstructure:"mysql"`
 	*RedisConfig    `mapstructure:"redis"`
 	*RabbitMQConfig `mapstructure:"rabbitmq"`
+	*EsConfig       `mapstructure:"elasticsearch"`
 }
 
 type AuthConfig struct {
@@ -59,6 +60,11 @@ type RabbitMQConfig struct {
 	User     string `mapstructure:"user"`
 	Password string `mapstructure:"password"`
 	Vhost    string `mapstructure:"vhost"`
+}
+
+type EsConfig struct {
+	Host string `mapstructure:"host"`
+	Port int    `mapstructure:"port"`
 }
 
 func Init() (err error) {

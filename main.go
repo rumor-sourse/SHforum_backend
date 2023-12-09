@@ -4,6 +4,7 @@ import (
 	"SHforum_backend/controllers"
 	"SHforum_backend/dao/mysql"
 	"SHforum_backend/dao/redis"
+	"SHforum_backend/es"
 	"SHforum_backend/logger"
 	"SHforum_backend/logic"
 	"SHforum_backend/pkg/snowflake"
@@ -37,34 +38,40 @@ import (
 // @host 127.0.0.1
 // @BasePath /api/v1
 func main() {
-	// 1、加载配置文件
+	// 加载配置文件
 	if err := settings.Init(); err != nil {
 		fmt.Printf("init settings failed, err:%v\n", err)
 		return
 	}
-	//2、初始化日志
+	//初始化日志
 	if err := logger.Init(settings.Conf.LogConfig, settings.Conf.Mode); err != nil {
 		fmt.Printf("init logger failed, err:%v\n", err)
 		return
 	}
 	defer zap.L().Sync() // 将缓冲区的日志追加到日志文件中
 	zap.L().Debug("logger init success...")
-	//3、初始化数据库MYSQL
+	//初始化数据库MYSQL
 	if err := mysql.Init(settings.Conf.MySQLConfig); err != nil {
 		fmt.Printf("init mysql failed, err:%v\n", err)
 		return
 	}
-	//4、初始化Redis
+	//初始化Redis
 	if err := redis.Init(settings.Conf.RedisConfig); err != nil {
 		fmt.Printf("init redis failed, err:%v\n", err)
 		return
 	}
 	defer redis.Close()
-	//5、初始胡Rabbitmq
+	//初始胡Rabbitmq
 	if err := rabbitmq.InitRabbitMQ(settings.Conf.RabbitMQConfig); err != nil {
 		fmt.Printf("init rabbitmq failed, err:%v\n", err)
 		return
 	}
+	//初始化Es
+	if err := es.InitEs(settings.Conf.EsConfig); err != nil {
+		fmt.Printf("init es failed, err:%v\n", err)
+		return
+	}
+	//初始化雪花算法
 	if err := snowflake.Init(settings.Conf.StartTime, settings.Conf.MachineID); err != nil {
 		fmt.Printf("init snowflake failed, err:%v\n", err)
 		return
@@ -87,6 +94,7 @@ func main() {
 			zap.L().Fatal("listen: %s\n", zap.Error(err))
 		}
 	}()
+	//开启MQ监听服务
 	go logic.MQReceiveCreatePostMessage()
 	go logic.MQReceiveCodeMessage()
 	// 等待中断信号来优雅地关闭服务器，为关闭服务器操作设置一个5秒的超时
