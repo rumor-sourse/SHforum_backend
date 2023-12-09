@@ -53,6 +53,7 @@ func SetUp(mode string) *gin.Engine {
 	{
 		v1.POST("/post", controllers.CreatePostHandler)
 		v1.POST("/vote", controllers.PostVoteController)
+		v1.GET("/search", controllers.SearchPostHandler)
 	}
 	pprof.Register(r)
 	r.GET("/ping", func(c *gin.Context) {

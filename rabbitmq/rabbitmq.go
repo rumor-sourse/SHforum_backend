@@ -61,3 +61,17 @@ func NewRabbitMQSimple(queueName string) *RabbitMQ {
 	rabbitmq.failOnErr(err, "failed to open a channel")
 	return rabbitmq
 }
+
+// NewRabbitMQPubSub 订阅模式创建RabbitMQ实例
+func NewRabbitMQPubSub(exchangeName string) *RabbitMQ {
+	//创建RabbitMQ实例
+	rabbitmq := NewRabbitMQ("", exchangeName, "")
+	var err error
+	//获取connection
+	rabbitmq.conn, err = amqp.Dial(rabbitmq.MQurl)
+	rabbitmq.failOnErr(err, "failed to connect rabbitmq!")
+	//获取channel
+	rabbitmq.channel, err = rabbitmq.conn.Channel()
+	rabbitmq.failOnErr(err, "failed to open a channel")
+	return rabbitmq
+}

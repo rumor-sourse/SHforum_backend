@@ -3,6 +3,7 @@ package logic
 import (
 	"SHforum_backend/dao/mysql"
 	"SHforum_backend/dao/redis"
+	"SHforum_backend/es"
 	"SHforum_backend/models"
 	"SHforum_backend/models/response"
 	"SHforum_backend/pkg/snowflake"
@@ -258,8 +259,8 @@ func GetPostListNew(p *models.ParamPostList) (data []*response.PostDetailRespons
 	return
 }
 
-func MQSendCreatePostMessage(userID int64) {
-	rmq := rabbitmq.NewRabbitMQSimple("new_post")
+func MQSendCreatePostMessage(userID int64, post models.Post) {
+	rmq := rabbitmq.NewRabbitMQPubSub("new_post")
 	defer rmq.Destroy()
 	//查找该用户所有粉丝
 	fans, err := GetFanList(userID)
@@ -268,11 +269,30 @@ func MQSendCreatePostMessage(userID int64) {
 		return
 	}
 	msg := fmt.Sprintf("您关注的用户%d创建了一条新帖子", userID)
-	rmq.PublishCreatePostMessage(userID, fans, msg)
+	rmq.PublishCreatePostMessage(userID, fans, msg, post)
 }
 
-func MQReceiveCreatePostMessage() {
-	rmq := rabbitmq.NewRabbitMQSimple("new_post")
-	defer rmq.Destroy()
-	rmq.ConsumeCreatePostMessage()
+func MQReceiveCreatePostMessageByMysql() {
+	rmqMysql := rabbitmq.NewRabbitMQPubSub("new_post")
+	defer rmqMysql.Destroy()
+	rmqMysql.ConsumeCreatePostMessageByMysql()
+}
+
+func MQReceiveCreatePostMessageByEs() {
+	rmqEs := rabbitmq.NewRabbitMQPubSub("new_post")
+	defer rmqEs.Destroy()
+	rmqEs.ConsumeCreatePostMessageByEs()
+}
+
+func SearchPost(keyWord string, page int) (data []*models.Post, err error) {
+	//查询es
+	posts, err := es.SearchPostIndex(keyWord, page)
+	if err != nil {
+		return
+	}
+	//查询作者信息
+	for _, post := range posts {
+		data = append(data, &post)
+	}
+	return
 }

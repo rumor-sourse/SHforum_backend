@@ -31,7 +31,7 @@ func CreatePostHandler(c *gin.Context) {
 		return
 	}
 	//创建生产者告诉其粉丝有新帖子产生
-	logic.MQSendCreatePostMessage(userID)
+	logic.MQSendCreatePostMessage(userID, *p)
 	// 返回响应
 	ResponseSuccess(c, nil)
 }
@@ -134,3 +134,23 @@ func GetCommunityPostListHandler(c *gin.Context) {
 	ResponseSuccess(c, data)
 }
 */
+
+// SearchPostHandler 搜索帖子
+func SearchPostHandler(c *gin.Context) {
+	// 1. 获取参数
+	keyWord := c.Query("keyword")
+	page, err := strconv.Atoi(c.DefaultQuery("page", "1"))
+	if err != nil {
+		ResponseError(c, CodeInvalidParam)
+		return
+	}
+	// 2. 搜索帖子
+	data, err := logic.SearchPost(keyWord, page)
+	if err != nil {
+		zap.L().Error("logic.SearchPost() failed", zap.Error(err))
+		ResponseError(c, CodeServerBusy)
+		return
+	}
+	// 3. 返回响应
+	ResponseSuccess(c, data)
+}
