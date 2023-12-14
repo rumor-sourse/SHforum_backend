@@ -1,6 +1,6 @@
 name: "web_app"
 mode: "dev"
-port: 8081
+port: 8088
 version: "v0.0.1"
 start_time: "2023-11-11"
 machine_id: 1
