@@ -28,6 +28,13 @@ func CreatePost(p *models.Post) (err error) {
 	return
 }
 
+func UpdatePost(p *models.Post) (err error) {
+	return mysql.UpdatePost(p)
+}
+func DeletePost(pid int64) (err error) {
+	return mysql.DeletePost(pid)
+}
+
 func GetPostById(pid int64) (data *response.PostDetailResponse, err error) {
 	//查询帖子详情
 	post, err := mysql.GetPostById(pid)

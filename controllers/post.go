@@ -36,6 +36,76 @@ func CreatePostHandler(c *gin.Context) {
 	ResponseSuccess(c, nil)
 }
 
+// CanEditPostHandler 判断当前用户是否可以编辑帖子
+func CanEditPostHandler(c *gin.Context) {
+	//  获取参数（帖子id）
+	postIDStr := c.Param("id")
+	postID, err := strconv.ParseInt(postIDStr, 10, 64)
+	if err != nil {
+		zap.L().Error("GetPostDetail with invalid param", zap.Error(err))
+		ResponseError(c, CodeInvalidParam)
+		return
+	}
+	// 根据id获取帖子数据
+	data, err := logic.GetPostById(postID)
+	if err != nil {
+		zap.L().Error("logic.GetPostById() failed", zap.Error(err))
+		ResponseError(c, CodeServerBusy)
+		return
+	}
+	// 从请求中获取到当前发请求的用户的id
+	userID, err := getCurrentUserID(c)
+	if err != nil {
+		ResponseError(c, CodeNeedLogin)
+		return
+	}
+	// 判断是否有权限
+	if data.AuthorID != userID {
+		ResponseError(c, CodeNotPermission)
+		return
+	}
+	// 返回响应
+	ResponseSuccess(c, nil)
+}
+
+// UpdatePostHandler 更新帖子
+func UpdatePostHandler(c *gin.Context) {
+	// 获取参数及参数校验
+	p := new(models.Post)
+	if err := c.ShouldBindJSON(p); err != nil {
+		zap.L().Error("UpdatePost with invalid param", zap.Error(err))
+		ResponseError(c, CodeInvalidParam)
+		return
+	}
+	// 更新帖子
+	if err := logic.UpdatePost(p); err != nil {
+		zap.L().Error("logic.UpdatePost() failed", zap.Error(err))
+		ResponseError(c, CodeServerBusy)
+		return
+	}
+	// 返回响应
+	ResponseSuccess(c, nil)
+}
+
+// DeletePostHandler 删除帖子
+func DeletePostHandler(c *gin.Context) {
+	// 获取参数及参数校验
+	postIDStr := c.Param("id")
+	postID, err := strconv.ParseInt(postIDStr, 10, 64)
+	if err != nil {
+		zap.L().Error("DeletePost with invalid param", zap.Error(err))
+		ResponseError(c, CodeInvalidParam)
+		return
+	}
+	// 删除帖子
+	if err := logic.DeletePost(postID); err != nil {
+		zap.L().Error("logic.DeletePost() failed", zap.Error(err))
+		ResponseError(c, CodeServerBusy)
+		return
+	}
+	// 返回响应
+	ResponseSuccess(c, nil)
+}
 func GetPostDetailHandler(c *gin.Context) {
 	// 1. 获取参数（帖子id）
 	postIDStr := c.Param("id")
@@ -56,7 +126,7 @@ func GetPostDetailHandler(c *gin.Context) {
 	ResponseSuccess(c, data)
 }
 
-func GetPostListHandler(c *gin.Context) {
+func GetPostsHandler(c *gin.Context) {
 	// 1. 获取分页参数
 	page, size := getPageInfo(c)
 	// 2. 获取帖子列表数据
@@ -70,7 +140,7 @@ func GetPostListHandler(c *gin.Context) {
 	ResponseSuccess(c, data)
 }
 
-// GetPostListHandler2 升级版帖子列表接口
+// GetPostListHandler 升级版帖子列表接口
 // @Summary 升级版帖子列表接口
 // @Description 可按社区按时间或分数排序查询帖子列表接口
 // @Tags 帖子相关接口
@@ -81,7 +151,7 @@ func GetPostListHandler(c *gin.Context) {
 // @Security ApiKeyAuth
 // @Success 200 {object} _ResponsePostList
 // @Router /posts2 [get]
-func GetPostListHandler2(c *gin.Context) {
+func GetPostListHandler(c *gin.Context) {
 	//GET请求参数： /api/v1/post2?page=1&size=10&order=time
 	//1. 获取分页参数
 	p := &models.ParamPostList{

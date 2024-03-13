@@ -11,6 +11,7 @@ const (
 	CodeServerBusy
 
 	CodeNeedLogin
+	CodeNotPermission
 	CodeInvalidToken
 	CodeEmailEmpty
 )
@@ -25,6 +26,7 @@ var codeMsgMap = map[ResCode]string{
 	CodeNeedLogin:       "需要登录",
 	CodeInvalidToken:    "无效的token",
 	CodeEmailEmpty:      "邮箱不能为空",
+	CodeNotPermission:   "没有权限",
 }
 
 func (c ResCode) Msg() string {

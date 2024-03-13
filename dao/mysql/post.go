@@ -12,6 +12,20 @@ func CreatePost(p *models.Post) (err error) {
 	return
 }
 
+// UpdatePost 更新帖子
+func UpdatePost(p *models.Post) (err error) {
+	//update post set title=?, content=? where post_id=?
+	db.Debug().Save(p)
+	return
+}
+
+// DeletePost 删除帖子
+func DeletePost(pid int64) (err error) {
+	//delete from post where post_id=?
+	db.Debug().Where("id = ?", pid).Delete(&models.Post{})
+	return
+}
+
 // GetPostById 根据帖子ID查询帖子详情
 func GetPostById(pid int64) (data *models.Post, err error) {
 	//select post_id, title, content, author_id, community_id, create_time from post where post_id = ?
