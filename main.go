@@ -72,7 +72,7 @@ func main() {
 		return
 	}
 	//初始化雪花算法
-	if err := snowflake.Init(settings.Conf.StartTime, settings.Conf.MachineID); err != nil {
+	if err := snowflake.Init(settings.Conf.SnowFlakeConfig.StartTime); err != nil {
 		fmt.Printf("init snowflake failed, err:%v\n", err)
 		return
 	}

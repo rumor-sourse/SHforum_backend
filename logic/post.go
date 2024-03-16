@@ -14,7 +14,7 @@ import (
 
 func CreatePost(p *models.Post) (err error) {
 	//生成post_id
-	p.ID = uint(snowflake.GenID())
+	p.ID = snowflake.GenID("post")
 	//保存到数据库
 	err = mysql.CreatePost(p)
 	if err != nil {

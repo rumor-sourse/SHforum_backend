@@ -2868,3 +2868,75 @@
 {"level":"INFO","time":"2024-03-09T17:08:57.353+0800","caller":"logger/logger.go:75","msg":"/api/v1/post/10362328637771776","status":200,"method":"GET","path":"/api/v1/post/10362328637771776","query":"","ip":"127.0.0.1","user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36","errors":"","cost":0.0018574}
 {"level":"INFO","time":"2024-03-09T17:32:59.344+0800","caller":"SHforum_backend/main.go:109","msg":"Shutdown Server ..."}
 {"level":"INFO","time":"2024-03-09T17:32:59.345+0800","caller":"SHforum_backend/main.go:118","msg":"Server exiting"}
+{"level":"DEBUG","time":"2024-03-15T21:36:05.712+0800","caller":"SHforum_backend/main.go:52","msg":"logger init success..."}
+{"level":"INFO","time":"2024-03-15T21:36:39.762+0800","caller":"SHforum_backend/main.go:109","msg":"Shutdown Server ..."}
+{"level":"INFO","time":"2024-03-15T21:36:39.762+0800","caller":"SHforum_backend/main.go:118","msg":"Server exiting"}
+{"level":"DEBUG","time":"2024-03-15T21:37:49.199+0800","caller":"SHforum_backend/main.go:52","msg":"logger init success..."}
+{"level":"INFO","time":"2024-03-15T21:42:04.518+0800","caller":"logger/logger.go:75","msg":"/api/v1/user/login","status":200,"method":"POST","path":"/api/v1/user/login","query":"","ip":"::1","user-agent":"PostmanRuntime/7.37.0","errors":"","cost":0.0010693}
+{"level":"ERROR","time":"2024-03-15T21:43:18.160+0800","caller":"snowflake/snowflake.go:26","msg":"tablename not found"}
+{"level":"INFO","time":"2024-03-15T21:43:18.170+0800","caller":"logger/logger.go:75","msg":"/api/v1/post/create","status":200,"method":"POST","path":"/api/v1/post/create","query":"","ip":"::1","user-agent":"PostmanRuntime/7.37.0","errors":"","cost":0.0103427}
+{"level":"INFO","time":"2024-03-15T21:43:18.183+0800","caller":"es/post.go:18","msg":"es.CreatePostIndex(post) success"}
+{"level":"INFO","time":"2024-03-15T21:46:03.426+0800","caller":"SHforum_backend/main.go:109","msg":"Shutdown Server ..."}
+{"level":"INFO","time":"2024-03-15T21:46:03.426+0800","caller":"SHforum_backend/main.go:118","msg":"Server exiting"}
+{"level":"DEBUG","time":"2024-03-15T22:15:43.951+0800","caller":"SHforum_backend/main.go:52","msg":"logger init success..."}
+{"level":"ERROR","time":"2024-03-15T22:15:49.525+0800","caller":"snowflake/snowflake.go:26","msg":"tablename not found"}
+{"level":"INFO","time":"2024-03-15T22:15:49.534+0800","caller":"logger/logger.go:75","msg":"/api/v1/post/create","status":200,"method":"POST","path":"/api/v1/post/create","query":"","ip":"::1","user-agent":"PostmanRuntime/7.37.0","errors":"","cost":0.0082476}
+{"level":"INFO","time":"2024-03-15T22:15:49.541+0800","caller":"es/post.go:18","msg":"es.CreatePostIndex(post) success"}
+{"level":"INFO","time":"2024-03-15T22:17:31.816+0800","caller":"SHforum_backend/main.go:109","msg":"Shutdown Server ..."}
+{"level":"INFO","time":"2024-03-15T22:17:31.816+0800","caller":"SHforum_backend/main.go:118","msg":"Server exiting"}
+{"level":"DEBUG","time":"2024-03-15T22:17:35.647+0800","caller":"SHforum_backend/main.go:52","msg":"logger init success..."}
+{"level":"ERROR","time":"2024-03-15T22:17:39.843+0800","caller":"snowflake/snowflake.go:27","msg":"tablename not found"}
+{"level":"INFO","time":"2024-03-15T22:17:39.859+0800","caller":"logger/logger.go:75","msg":"/api/v1/post/create","status":200,"method":"POST","path":"/api/v1/post/create","query":"","ip":"::1","user-agent":"PostmanRuntime/7.37.0","errors":"","cost":0.0161474}
+{"level":"INFO","time":"2024-03-15T22:17:39.863+0800","caller":"es/post.go:18","msg":"es.CreatePostIndex(post) success"}
+{"level":"INFO","time":"2024-03-15T22:22:53.559+0800","caller":"SHforum_backend/main.go:109","msg":"Shutdown Server ..."}
+{"level":"INFO","time":"2024-03-15T22:22:53.559+0800","caller":"SHforum_backend/main.go:118","msg":"Server exiting"}
+{"level":"DEBUG","time":"2024-03-16T17:17:11.816+0800","caller":"SHforum_backend/main.go:52","msg":"logger init success..."}
+{"level":"INFO","time":"2024-03-16T17:17:42.163+0800","caller":"logger/logger.go:75","msg":"/api/v1/post/create","status":200,"method":"POST","path":"/api/v1/post/create","query":"","ip":"::1","user-agent":"PostmanRuntime/7.37.0","errors":"","cost":0.0110799}
+{"level":"INFO","time":"2024-03-16T17:17:42.176+0800","caller":"es/post.go:18","msg":"es.CreatePostIndex(post) success"}
+{"level":"INFO","time":"2024-03-16T17:19:18.618+0800","caller":"SHforum_backend/main.go:109","msg":"Shutdown Server ..."}
+{"level":"INFO","time":"2024-03-16T17:19:18.618+0800","caller":"SHforum_backend/main.go:118","msg":"Server exiting"}
+{"level":"DEBUG","time":"2024-03-16T17:19:21.538+0800","caller":"SHforum_backend/main.go:52","msg":"logger init success..."}
+{"level":"INFO","time":"2024-03-16T17:19:33.186+0800","caller":"logger/logger.go:75","msg":"/api/v1/post/create","status":200,"method":"POST","path":"/api/v1/post/create","query":"","ip":"::1","user-agent":"PostmanRuntime/7.37.0","errors":"","cost":0.007566}
+{"level":"INFO","time":"2024-03-16T17:19:33.191+0800","caller":"es/post.go:18","msg":"es.CreatePostIndex(post) success"}
+{"level":"INFO","time":"2024-03-16T17:20:41.428+0800","caller":"logger/logger.go:75","msg":"/api/v1/post/create","status":200,"method":"POST","path":"/api/v1/post/create","query":"","ip":"::1","user-agent":"PostmanRuntime/7.37.0","errors":"","cost":0.0159956}
+{"level":"INFO","time":"2024-03-16T17:20:41.433+0800","caller":"es/post.go:18","msg":"es.CreatePostIndex(post) success"}
+{"level":"INFO","time":"2024-03-16T17:20:52.388+0800","caller":"SHforum_backend/main.go:109","msg":"Shutdown Server ..."}
+{"level":"INFO","time":"2024-03-16T17:20:52.389+0800","caller":"SHforum_backend/main.go:118","msg":"Server exiting"}
+{"level":"DEBUG","time":"2024-03-16T17:20:55.880+0800","caller":"SHforum_backend/main.go:52","msg":"logger init success..."}
+{"level":"INFO","time":"2024-03-16T17:21:07.573+0800","caller":"logger/logger.go:75","msg":"/api/v1/post/create","status":200,"method":"POST","path":"/api/v1/post/create","query":"","ip":"::1","user-agent":"PostmanRuntime/7.37.0","errors":"","cost":0.0065189}
+{"level":"INFO","time":"2024-03-16T17:21:07.578+0800","caller":"es/post.go:18","msg":"es.CreatePostIndex(post) success"}
+{"level":"INFO","time":"2024-03-16T17:22:07.970+0800","caller":"SHforum_backend/main.go:109","msg":"Shutdown Server ..."}
+{"level":"INFO","time":"2024-03-16T17:22:07.970+0800","caller":"SHforum_backend/main.go:118","msg":"Server exiting"}
+{"level":"DEBUG","time":"2024-03-16T17:22:11.528+0800","caller":"SHforum_backend/main.go:52","msg":"logger init success..."}
+{"level":"INFO","time":"2024-03-16T17:22:24.601+0800","caller":"logger/logger.go:75","msg":"/api/v1/post/create","status":200,"method":"POST","path":"/api/v1/post/create","query":"","ip":"::1","user-agent":"PostmanRuntime/7.37.0","errors":"","cost":0.0071257}
+{"level":"INFO","time":"2024-03-16T17:22:24.605+0800","caller":"es/post.go:18","msg":"es.CreatePostIndex(post) success"}
+{"level":"INFO","time":"2024-03-16T17:22:40.350+0800","caller":"SHforum_backend/main.go:109","msg":"Shutdown Server ..."}
+{"level":"INFO","time":"2024-03-16T17:22:40.350+0800","caller":"SHforum_backend/main.go:118","msg":"Server exiting"}
+{"level":"DEBUG","time":"2024-03-16T17:57:32.827+0800","caller":"SHforum_backend/main.go:52","msg":"logger init success..."}
+{"level":"INFO","time":"2024-03-16T17:57:37.510+0800","caller":"logger/logger.go:75","msg":"/api/v1/comment/create","status":404,"method":"POST","path":"/api/v1/comment/create","query":"","ip":"::1","user-agent":"PostmanRuntime/7.37.0","errors":"","cost":0}
+{"level":"INFO","time":"2024-03-16T17:57:46.722+0800","caller":"logger/logger.go:75","msg":"/api/v1/comment/add","status":200,"method":"POST","path":"/api/v1/comment/add","query":"","ip":"::1","user-agent":"PostmanRuntime/7.37.0","errors":"","cost":0.0153041}
+{"level":"INFO","time":"2024-03-16T18:02:55.342+0800","caller":"logger/logger.go:75","msg":"/api/v1/comment/add","status":200,"method":"POST","path":"/api/v1/comment/add","query":"","ip":"::1","user-agent":"PostmanRuntime/7.37.0","errors":"","cost":0.0131635}
+{"level":"ERROR","time":"2024-03-16T18:05:30.637+0800","caller":"logic/comment.go:16","msg":"mysql.GetCommentList(postID) failed","postID":45802406151331840}
+{"level":"ERROR","time":"2024-03-16T18:05:30.637+0800","caller":"controllers/comment.go:24","msg":"logic.GetCommentList() failed","error":"Error 1054 (42S22): Unknown column 'username' in 'field list'"}
+{"level":"INFO","time":"2024-03-16T18:05:30.637+0800","caller":"logger/logger.go:75","msg":"/api/v1/comment/45802406151331840","status":200,"method":"GET","path":"/api/v1/comment/45802406151331840","query":"","ip":"::1","user-agent":"PostmanRuntime/7.37.0","errors":"","cost":0.0006843}
+{"level":"INFO","time":"2024-03-16T18:11:12.677+0800","caller":"SHforum_backend/main.go:109","msg":"Shutdown Server ..."}
+{"level":"INFO","time":"2024-03-16T18:11:12.677+0800","caller":"SHforum_backend/main.go:118","msg":"Server exiting"}
+{"level":"DEBUG","time":"2024-03-16T18:11:16.685+0800","caller":"SHforum_backend/main.go:52","msg":"logger init success..."}
+{"level":"INFO","time":"2024-03-16T18:13:31.397+0800","caller":"SHforum_backend/main.go:109","msg":"Shutdown Server ..."}
+{"level":"INFO","time":"2024-03-16T18:13:31.397+0800","caller":"SHforum_backend/main.go:118","msg":"Server exiting"}
+{"level":"DEBUG","time":"2024-03-16T18:13:33.310+0800","caller":"SHforum_backend/main.go:52","msg":"logger init success..."}
+{"level":"INFO","time":"2024-03-16T18:14:17.078+0800","caller":"SHforum_backend/main.go:109","msg":"Shutdown Server ..."}
+{"level":"INFO","time":"2024-03-16T18:14:17.078+0800","caller":"SHforum_backend/main.go:118","msg":"Server exiting"}
+{"level":"DEBUG","time":"2024-03-16T18:14:20.238+0800","caller":"SHforum_backend/main.go:52","msg":"logger init success..."}
+{"level":"INFO","time":"2024-03-16T18:16:29.452+0800","caller":"SHforum_backend/main.go:109","msg":"Shutdown Server ..."}
+{"level":"INFO","time":"2024-03-16T18:16:29.452+0800","caller":"SHforum_backend/main.go:118","msg":"Server exiting"}
+{"level":"DEBUG","time":"2024-03-16T18:16:31.302+0800","caller":"SHforum_backend/main.go:52","msg":"logger init success..."}
+{"level":"INFO","time":"2024-03-16T18:17:24.937+0800","caller":"logger/logger.go:75","msg":"/api/v1/comment/add","status":200,"method":"POST","path":"/api/v1/comment/add","query":"","ip":"::1","user-agent":"PostmanRuntime/7.37.0","errors":"","cost":0.0136298}
+{"level":"INFO","time":"2024-03-16T18:17:31.320+0800","caller":"logger/logger.go:75","msg":"/api/v1/comment/add","status":200,"method":"POST","path":"/api/v1/comment/add","query":"","ip":"::1","user-agent":"PostmanRuntime/7.37.0","errors":"","cost":0.0124871}
+{"level":"ERROR","time":"2024-03-16T18:17:45.696+0800","caller":"logic/comment.go:16","msg":"mysql.GetCommentList(postID) failed","postID":45802406151331840}
+{"level":"ERROR","time":"2024-03-16T18:17:45.696+0800","caller":"controllers/comment.go:24","msg":"logic.GetCommentList() failed","error":"Error 1054 (42S22): Unknown column 'user_name' in 'field list'"}
+{"level":"INFO","time":"2024-03-16T18:17:45.696+0800","caller":"logger/logger.go:75","msg":"/api/v1/comment/45802406151331840","status":200,"method":"GET","path":"/api/v1/comment/45802406151331840","query":"","ip":"::1","user-agent":"PostmanRuntime/7.37.0","errors":"","cost":0.0012092}
+{"level":"INFO","time":"2024-03-16T18:19:56.870+0800","caller":"SHforum_backend/main.go:109","msg":"Shutdown Server ..."}
+{"level":"INFO","time":"2024-03-16T18:19:56.870+0800","caller":"SHforum_backend/main.go:118","msg":"Server exiting"}
+{"level":"DEBUG","time":"2024-03-16T18:19:59.839+0800","caller":"SHforum_backend/main.go:52","msg":"logger init success..."}
+{"level":"INFO","time":"2024-03-16T18:20:03.662+0800","caller":"logger/logger.go:75","msg":"/api/v1/comment/45802406151331840","status":200,"method":"GET","path":"/api/v1/comment/45802406151331840","query":"","ip":"::1","user-agent":"PostmanRuntime/7.37.0","errors":"","cost":0.0010386}

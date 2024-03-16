@@ -17,7 +17,7 @@ func SignUp(p *models.ParamSignUp) (err error) {
 		return err
 	}
 	//2、生成UID
-	userId := snowflake.GenID()
+	userId := snowflake.GenID("user")
 	//构造一个User实例
 	user := &models.User{
 		UserID:   userId,

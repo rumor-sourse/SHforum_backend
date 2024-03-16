@@ -9,19 +9,28 @@ import (
 var Conf = new(AppConfig)
 
 type AppConfig struct {
-	Name      string `mapstructure:"name"`
-	Mode      string `mapstructure:"mode"`
-	Version   string `mapstructure:"version"`
-	Port      int    `mapstructure:"port"`
-	StartTime string `mapstructure:"start_time"`
-	MachineID int64  `mapstructure:"machine_id"`
+	Name    string `mapstructure:"name"`
+	Mode    string `mapstructure:"mode"`
+	Version string `mapstructure:"version"`
+	Port    int    `mapstructure:"port"`
 
-	*AuthConfig     `mapstructure:"auth"`
-	*LogConfig      `mapstructure:"log"`
-	*MySQLConfig    `mapstructure:"mysql"`
-	*RedisConfig    `mapstructure:"redis"`
-	*RabbitMQConfig `mapstructure:"rabbitmq"`
-	*EsConfig       `mapstructure:"elasticsearch"`
+	*SnowFlakeConfig `mapstructure:"snowflake"`
+	*AuthConfig      `mapstructure:"auth"`
+	*LogConfig       `mapstructure:"log"`
+	*MySQLConfig     `mapstructure:"mysql"`
+	*RedisConfig     `mapstructure:"redis"`
+	*RabbitMQConfig  `mapstructure:"rabbitmq"`
+	*EsConfig        `mapstructure:"elasticsearch"`
+}
+
+type SnowFlakeConfig struct {
+	StartTime   string                          `mapstructure:"start_time"`
+	TableConfig map[string]TableSnowFlakeConfig `mapstructure:"table_config"`
+}
+
+type TableSnowFlakeConfig struct {
+	DataCenterID int `mapstructure:"datacenter_id"`
+	WorkerID     int `mapstructure:"worker_id"`
 }
 
 type AuthConfig struct {
@@ -82,7 +91,6 @@ func Init() (err error) {
 	viper.OnConfigChange(func(e fsnotify.Event) {
 		fmt.Println("配置文件修改了...")
 	})
-
 	if err := viper.Unmarshal(&Conf); err != nil {
 		fmt.Printf("viper.Unmarshal failed, err:%v\n", err)
 		return err

@@ -1,23 +1,31 @@
 package snowflake
 
 import (
+	"SHforum_backend/settings"
 	sf "github.com/bwmarrin/snowflake"
+	"go.uber.org/zap"
+	"log"
 	"time"
 )
 
-var node *sf.Node
-
-func Init(startTime string, machineID int64) (err error) {
+func Init(startTime string) (err error) {
 	var st time.Time
 	st, err = time.Parse("2006-01-02", startTime)
 	if err != nil {
 		return
 	}
 	sf.Epoch = st.UnixNano() / 1000000
-	node, err = sf.NewNode(machineID)
 	return
 }
 
-func GenID() int64 {
+func GenID(tablename string) int64 {
+	config, ok := settings.Conf.SnowFlakeConfig.TableConfig[tablename]
+	if !ok {
+		zap.L().Error("tablename not found")
+	}
+	node, err := sf.NewNode(int64(config.DataCenterID<<5 | config.WorkerID))
+	if err != nil {
+		log.Fatalf("Failed to create snowflake node: %v", err)
+	}
 	return node.Generate().Int64()
 }

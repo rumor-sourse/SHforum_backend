@@ -2,8 +2,18 @@ name: "web_app"
 mode: "dev"
 port: 8088
 version: "v0.0.1"
-start_time: "2023-11-11"
-machine_id: 1
+snowflake:
+  start_time: "2023-11-11"
+  table_config:
+    user:
+      datacenter_id: 1
+      worker_id: 1
+    post:
+      datacenter_id: 1
+      worker_id: 2
+    comment:
+      datacenter_id: 1
+      worker_id: 3
 
 auth:
   jwt_expire: 24

@@ -64,7 +64,17 @@ func SetUp(mode string) *gin.Engine {
 		//为某个贴子投票
 		postRouter.GET("/vote", controllers.PostVoteController)
 	}
-
+	commentRouter := v1.Group("/comment", middlewares.JWTAuthMiddleware())
+	{
+		//获取某个帖子的评论列表
+		commentRouter.GET("/:id", controllers.GetCommentByPostIdHandler)
+		//创建评论
+		commentRouter.POST("/add", controllers.CreateCommentHandler)
+		//判断某个评论是否可以编辑
+		commentRouter.GET("/canEdit/:id", controllers.CanEditCommentHandler)
+		//删除评论
+		commentRouter.POST("/delete/:id", controllers.DeleteCommentHandler)
+	}
 	v1.Use(middlewares.JWTAuthMiddleware()) //应用JWT认证中间件
 	{
 		//根据内容搜索博客，通过es实现

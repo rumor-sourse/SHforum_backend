@@ -11,6 +11,16 @@ type CommunityResponse struct {
 	Name string `json:"name"`
 }
 
+type CommentResponse struct {
+	ID                    int64  `json:"id"`
+	Content               string `json:"content"`
+	UserID                int64  `json:"user_id"`
+	UserName              string `json:"user_name"`
+	CommentLikeCount      int64  `json:"comment_like_count"`
+	IsAdminComment        bool   `json:"is_admin_comment"`
+	ParentCommentUserName string `json:"parent_comment_username"`
+}
+
 type CommunityDetailResponse struct {
 	ID           uint   `json:"id"`
 	Name         string `json:"name"`
@@ -18,7 +28,7 @@ type CommunityDetailResponse struct {
 }
 
 type PostResponse struct {
-	ID          uint   `json:"id"`
+	ID          int64  `json:"id"`
 	Title       string `json:"title"`
 	Content     string `json:"content"`
 	AuthorID    int64  `json:"author_id"`
