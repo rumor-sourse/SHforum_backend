@@ -24,6 +24,11 @@ type ParamVoteData struct {
 	Direction int8   `json:"direction,string" binding:"oneof=1 0 -1"` //赞成票(1)还是反对票(-1)还是取消投票(0)
 }
 
+type ParamCommentLike struct {
+	CommentID string `json:"comment_id" binding:"required"`           //评论id
+	Direction int8   `json:"direction,string" binding:"oneof=1 0 -1"` //赞成票(1)还是反对票(-1)还是取消投票(0)
+}
+
 type ParamPostList struct {
 	Page        int64  `json:"page" form:"page"`
 	Size        int64  `json:"size" form:"size"`

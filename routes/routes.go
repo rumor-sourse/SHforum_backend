@@ -62,7 +62,7 @@ func SetUp(mode string) *gin.Engine {
 		//删除贴子
 		postRouter.POST("/delete/:id", controllers.DeletePostHandler)
 		//为某个贴子投票
-		postRouter.GET("/vote", controllers.PostVoteController)
+		postRouter.POST("/vote", controllers.PostVoteController)
 	}
 	commentRouter := v1.Group("/comment", middlewares.JWTAuthMiddleware())
 	{
@@ -70,6 +70,8 @@ func SetUp(mode string) *gin.Engine {
 		commentRouter.GET("/:id", controllers.GetCommentByPostIdHandler)
 		//创建评论
 		commentRouter.POST("/add", controllers.CreateCommentHandler)
+		//给某个评论点赞
+		commentRouter.POST("/like", controllers.LikeCommentHandler)
 		//判断某个评论是否可以编辑
 		commentRouter.GET("/canEdit/:id", controllers.CanEditCommentHandler)
 		//删除评论

@@ -2,10 +2,12 @@ package logic
 
 import (
 	"SHforum_backend/dao/mysql"
+	"SHforum_backend/dao/redis"
 	"SHforum_backend/models"
 	"SHforum_backend/models/response"
 	"SHforum_backend/pkg/snowflake"
 	"go.uber.org/zap"
+	"strconv"
 )
 
 // GetCommentList 根据帖子id获取评论列表
@@ -60,7 +62,17 @@ func CreateComment(p *models.Comment) (err error) {
 	} else {
 		p.IsAdminComment = true
 	}
-	return mysql.CreateComment(p)
+	err = mysql.CreateComment(p)
+	if err != nil {
+		return err
+
+	}
+	//把评论保存到redis
+	err = redis.CreateComment(p.ID)
+	if err != nil {
+		return err
+	}
+	return
 }
 
 // GetCommentByID 根据评论ID获取评论
@@ -89,4 +101,9 @@ func GetCommentByID(commentID int64) (data *response.CommentResponse, err error)
 // DeleteComment 删除评论
 func DeleteComment(commentID int64) (err error) {
 	return mysql.DeleteComment(commentID)
+}
+
+// LikeComment 给评论点赞
+func LikeComment(userID int64, p *models.ParamCommentLike) (err error) {
+	return redis.CommentLike(strconv.Itoa(int(userID)), p.CommentID, float64(p.Direction))
 }

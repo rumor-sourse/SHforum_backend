@@ -1,7 +1,6 @@
 package redis
 
 import (
-	"errors"
 	"github.com/go-redis/redis"
 	"math"
 	"strconv"
@@ -27,16 +26,6 @@ direction=-1时，有两种情况：
      1、到期之后将redis中保存的赞成票数和反对票数存储到mysql中
 	 2、到期之后删除那个keyPostVotedZSetPF
 */
-
-const (
-	oneWeekInSeconds = 7 * 24 * 3600
-	scorePerVote     = 432 //每一票的分数
-)
-
-var (
-	ErrVoteTimeExpire = errors.New("投票时间已过")
-	ErrorVoteRepeated = errors.New("不允许重复投票")
-)
 
 func CreatePost(postID, communityID int64) error {
 	// 1、帖子发布的时候要设置一个有效期
