@@ -64,6 +64,11 @@ func Login(p *models.ParamLogin) (userresp *response.UserResponse, err error) {
 	return
 }*/
 
+// SendCode 发送邮箱验证码
+func SendCode(email string, code string) {
+	MQSendCodeMessage(email, code)
+}
+
 func MQSendCodeMessage(email string, code string) {
 	rmq := rabbitmq.NewRabbitMQSimple("send_code")
 	defer rmq.Destroy()

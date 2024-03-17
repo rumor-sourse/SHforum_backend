@@ -6,6 +6,7 @@ import (
 	"SHforum_backend/models"
 	"SHforum_backend/models/response"
 	"SHforum_backend/pkg/snowflake"
+	"SHforum_backend/rabbitmq"
 	"go.uber.org/zap"
 	"strconv"
 )
@@ -72,6 +73,8 @@ func CreateComment(p *models.Comment) (err error) {
 	if err != nil {
 		return err
 	}
+	//发送消息到rabbitmq
+	MQCreateCommentMessage(p, post)
 	return
 }
 
@@ -106,4 +109,16 @@ func DeleteComment(commentID int64) (err error) {
 // LikeComment 给评论点赞
 func LikeComment(userID int64, p *models.ParamCommentLike) (err error) {
 	return redis.CommentLike(strconv.Itoa(int(userID)), p.CommentID, float64(p.Direction))
+}
+
+func MQCreateCommentMessage(p *models.Comment, post *models.Post) {
+	rmq := rabbitmq.NewRabbitMQSimple("new_comment")
+	defer rmq.Destroy()
+	rmq.PublishCreateCommentMessage(p, post)
+}
+
+func MQReceiveCreateCommentMessageByMysql() {
+	rmq := rabbitmq.NewRabbitMQSimple("new_comment")
+	defer rmq.Destroy()
+	rmq.ConsumeCreateCommentMessageByMysql()
 }

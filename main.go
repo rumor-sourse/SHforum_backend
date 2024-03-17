@@ -98,6 +98,7 @@ func main() {
 	go logic.MQReceiveCreatePostMessageByEs()
 	go logic.MQReceiveCreatePostMessageByMysql()
 	go logic.MQReceiveCodeMessage()
+	go logic.MQReceiveCreateCommentMessageByMysql()
 	// 等待中断信号来优雅地关闭服务器，为关闭服务器操作设置一个5秒的超时
 	quit := make(chan os.Signal, 1) // 创建一个接收信号的通道
 	// kill 默认会发送 syscall.SIGTERM 信号

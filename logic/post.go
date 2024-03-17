@@ -25,6 +25,8 @@ func CreatePost(p *models.Post) (err error) {
 	if err != nil {
 		return err
 	}
+	//创建生产者告诉其粉丝有新帖子产生
+	MQSendCreatePostMessage(p.AuthorID, *p)
 	return
 }
 
