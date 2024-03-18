@@ -5,8 +5,8 @@ import (
 	"SHforum_backend/dao/redis"
 	"SHforum_backend/models"
 	"SHforum_backend/models/response"
-	"SHforum_backend/pkg/snowflake"
 	"SHforum_backend/rabbitmq"
+	"SHforum_backend/util/snowflake"
 	"go.uber.org/zap"
 	"strconv"
 )
@@ -69,7 +69,7 @@ func CreateComment(p *models.Comment) (err error) {
 
 	}
 	//把评论保存到redis
-	err = redis.CreateComment(p.ID)
+	err = redis.CreateComment(p.ID, post.ID)
 	if err != nil {
 		return err
 	}

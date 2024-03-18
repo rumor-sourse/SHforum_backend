@@ -36,6 +36,7 @@ func GetPostVoteData(ids []string) (data []int64, err error) {
 	if err != nil {
 		return nil, err
 	}
+	//查询结果存储到data中
 	data = make([]int64, 0, len(cmders))
 	for _, cmder := range cmders {
 		v := cmder.(*redis.IntCmd).Val()
@@ -50,7 +51,7 @@ func GetCommunityPostIDsInOrder(p *models.ParamPostList) ([]string, error) {
 	if p.Order == models.OrderScore {
 		orderKey = getRedisKey(KeyPostScoreZSet)
 	}
-	//使用 zinterstore 把分区的帖子set与帖子分数的zset生成一个新的zset
+	//使用 zinterstore 把分区的帖子set与帖子分数的zset生成一个新的zset（交集运算）
 	// 针对新的zset按之前的逻辑取数据
 
 	//社区的key

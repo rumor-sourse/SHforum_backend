@@ -2974,3 +2974,6 @@
 {"level":"INFO","time":"2024-03-17T18:10:54.497+0800","caller":"logger/logger.go:75","msg":"/api/v1/comment/add","status":200,"method":"POST","path":"/api/v1/comment/add","query":"","ip":"::1","user-agent":"PostmanRuntime/7.37.0","errors":"","cost":0.0168885}
 {"level":"INFO","time":"2024-03-17T18:12:18.984+0800","caller":"SHforum_backend/main.go:110","msg":"Shutdown Server ..."}
 {"level":"INFO","time":"2024-03-17T18:12:18.984+0800","caller":"SHforum_backend/main.go:119","msg":"Server exiting"}
+{"level":"DEBUG","time":"2024-03-18T17:26:43.372+0800","caller":"SHforum_backend/main.go:52","msg":"logger init success..."}
+{"level":"INFO","time":"2024-03-18T17:26:49.884+0800","caller":"SHforum_backend/main.go:110","msg":"Shutdown Server ..."}
+{"level":"INFO","time":"2024-03-18T17:26:49.884+0800","caller":"SHforum_backend/main.go:119","msg":"Server exiting"}

@@ -1,4 +1,4 @@
-package util
+package email
 
 import (
 	"github.com/jordan-wright/email"

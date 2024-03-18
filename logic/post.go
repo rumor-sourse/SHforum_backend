@@ -6,8 +6,8 @@ import (
 	"SHforum_backend/es"
 	"SHforum_backend/models"
 	"SHforum_backend/models/response"
-	"SHforum_backend/pkg/snowflake"
 	"SHforum_backend/rabbitmq"
+	"SHforum_backend/util/snowflake"
 	"fmt"
 	"go.uber.org/zap"
 )

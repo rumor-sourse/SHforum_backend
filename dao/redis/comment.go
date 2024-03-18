@@ -3,10 +3,11 @@ package redis
 import (
 	"github.com/go-redis/redis"
 	"math"
+	"strconv"
 	"time"
 )
 
-func CreateComment(commentID int64) error {
+func CreateComment(commentID int64, postID int64) error {
 	// 1、评论发布的时候要设置一个有效期
 	pipeline := client.TxPipeline()
 	pipeline.ZAdd(getRedisKey(KeyCommentTimeZSet), redis.Z{
@@ -18,6 +19,9 @@ func CreateComment(commentID int64) error {
 		Score:  0,
 		Member: commentID,
 	})
+	// 3、评论发布的时候要把评论id添加到帖子set里面
+	cKey := getRedisKey(KeyCommentInPostSetPF + strconv.Itoa(int(postID)))
+	pipeline.SAdd(cKey, commentID)
 	_, err := pipeline.Exec()
 	return err
 }

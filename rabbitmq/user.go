@@ -2,7 +2,7 @@ package rabbitmq
 
 import (
 	"SHforum_backend/dao/redis"
-	"SHforum_backend/util"
+	"SHforum_backend/util/email"
 	"context"
 	"encoding/json"
 	amqp "github.com/rabbitmq/amqp091-go"
@@ -94,7 +94,7 @@ func (r *RabbitMQ) ConsumeCodeMessage() {
 			//消息逻辑处理，可以自行设计逻辑
 			var mes SendCodeMessage
 			err = json.Unmarshal(d.Body, &mes)
-			err = util.SendEmailWithCode([]string{mes.Email}, mes.Code)
+			err = email.SendEmailWithCode([]string{mes.Email}, mes.Code)
 			if err != nil {
 				return
 			}

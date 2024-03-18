@@ -2,7 +2,7 @@ package middlewares
 
 import (
 	"SHforum_backend/controllers"
-	"SHforum_backend/pkg/jwt"
+	"SHforum_backend/util/jwt"
 	"github.com/gin-gonic/gin"
 	"strings"
 )
