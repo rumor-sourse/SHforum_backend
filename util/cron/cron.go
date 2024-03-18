@@ -3,9 +3,9 @@ package cron
 import "github.com/robfig/cron/v3"
 
 var (
-	CronClient *cron.Cron
+	cronClient *cron.Cron
 )
 
 func Init() {
-	CronClient = cron.New()
+	cronClient = cron.New()
 }

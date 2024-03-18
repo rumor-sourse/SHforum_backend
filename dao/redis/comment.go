@@ -63,3 +63,18 @@ func CommentLike(userID, commentID string, value float64) error {
 	_, err := pipeline.Exec()
 	return err
 }
+
+func GetCommentLikeCount(commentID string) (count int64, err error) {
+	pipeline := client.Pipeline()
+	key := getRedisKey(KeyCommentLikedZSetPF + commentID)
+	cmd := pipeline.ZCount(key, "1", "1")
+	_, err = pipeline.Exec()
+	if err != nil {
+		return 0, err
+	}
+	count, err = cmd.Result()
+	if err != nil {
+		return 0, err
+	}
+	return count, nil
+}

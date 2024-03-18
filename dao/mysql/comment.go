@@ -41,3 +41,12 @@ func DeleteComment(commentID int64) (err error) {
 	}
 	return
 }
+
+// UpdateCommentLikeCount 更新评论点赞数
+func UpdateCommentLikeCount(commentID int64, value int64) (err error) {
+	result := db.Debug().Model(&models.Comment{}).Where("id = ?", commentID).Update("comment_like_count", value)
+	if result.Error != nil {
+		return result.Error
+	}
+	return
+}

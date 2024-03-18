@@ -36,7 +36,6 @@ func GetPostVoteData(ids []string) (data []int64, err error) {
 	if err != nil {
 		return nil, err
 	}
-	//查询结果存储到data中
 	data = make([]int64, 0, len(cmders))
 	for _, cmder := range cmders {
 		v := cmder.(*redis.IntCmd).Val()

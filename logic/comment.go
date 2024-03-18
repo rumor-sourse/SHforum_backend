@@ -108,7 +108,15 @@ func DeleteComment(commentID int64) (err error) {
 
 // LikeComment 给评论点赞
 func LikeComment(userID int64, p *models.ParamCommentLike) (err error) {
-	return redis.CommentLike(strconv.Itoa(int(userID)), p.CommentID, float64(p.Direction))
+	err = redis.CommentLike(strconv.Itoa(int(userID)), p.CommentID, float64(p.Direction))
+	if err != nil {
+		return err
+	}
+	// 获取点赞数
+	likeCount, err := redis.GetCommentLikeCount(p.CommentID)
+	//发送消息到rabbitmq
+	MQCreateUpdateCommentLikeMessgeByMysql(p.CommentID, likeCount)
+	return
 }
 
 func MQCreateCommentMessage(p *models.Comment, post *models.Post) {
@@ -121,4 +129,16 @@ func MQReceiveCreateCommentMessageByMysql() {
 	rmq := rabbitmq.NewRabbitMQSimple("new_comment")
 	defer rmq.Destroy()
 	rmq.ConsumeCreateCommentMessageByMysql()
+}
+
+func MQCreateUpdateCommentLikeMessgeByMysql(CommentID string, likeCount int64) {
+	rmq := rabbitmq.NewRabbitMQSimple("update_comment_like")
+	defer rmq.Destroy()
+	rmq.PublishUpdateCommentLikeMessge(CommentID, likeCount)
+}
+
+func MQReceiveUpdateCommentLikeMessgeByMysql() {
+	rmq := rabbitmq.NewRabbitMQSimple("update_comment_like")
+	defer rmq.Destroy()
+	rmq.ConsumeUpdateCommentLikeMessgeByMysql()
 }
