@@ -12,15 +12,18 @@ import (
 // GetCommentByPostIdHandler 根据帖子id获取评论列表
 func GetCommentByPostIdHandler(c *gin.Context) {
 	//获取参数
-	pid := c.Param("id")
-	postID, err := strconv.ParseInt(pid, 10, 64)
-	if err != nil {
+	p := &models.ParamCommentList{
+		Page:  1,
+		Size:  10,
+		Order: models.OrderScore,
+	}
+	if err := c.ShouldBindQuery(p); err != nil {
 		zap.L().Error("GetCommentByPostIdHandler with invalid param", zap.Error(err))
 		ResponseError(c, CodeInvalidParam)
 		return
 	}
 	//查询数据
-	data, err := logic.GetCommentList(postID)
+	data, err := logic.GetCommentList(p)
 	if err != nil {
 		zap.L().Error("logic.GetCommentList() failed", zap.Error(err))
 		ResponseError(c, CodeServerBusy)
@@ -131,4 +134,25 @@ func CanEditCommentHandler(c *gin.Context) {
 	}
 	//返回响应
 	ResponseSuccess(c, nil)
+}
+
+// GetHotCommentByPostIdHandler 根据帖子id获取热门评论
+func GetHotCommentByPostIdHandler(c *gin.Context) {
+	//获取参数
+	pid := c.Param("id")
+	postID, err := strconv.ParseInt(pid, 10, 64)
+	if err != nil {
+		zap.L().Error("GetHotCommentByPostIdHandler with invalid param", zap.Error(err))
+		ResponseError(c, CodeInvalidParam)
+		return
+	}
+	//查询数据
+	data, err := logic.GetHotComment(postID)
+	if err != nil {
+		zap.L().Error("logic.GetHotCommentList() failed", zap.Error(err))
+		ResponseError(c, CodeServerBusy)
+		return
+	}
+	//返回数据
+	ResponseSuccess(c, data)
 }

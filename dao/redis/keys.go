@@ -14,6 +14,8 @@ const (
 	keyCommentScoreZSet   = "comment:score"   // zset评论及投票的分数
 	KeyCommentLikedZSetPF = "comment:liked:"  // zset记录用户及投票类型;参数是comment_id
 	KeyCommentInPostSetPF = "comment:inpost:" // zset记录每个帖子下的评论id;参数是post_id
+
+	KeyHotCommentHashPF = "hotcomment:" // hash保存热评;参数是post_id
 )
 
 const (

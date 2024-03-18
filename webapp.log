@@ -2980,3 +2980,6 @@
 {"level":"DEBUG","time":"2024-03-18T18:17:50.797+0800","caller":"SHforum_backend/main.go:52","msg":"logger init success..."}
 {"level":"INFO","time":"2024-03-18T18:17:53.140+0800","caller":"SHforum_backend/main.go:111","msg":"Shutdown Server ..."}
 {"level":"INFO","time":"2024-03-18T18:17:53.140+0800","caller":"SHforum_backend/main.go:120","msg":"Server exiting"}
+{"level":"DEBUG","time":"2024-03-18T21:32:37.336+0800","caller":"SHforum_backend/main.go:52","msg":"logger init success..."}
+{"level":"INFO","time":"2024-03-18T21:33:45.647+0800","caller":"SHforum_backend/main.go:111","msg":"Shutdown Server ..."}
+{"level":"INFO","time":"2024-03-18T21:33:45.647+0800","caller":"SHforum_backend/main.go:120","msg":"Server exiting"}

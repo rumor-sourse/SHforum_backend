@@ -12,12 +12,19 @@ import (
 )
 
 // GetCommentList 根据帖子id获取评论列表
-func GetCommentList(postID int64) (data []*response.CommentResponse, err error) {
-	//查询评论列表
-	comments, err := mysql.GetCommentList(postID)
+func GetCommentList(p *models.ParamCommentList) (data []*response.CommentResponse, err error) {
+	//从redis拿到所有的id
+	ids, err := redis.GetPostCommentIDsInOrder(p)
 	if err != nil {
-		zap.L().Error("mysql.GetCommentList(postID) failed",
-			zap.Int64("postID", postID))
+		return
+	}
+	if len(ids) == 0 {
+		zap.L().Warn("redis.GetPostCommentIDs(p) return 0 data")
+		return
+	}
+	// 根据id去数据库查询评论
+	comments, err := mysql.GetCommentListByIDs(ids)
+	if err != nil {
 		return
 	}
 	//组合数据
@@ -117,6 +124,12 @@ func LikeComment(userID int64, p *models.ParamCommentLike) (err error) {
 	//发送消息到rabbitmq
 	MQCreateUpdateCommentLikeMessgeByMysql(p.CommentID, likeCount)
 	return
+}
+
+func GetHotComment(pid int64) (data *response.CommentResponse, err error) {
+	//postID = strconv.FormatInt(pid, 10)
+	//redis.GetHotComment(postID)
+	return nil, nil
 }
 
 func MQCreateCommentMessage(p *models.Comment, post *models.Post) {

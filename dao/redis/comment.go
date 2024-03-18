@@ -1,6 +1,7 @@
 package redis
 
 import (
+	"SHforum_backend/models"
 	"github.com/go-redis/redis"
 	"math"
 	"strconv"
@@ -64,6 +65,7 @@ func CommentLike(userID, commentID string, value float64) error {
 	return err
 }
 
+// GetCommentLikeCount 获取评论点赞数
 func GetCommentLikeCount(commentID string) (count int64, err error) {
 	pipeline := client.Pipeline()
 	key := getRedisKey(KeyCommentLikedZSetPF + commentID)
@@ -77,4 +79,48 @@ func GetCommentLikeCount(commentID string) (count int64, err error) {
 		return 0, err
 	}
 	return count, nil
+}
+
+func GetPostCommentIDsInOrder(p *models.ParamCommentList) ([]string, error) {
+	//1、根据用户请求中携带的order参数确定要查询的redis key
+	orderkey := getRedisKey(KeyCommentTimeZSet)
+	if p.Order == models.OrderScore {
+		orderkey = getRedisKey(keyCommentScoreZSet)
+	}
+
+	//贴子的key
+	pKey := getRedisKey(KeyCommentInPostSetPF + strconv.Itoa(int(p.PostID)))
+	// 利用缓存key减少zinterstore的执行次数
+	key := orderkey + strconv.Itoa(int(p.PostID))
+	if client.Exists(key).Val() < 1 {
+		//不存在，需要计算
+		pipeline := client.Pipeline()
+		pipeline.ZInterStore(key, redis.ZStore{
+			Aggregate: "MAX",
+		}, pKey, orderkey)
+		pipeline.Expire(key, 60*time.Second)
+		_, err := pipeline.Exec()
+		if err != nil {
+			return nil, err
+		}
+	}
+	//存在的话直接根据key查询ids
+	return getIDsFormKey(key, p.Page, p.Size)
+}
+
+// UpdateHotComment 缓存存储热评信息
+/*func UpdateHotComment(postID string, data string) error {
+	ckey := getRedisKey(KeyHotCommentHashPF + postID)
+	_, err := client.HSet(key, "data", data).Result()
+	return err
+}*/
+
+// GetHotComment 获取热评信息
+func GetHotComment(postID string) (data map[string]string, err error) {
+	key := getRedisKey(KeyHotCommentHashPF + postID)
+	data, err = client.HGetAll(key).Result()
+	if err != nil {
+		return nil, err
+	}
+	return data, nil
 }

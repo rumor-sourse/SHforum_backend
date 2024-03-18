@@ -35,3 +35,10 @@ type ParamPostList struct {
 	Order       string `json:"order" form:"order" example:"score"`
 	CommunityID int64  `json:"community_id" form:"community_id"`
 }
+
+type ParamCommentList struct {
+	Page   int64  `json:"page" form:"page"`
+	Size   int64  `json:"size" form:"size"`
+	Order  string `json:"order" form:"order" example:"score"`
+	PostID int64  `json:"post_id" form:"post_id"`
+}
