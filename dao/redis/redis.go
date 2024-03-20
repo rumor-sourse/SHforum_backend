@@ -2,20 +2,24 @@ package redis
 
 import (
 	"SHforum_backend/settings"
+	"context"
 	"fmt"
-	"github.com/go-redis/redis"
+	"github.com/go-redsync/redsync/v4"
+	"github.com/go-redsync/redsync/v4/redis/goredis/v9"
+	goredislib "github.com/redis/go-redis/v9"
 	"sync"
 )
 
 var (
-	client *redis.Client
-	once   sync.Once
-	Nil    = redis.Nil
+	client  *goredislib.Client
+	once    sync.Once
+	RedSync *redsync.Redsync
+	ctx     = context.Background()
 )
 
 func Init(cfg *settings.RedisConfig) (err error) {
 	once.Do(func() {
-		client = redis.NewClient(&redis.Options{
+		client = goredislib.NewClient(&goredislib.Options{
 			Addr: fmt.Sprintf("%s:%d",
 				cfg.Host,
 				cfg.Port,
@@ -25,7 +29,9 @@ func Init(cfg *settings.RedisConfig) (err error) {
 			PoolSize: cfg.PoolSize,
 		})
 	})
-	_, err = client.Ping().Result()
+	pool := goredis.NewPool(client)
+	RedSync = redsync.New(pool)
+	_, err = client.Ping(context.TODO()).Result()
 	return err
 }
 

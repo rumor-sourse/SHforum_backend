@@ -2,7 +2,8 @@ package redis
 
 import (
 	"SHforum_backend/models"
-	"github.com/go-redis/redis"
+	"errors"
+	"github.com/redis/go-redis/v9"
 	"math"
 	"strconv"
 	"time"
@@ -11,19 +12,19 @@ import (
 func CreateComment(commentID int64, postID int64) error {
 	// 1、评论发布的时候要设置一个有效期
 	pipeline := client.TxPipeline()
-	pipeline.ZAdd(getRedisKey(KeyCommentTimeZSet), redis.Z{
+	pipeline.ZAdd(ctx, getRedisKey(KeyCommentTimeZSet), redis.Z{
 		Score:  float64(time.Now().Unix()),
 		Member: commentID,
 	})
 	// 2、评论发布的时候要初始化分数
-	pipeline.ZAdd(getRedisKey(keyCommentScoreZSet), redis.Z{
+	pipeline.ZAdd(ctx, getRedisKey(keyCommentScoreZSet), redis.Z{
 		Score:  0,
 		Member: commentID,
 	})
 	// 3、评论发布的时候要把评论id添加到帖子set里面
 	cKey := getRedisKey(KeyCommentInPostSetPF + strconv.Itoa(int(postID)))
-	pipeline.SAdd(cKey, commentID)
-	_, err := pipeline.Exec()
+	pipeline.SAdd(ctx, cKey, commentID)
+	_, err := pipeline.Exec(ctx)
 	return err
 }
 
@@ -31,13 +32,13 @@ func CreateComment(commentID int64, postID int64) error {
 func CommentLike(userID, commentID string, value float64) error {
 	// 1、判断投票限制
 	//去redis取评论发布时间
-	commentTime := client.ZScore(getRedisKey(KeyCommentTimeZSet), commentID).Val()
+	commentTime := client.ZScore(ctx, getRedisKey(KeyCommentTimeZSet), commentID).Val()
 	if float64(time.Now().Unix())-commentTime > oneWeekInSeconds {
 		return ErrVoteTimeExpire
 	}
 	// 2、更新分数
 	// 先查当前用户给当前评论的投票记录
-	ov := client.ZScore(getRedisKey(KeyCommentLikedZSetPF+commentID), userID).Val()
+	ov := client.ZScore(ctx, getRedisKey(KeyCommentLikedZSetPF+commentID), userID).Val()
 	//如果这一次投票的值和之前的值一样，就提示不允许重复投票
 	if value == ov {
 		return ErrorVoteRepeated
@@ -50,18 +51,18 @@ func CommentLike(userID, commentID string, value float64) error {
 	}
 	diff := math.Abs(ov - value) //计算差值
 	pipeline := client.TxPipeline()
-	pipeline.ZIncrBy(getRedisKey(keyCommentScoreZSet), op*diff*scorePerLike, commentID)
+	pipeline.ZIncrBy(ctx, getRedisKey(keyCommentScoreZSet), op*diff*scorePerLike, commentID)
 	// 3、记录投票
 	if value == 0 {
-		pipeline.ZRem(getRedisKey(KeyCommentLikedZSetPF+commentID), userID)
+		pipeline.ZRem(ctx, getRedisKey(KeyCommentLikedZSetPF+commentID), userID)
 	} else {
-		pipeline.ZAdd(getRedisKey(KeyCommentLikedZSetPF+commentID), redis.Z{
+		pipeline.ZAdd(ctx, getRedisKey(KeyCommentLikedZSetPF+commentID), redis.Z{
 			Score:  value, //赞成票还是反对票
 			Member: userID,
 		})
 	}
 	// 4、返回结果
-	_, err := pipeline.Exec()
+	_, err := pipeline.Exec(ctx)
 	return err
 }
 
@@ -69,8 +70,8 @@ func CommentLike(userID, commentID string, value float64) error {
 func GetCommentLikeCount(commentID string) (count int64, err error) {
 	pipeline := client.Pipeline()
 	key := getRedisKey(KeyCommentLikedZSetPF + commentID)
-	cmd := pipeline.ZCount(key, "1", "1")
-	_, err = pipeline.Exec()
+	cmd := pipeline.ZCount(ctx, key, "1", "1")
+	_, err = pipeline.Exec(ctx)
 	if err != nil {
 		return 0, err
 	}
@@ -92,14 +93,15 @@ func GetPostCommentIDsInOrder(p *models.ParamCommentList) ([]string, error) {
 	pKey := getRedisKey(KeyCommentInPostSetPF + strconv.Itoa(int(p.PostID)))
 	// 利用缓存key减少zinterstore的执行次数
 	key := orderkey + strconv.Itoa(int(p.PostID))
-	if client.Exists(key).Val() < 1 {
+	if client.Exists(ctx, key).Val() < 1 {
 		//不存在，需要计算
 		pipeline := client.Pipeline()
-		pipeline.ZInterStore(key, redis.ZStore{
+		pipeline.ZInterStore(ctx, key, &redis.ZStore{
+			Keys:      []string{pKey, orderkey},
 			Aggregate: "MAX",
-		}, pKey, orderkey)
-		pipeline.Expire(key, 60*time.Second)
-		_, err := pipeline.Exec()
+		})
+		pipeline.Expire(ctx, key, 60*time.Second)
+		_, err := pipeline.Exec(ctx)
 		if err != nil {
 			return nil, err
 		}
@@ -118,8 +120,10 @@ func GetPostCommentIDsInOrder(p *models.ParamCommentList) ([]string, error) {
 // GetHotComment 获取热评信息
 func GetHotComment(postID string) (data map[string]string, err error) {
 	key := getRedisKey(KeyHotCommentHashPF + postID)
-	data, err = client.HGetAll(key).Result()
-	if err != nil {
+	data, err = client.HGetAll(ctx, key).Result()
+	if errors.Is(err, redis.Nil) {
+		return nil, redis.Nil
+	} else if err != nil {
 		return nil, err
 	}
 	return data, nil

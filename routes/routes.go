@@ -65,11 +65,11 @@ func SetUp(mode string) *gin.Engine {
 		postRouter.POST("/vote", controllers.PostVoteController)
 		//获取某个贴子的评论列表
 		postRouter.GET("/comments", controllers.GetCommentByPostIdHandler)
+		//获取某个贴子的热评
+		postRouter.GET("/hotcomment/:id", controllers.GetHotCommentByPostIdHandler)
 	}
 	commentRouter := v1.Group("/comment", middlewares.JWTAuthMiddleware())
 	{
-		//获取某个贴子的热评
-		commentRouter.GET("/hot/:id", controllers.GetHotCommentByPostIdHandler)
 		//创建评论
 		commentRouter.POST("/add", controllers.CreateCommentHandler)
 		//给某个评论点赞

@@ -12,10 +12,10 @@ func SaveCode(em string, code string) {
 	if err != nil {
 		return
 	}
-	client.Set(em, code, time.Duration(emailExpireTime)*time.Minute)
+	client.Set(ctx, em, code, time.Duration(emailExpireTime)*time.Minute)
 }
 
 // GetCode 从redis中获取验证码
 func GetCode(email string) (code string, err error) {
-	return client.Get(email).Result()
+	return client.Get(ctx, email).Result()
 }

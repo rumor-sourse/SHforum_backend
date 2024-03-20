@@ -127,8 +127,8 @@ func LikeComment(userID int64, p *models.ParamCommentLike) (err error) {
 }
 
 func GetHotComment(pid int64) (data *response.CommentResponse, err error) {
-	//postID = strconv.FormatInt(pid, 10)
-	//redis.GetHotComment(postID)
+	postID := strconv.Itoa(int(pid))
+	redis.GetHotComment(postID)
 	return nil, nil
 }
 

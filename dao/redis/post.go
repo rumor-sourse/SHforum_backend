@@ -2,7 +2,7 @@ package redis
 
 import (
 	"SHforum_backend/models"
-	"github.com/go-redis/redis"
+	"github.com/redis/go-redis/v9"
 	"strconv"
 	"time"
 )
@@ -12,7 +12,7 @@ func getIDsFormKey(key string, page, size int64) ([]string, error) {
 	start := (page - 1) * size
 	end := start + size - 1
 	//3、ZREVRange查询
-	return client.ZRevRange(key, start, end).Result()
+	return client.ZRevRange(ctx, key, start, end).Result()
 }
 
 func GetPostIDsInOrder(p *models.ParamPostList) ([]string, error) {
@@ -30,9 +30,9 @@ func GetPostVoteData(ids []string) (data []int64, err error) {
 	pipeline := client.Pipeline()
 	for _, id := range ids {
 		key := getRedisKey(KeyPostVotedZSetPF + id)
-		pipeline.ZCount(key, "1", "1")
+		pipeline.ZCount(ctx, key, "1", "1")
 	}
-	cmders, err := pipeline.Exec()
+	cmders, err := pipeline.Exec(ctx)
 	if err != nil {
 		return nil, err
 	}
@@ -57,14 +57,15 @@ func GetCommunityPostIDsInOrder(p *models.ParamPostList) ([]string, error) {
 	cKey := getRedisKey(KeyCommunitySetPF + strconv.Itoa(int(p.CommunityID)))
 	// 利用缓存key减少zinterstore的执行次数
 	key := orderKey + strconv.Itoa(int(p.CommunityID))
-	if client.Exists(key).Val() < 1 {
+	if client.Exists(ctx, key).Val() < 1 {
 		//不存在，需要计算
 		pipeline := client.Pipeline()
-		pipeline.ZInterStore(key, redis.ZStore{
+		pipeline.ZInterStore(ctx, key, &redis.ZStore{
+			Keys:      []string{cKey, orderKey},
 			Aggregate: "MAX",
-		}, cKey, orderKey)
-		pipeline.Expire(key, 60*time.Second)
-		_, err := pipeline.Exec()
+		})
+		pipeline.Expire(ctx, key, 60*time.Second)
+		_, err := pipeline.Exec(ctx)
 		if err != nil {
 			return nil, err
 		}
