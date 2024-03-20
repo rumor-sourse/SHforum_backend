@@ -27,6 +27,16 @@ func GetCommentByID(commentID int64) (comment *models.Comment, err error) {
 	return
 }
 
+// GetHotComment 获取热评
+func GetHotComment(postID int64) (comment *models.Comment, err error) {
+	comment = new(models.Comment)
+	result := db.Debug().Where("post_id = ?", postID).Order("comment_like_count desc").First(comment)
+	if result.Error != nil {
+		return nil, result.Error
+	}
+	return
+}
+
 // CreateComment 创建评论
 func CreateComment(p *models.Comment) (err error) {
 	result := db.Debug().Create(p)

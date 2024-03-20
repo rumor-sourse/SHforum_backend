@@ -7,6 +7,8 @@ import (
 	"SHforum_backend/models/response"
 	"SHforum_backend/rabbitmq"
 	"SHforum_backend/util/snowflake"
+	"errors"
+	"fmt"
 	"go.uber.org/zap"
 	"strconv"
 )
@@ -128,7 +130,41 @@ func LikeComment(userID int64, p *models.ParamCommentLike) (err error) {
 
 func GetHotComment(pid int64) (data *response.CommentResponse, err error) {
 	postID := strconv.Itoa(int(pid))
-	redis.GetHotComment(postID)
+	mutextname := fmt.Sprintf("hotcomment:%s", postID)
+	mutex := redis.RedSync.NewMutex(mutextname)
+	hotcomment, err := redis.GetHotComment(postID)
+	//缓存过期，redis中没有数据
+	if errors.Is(err, redis.Nil) {
+		//申请分布式锁
+		if err := mutex.Lock(); err != nil {
+			panic(err)
+		}
+		//让其中一个线程从mysql中读取信息
+		hc, err := mysql.GetHotComment(pid)
+		if err != nil {
+			return nil, err
+		}
+		hotcomment = map[string]string{
+			"ID":                    strconv.FormatInt(hc.ID, 10),
+			"CreatedAt":             hc.CreatedAt.Format(models.TimeFormatStr),
+			"UpdatedAt":             hc.UpdatedAt.Format(models.TimeFormatStr),
+			"Content":               hc.Content,
+			"PostID":                strconv.FormatInt(hc.PostID, 10),
+			"UserID":                strconv.FormatInt(hc.UserID, 10),
+			"UserName":              hc.UserName,
+			"CommentLikeCount":      strconv.FormatInt(hc.CommentLikeCount, 10),
+			"IsAdminComment":        strconv.FormatBool(hc.IsAdminComment),
+			"ParentCommentID":       strconv.FormatInt(hc.ParentCommentID, 10),
+			"ParentCommentUserName": hc.ParentCommentUserName,
+		}
+		//更新缓存信息
+		err = redis.UpdateHotComment(postID, hotcomment)
+		//释放锁
+		if ok, err := mutex.Unlock(); !ok || err != nil {
+			panic("unlock failed")
+		}
+
+	}
 	return nil, nil
 }
 

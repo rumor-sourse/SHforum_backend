@@ -2994,3 +2994,9 @@
 {"level":"DEBUG","time":"2024-03-20T23:39:00.385+0800","caller":"SHforum_backend/main.go:52","msg":"logger init success..."}
 {"level":"INFO","time":"2024-03-20T23:39:23.924+0800","caller":"SHforum_backend/main.go:111","msg":"Shutdown Server ..."}
 {"level":"INFO","time":"2024-03-20T23:39:23.925+0800","caller":"SHforum_backend/main.go:120","msg":"Server exiting"}
+{"level":"DEBUG","time":"2024-03-21T00:19:26.666+0800","caller":"SHforum_backend/main.go:52","msg":"logger init success..."}
+{"level":"INFO","time":"2024-03-21T00:19:37.251+0800","caller":"SHforum_backend/main.go:111","msg":"Shutdown Server ..."}
+{"level":"INFO","time":"2024-03-21T00:19:37.251+0800","caller":"SHforum_backend/main.go:120","msg":"Server exiting"}
+{"level":"DEBUG","time":"2024-03-21T00:20:14.249+0800","caller":"SHforum_backend/main.go:52","msg":"logger init success..."}
+{"level":"INFO","time":"2024-03-21T00:20:17.695+0800","caller":"SHforum_backend/main.go:111","msg":"Shutdown Server ..."}
+{"level":"INFO","time":"2024-03-21T00:20:17.696+0800","caller":"SHforum_backend/main.go:120","msg":"Server exiting"}

@@ -14,6 +14,7 @@ var (
 	client  *goredislib.Client
 	once    sync.Once
 	RedSync *redsync.Redsync
+	Nil     = goredislib.Nil
 	ctx     = context.Background()
 )
 

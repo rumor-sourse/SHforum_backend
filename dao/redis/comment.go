@@ -111,11 +111,14 @@ func GetPostCommentIDsInOrder(p *models.ParamCommentList) ([]string, error) {
 }
 
 // UpdateHotComment 缓存存储热评信息
-/*func UpdateHotComment(postID string, data string) error {
-	ckey := getRedisKey(KeyHotCommentHashPF + postID)
-	_, err := client.HSet(key, "data", data).Result()
-	return err
-}*/
+func UpdateHotComment(postID string, hotcomment map[string]string) error {
+	pkey := getRedisKey(KeyHotCommentHashPF + postID)
+	_, err := client.HSet(ctx, pkey, hotcomment).Result()
+	if err != nil {
+		return err
+	}
+	return nil
+}
 
 // GetHotComment 获取热评信息
 func GetHotComment(postID string) (data map[string]string, err error) {
