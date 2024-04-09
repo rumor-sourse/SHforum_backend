@@ -2,7 +2,6 @@ package redis
 
 import (
 	"SHforum_backend/models"
-	"errors"
 	"github.com/redis/go-redis/v9"
 	"math"
 	"strconv"
@@ -124,8 +123,8 @@ func UpdateHotComment(postID string, hotcomment map[string]string) error {
 func GetHotComment(postID string) (data map[string]string, err error) {
 	key := getRedisKey(KeyHotCommentHashPF + postID)
 	data, err = client.HGetAll(ctx, key).Result()
-	if errors.Is(err, redis.Nil) {
-		return nil, redis.Nil
+	if len(data) == 0 {
+		return nil, Nil
 	} else if err != nil {
 		return nil, err
 	}

@@ -128,7 +128,7 @@ func LikeComment(userID int64, p *models.ParamCommentLike) (err error) {
 	return
 }
 
-func GetHotComment(pid int64) (data *response.CommentResponse, err error) {
+func GetHotComment(pid int64) (data *map[string]string, err error) {
 	postID := strconv.Itoa(int(pid))
 	mutextname := fmt.Sprintf("hotcomment:%s", postID)
 	mutex := redis.RedSync.NewMutex(mutextname)
@@ -163,9 +163,9 @@ func GetHotComment(pid int64) (data *response.CommentResponse, err error) {
 		if ok, err := mutex.Unlock(); !ok || err != nil {
 			panic("unlock failed")
 		}
-
 	}
-	return nil, nil
+	data = &hotcomment
+	return data, nil
 }
 
 func MQCreateCommentMessage(p *models.Comment, post *models.Post) {
