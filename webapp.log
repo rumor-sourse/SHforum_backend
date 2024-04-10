@@ -3061,3 +3061,7 @@
 {"level":"INFO","time":"2024-04-09T16:29:05.368+0800","caller":"logger/logger.go:75","msg":"/api/v1/post/hotcomment/54465329870544896","status":200,"method":"GET","path":"/api/v1/post/hotcomment/54465329870544896","query":"","ip":"::1","user-agent":"PostmanRuntime/7.37.0","errors":"","cost":0.0005193}
 {"level":"INFO","time":"2024-04-09T16:33:44.237+0800","caller":"SHforum_backend/main.go:111","msg":"Shutdown Server ..."}
 {"level":"INFO","time":"2024-04-09T16:33:44.237+0800","caller":"SHforum_backend/main.go:120","msg":"Server exiting"}
+{"level":"DEBUG","time":"2024-04-09T16:34:03.376+0800","caller":"SHforum_backend/main.go:52","msg":"logger init success..."}
+{"level":"INFO","time":"2024-04-09T16:34:27.604+0800","caller":"logger/logger.go:75","msg":"/api/v1/post/hotcomment/54465329870544896","status":200,"method":"GET","path":"/api/v1/post/hotcomment/54465329870544896","query":"","ip":"::1","user-agent":"PostmanRuntime/7.37.0","errors":"","cost":0.007006}
+{"level":"INFO","time":"2024-04-09T16:54:40.209+0800","caller":"SHforum_backend/main.go:111","msg":"Shutdown Server ..."}
+{"level":"INFO","time":"2024-04-09T16:54:40.210+0800","caller":"SHforum_backend/main.go:120","msg":"Server exiting"}

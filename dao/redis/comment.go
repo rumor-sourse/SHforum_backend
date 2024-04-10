@@ -116,6 +116,11 @@ func UpdateHotComment(postID string, hotcomment map[string]string) error {
 	if err != nil {
 		return err
 	}
+	//过期时间设置为半小时
+	_, err = client.Expire(ctx, pkey, 30*time.Minute).Result()
+	if err != nil {
+		return err
+	}
 	return nil
 }
 

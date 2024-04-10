@@ -171,7 +171,7 @@ func (r *RabbitMQ) ConsumeCreatePostMessageByEs() {
 	//启用协程处理消息
 	go func() {
 		for d := range msgs {
-			//消息逻辑处理，可以自行设计逻辑
+			//消息逻辑处理
 			var mes CreatePostMessage
 			err = json.Unmarshal(d.Body, &mes)
 			if err != nil {
