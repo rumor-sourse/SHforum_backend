@@ -138,8 +138,8 @@ func GetPostsHandler(c *gin.Context) {
 	ResponseSuccess(c, data)
 }
 
-// GetPostListHandler 升级版帖子列表接口
-// @Summary 升级版帖子列表接口
+// GetPostListHandler 帖子列表接口
+// @Summary 帖子列表接口
 // @Description 可按社区按时间或分数排序查询帖子列表接口
 // @Tags 帖子相关接口
 // @Accept application/json
@@ -148,7 +148,7 @@ func GetPostsHandler(c *gin.Context) {
 // @Param object query models.ParamPostList false "查询参数"
 // @Security ApiKeyAuth
 // @Success 200 {object} _ResponsePostList
-// @Router /posts2 [get]
+// @Router /posts [get]
 func GetPostListHandler(c *gin.Context) {
 	//GET请求参数： /api/v1/post2?page=1&size=10&order=time
 	//1. 获取分页参数

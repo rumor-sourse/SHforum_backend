@@ -9,13 +9,22 @@ const docTemplate = `{
     "info": {
         "description": "{{escape .Description}}",
         "title": "{{.Title}}",
-        "contact": {},
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {
+            "name": "chunkai_wang@qq.com",
+            "url": "http://www.swagger.io/support",
+            "email": "support@swagger.io"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
         "version": "{{.Version}}"
     },
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/posts2": {
+        "/posts": {
             "get": {
                 "security": [
                     {
@@ -32,7 +41,7 @@ const docTemplate = `{
                 "tags": [
                     "帖子相关接口"
                 ],
-                "summary": "升级版帖子列表接口",
+                "summary": "帖子列表接口",
                 "parameters": [
                     {
                         "type": "string",
@@ -85,7 +94,9 @@ const docTemplate = `{
                 1004,
                 1005,
                 1006,
-                1007
+                1007,
+                1008,
+                1009
             ],
             "x-enum-varnames": [
                 "CodeSuccess",
@@ -95,7 +106,9 @@ const docTemplate = `{
                 "CodeInvalidPassword",
                 "CodeServerBusy",
                 "CodeNeedLogin",
-                "CodeInvalidToken"
+                "CodeNotPermission",
+                "CodeInvalidToken",
+                "CodeEmailEmpty"
             ]
         },
         "controllers._ResponsePostList": {
@@ -107,7 +120,7 @@ const docTemplate = `{
                 "data": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/models.ApiPostDetail"
+                        "$ref": "#/definitions/response.PostResponse"
                     }
                 },
                 "message": {
@@ -115,22 +128,11 @@ const docTemplate = `{
                 }
             }
         },
-        "models.ApiPostDetail": {
+        "response.PostResponse": {
             "type": "object",
-            "required": [
-                "community_id",
-                "content",
-                "title"
-            ],
             "properties": {
                 "author_id": {
                     "type": "integer"
-                },
-                "author_name": {
-                    "type": "string"
-                },
-                "community": {
-                    "$ref": "#/definitions/models.CommunityDetail"
                 },
                 "community_id": {
                     "type": "integer"
@@ -138,37 +140,13 @@ const docTemplate = `{
                 "content": {
                     "type": "string"
                 },
-                "create_time": {
-                    "type": "string"
-                },
                 "id": {
-                    "type": "string",
-                    "example": "0"
+                    "type": "integer"
                 },
                 "status": {
                     "type": "integer"
                 },
                 "title": {
-                    "type": "string"
-                },
-                "vote_num": {
-                    "type": "integer"
-                }
-            }
-        },
-        "models.CommunityDetail": {
-            "type": "object",
-            "properties": {
-                "create_time": {
-                    "type": "string"
-                },
-                "id": {
-                    "type": "integer"
-                },
-                "introduction": {
-                    "type": "string"
-                },
-                "name": {
                     "type": "string"
                 }
             }
@@ -178,12 +156,12 @@ const docTemplate = `{
 
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
-	Version:          "",
-	Host:             "",
-	BasePath:         "",
+	Version:          "1.0",
+	Host:             "127.0.0.1",
+	BasePath:         "/api/v1",
 	Schemes:          []string{},
-	Title:            "",
-	Description:      "",
+	Title:            "沙河论坛",
+	Description:      "沙河论坛接口文档",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 	LeftDelim:        "{{",

@@ -2,16 +2,15 @@ package routes
 
 import (
 	"SHforum_backend/controllers"
+	_ "SHforum_backend/docs"
 	"SHforum_backend/logger"
 	"SHforum_backend/middlewares"
 	"github.com/gin-contrib/pprof"
 	"github.com/gin-gonic/gin"
-	"net/http"
-	"time"
-
-	_ "SHforum_backend/docs"
 	swaggerFiles "github.com/swaggo/files"
 	gs "github.com/swaggo/gin-swagger"
+	"net/http"
+	"time"
 )
 
 func SetUp(mode string) *gin.Engine {
@@ -21,8 +20,8 @@ func SetUp(mode string) *gin.Engine {
 	}
 	r := gin.New()
 	r.Use(logger.GinLogger(),
-		logger.GinRecovery(true),
-		middlewares.RateLimitMiddleware(2*time.Second, 1))
+		logger.GinRecovery(true))
+	middlewares.RateLimitMiddleware(time.Microsecond*time.Duration(200), 20000)
 	// 注册swagger路由
 	r.GET("/swagger/*any", gs.WrapHandler(swaggerFiles.Handler))
 	v1 := r.Group("/api/v1")
@@ -48,7 +47,7 @@ func SetUp(mode string) *gin.Engine {
 	//获取贴子列表
 	//v1.GET("/posts", controllers.GetPostsHandler)
 	//根据时间或分数获取帖子列表
-	v1.GET("/posts2", controllers.GetPostListHandler)
+	v1.GET("/posts", controllers.GetPostListHandler)
 	postRouter := v1.Group("/post", middlewares.JWTAuthMiddleware())
 	{
 		//查询某个贴子详情
