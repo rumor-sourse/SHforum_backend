@@ -121,6 +121,11 @@ func CanEditCommentHandler(c *gin.Context) {
 	}
 	//根据id获取评论数据
 	data, err := logic.GetCommentByID(commentID)
+	if err != nil {
+		zap.L().Error("logic.GetCommentByID() failed", zap.Error(err))
+		ResponseError(c, CodeServerBusy)
+		return
+	}
 	//从请求中获取到当前发请求的用户的id
 	userID, err := getCurrentUserID(c)
 	if err != nil {

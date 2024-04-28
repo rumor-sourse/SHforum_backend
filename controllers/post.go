@@ -124,7 +124,7 @@ func GetPostDetailHandler(c *gin.Context) {
 	ResponseSuccess(c, data)
 }
 
-func GetPostsHandler(c *gin.Context) {
+/*func GetPostsHandler(c *gin.Context) {
 	// 1. 获取分页参数
 	page, size := getPageInfo(c)
 	// 2. 获取帖子列表数据
@@ -136,7 +136,7 @@ func GetPostsHandler(c *gin.Context) {
 	}
 	// 3. 返回响应
 	ResponseSuccess(c, data)
-}
+}*/
 
 // GetPostListHandler 帖子列表接口
 // @Summary 帖子列表接口
@@ -150,7 +150,7 @@ func GetPostsHandler(c *gin.Context) {
 // @Success 200 {object} _ResponsePostList
 // @Router /posts [get]
 func GetPostListHandler(c *gin.Context) {
-	//GET请求参数： /api/v1/post2?page=1&size=10&order=time
+	//GET请求参数： /api/v1/posts?page=1&size=10&order=time
 	//1. 获取分页参数
 	p := &models.ParamPostList{
 		Page:  1,

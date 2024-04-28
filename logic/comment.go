@@ -159,6 +159,9 @@ func GetHotComment(pid int64) (data *map[string]string, err error) {
 		}
 		//更新缓存信息
 		err = redis.UpdateHotComment(postID, hotcomment)
+		if err != nil {
+			zap.L().Error("redis.UpdateHotComment(postID, hotcomment) failed")
+		}
 		//释放锁
 		if ok, err := mutex.Unlock(); !ok || err != nil {
 			panic("unlock failed")

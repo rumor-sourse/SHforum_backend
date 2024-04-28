@@ -48,7 +48,12 @@ func main() {
 		fmt.Printf("init logger failed, err:%v\n", err)
 		return
 	}
-	defer zap.L().Sync() // 将缓冲区的日志追加到日志文件中
+	defer func(l *zap.Logger) {
+		err := l.Sync()
+		if err != nil {
+			return
+		}
+	}(zap.L()) // 将缓冲区的日志追加到日志文件中
 	zap.L().Debug("logger init success...")
 	//初始化数据库MYSQL
 	if err := mysql.Init(settings.Conf.MySQLConfig); err != nil {
@@ -120,4 +125,4 @@ func main() {
 	zap.L().Info("Server exiting")
 }
 
-//go-wrk测试 -t=8 -c=100 -n=2000 "http://127.0.0.1:8081/api/v1/posts"
+//go-wrk -t=8 -c=100 -n=100000 "http://localhost:8088/api/v1/posts?size=10"

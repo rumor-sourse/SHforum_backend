@@ -25,6 +25,7 @@ func getCurrentUserID(c *gin.Context) (userID int64, err error) {
 	return
 }
 
+// nolint
 func getPageInfo(c *gin.Context) (page, size int64) {
 	pageStr := c.Query("page")
 	sizeStr := c.Query("size")

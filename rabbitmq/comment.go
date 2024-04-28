@@ -11,6 +11,7 @@ import (
 	"time"
 )
 
+// nolint
 type CreateCommentMessage struct {
 	models.Comment
 	models.Post
@@ -45,6 +46,9 @@ func (r *RabbitMQ) PublishCreateCommentMessage(p *models.Comment, post *models.P
 		Post:    *post,
 	}
 	jsonbody, err := json.Marshal(message)
+	if err != nil {
+		return
+	}
 	//调用channel 发送消息到队列中
 	err = r.channel.PublishWithContext(ctx,
 		r.Exchange,
@@ -150,6 +154,9 @@ func (r *RabbitMQ) PublishUpdateCommentLikeMessge(CommentID string, likeCount in
 		LikeCount: likeCount,
 	}
 	jsonbody, err := json.Marshal(mes)
+	if err != nil {
+		return
+	}
 	//调用channel 发送消息到队列中
 	err = r.channel.PublishWithContext(ctx,
 		r.Exchange,

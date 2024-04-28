@@ -38,6 +38,9 @@ func (r *RabbitMQ) PublishSendCodeMessage(email string, code string) {
 		Code:  code,
 	}
 	jsonbody, err := json.Marshal(message)
+	if err != nil {
+		return
+	}
 	//调用channel 发送消息到队列中
 	err = r.channel.PublishWithContext(ctx,
 		r.Exchange,

@@ -10,7 +10,6 @@ import (
 	swaggerFiles "github.com/swaggo/files"
 	gs "github.com/swaggo/gin-swagger"
 	"net/http"
-	"time"
 )
 
 func SetUp(mode string) *gin.Engine {
@@ -21,7 +20,7 @@ func SetUp(mode string) *gin.Engine {
 	r := gin.New()
 	r.Use(logger.GinLogger(),
 		logger.GinRecovery(true))
-	middlewares.RateLimitMiddleware(time.Microsecond*time.Duration(200), 20000)
+	//middlewares.RateLimitMiddleware(time.Microsecond*time.Duration(200), 20000)
 	// 注册swagger路由
 	r.GET("/swagger/*any", gs.WrapHandler(swaggerFiles.Handler))
 	v1 := r.Group("/api/v1")

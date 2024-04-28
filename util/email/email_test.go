@@ -5,5 +5,8 @@ import (
 )
 
 func TestSendEmailWithText(t *testing.T) {
-	SendEmailWithCode([]string{"chunkai_wang@qq.com"}, "123456")
+	err := SendEmailWithCode([]string{"chunkai_wang@qq.com"}, "123456")
+	if err != nil {
+		return
+	}
 }

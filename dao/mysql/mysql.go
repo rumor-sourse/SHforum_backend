@@ -29,6 +29,9 @@ func Init(cfg *settings.MySQLConfig) (err error) {
 			return
 		}
 		sqlDB, err := db.DB()
+		if err != nil {
+			zap.L().Error("get DB failed", zap.Error(err))
+		}
 		sqlDB.SetMaxIdleConns(cfg.MaxIdleConns)
 		sqlDB.SetMaxOpenConns(cfg.MaxOpenConns)
 		err = db.AutoMigrate(&models.User{},

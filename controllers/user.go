@@ -19,7 +19,7 @@ const (
 
 // SignUpHandler 处理注册请求的函数
 func SignUpHandler(c *gin.Context) {
-	// 1、获取参数和参数校验
+	// 获取参数和参数校验
 	p := new(models.ParamSignUp)
 	if err := c.ShouldBindJSON(p); err != nil {
 		//请求参数有误，直接返回响应
@@ -34,7 +34,11 @@ func SignUpHandler(c *gin.Context) {
 		ResponseErrorWithMsg(c, CodeInvalidParam, removeTopStruct(errs.Translate(trans)))
 		return
 	}
-	// 2、业务处理
+	// 如果role字段为空就是common_user
+	if len(p.Role) == 0 {
+		p.Role = models.CommonUser
+	}
+	// 业务处理
 	if err := logic.SignUp(p); err != nil {
 		zap.L().Error("logic.SignUp failed", zap.Error(err))
 		if errors.Is(err, mysql.ErrorUserExist) {

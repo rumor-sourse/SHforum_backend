@@ -24,6 +24,7 @@ func SignUp(p *models.ParamSignUp) (err error) {
 		Username: p.Username,
 		Password: p.Password,
 		Email:    p.Email,
+		Role:     p.Role,
 	}
 	rcode, err := redis.GetCode(p.Email)
 	if rcode != p.Code {

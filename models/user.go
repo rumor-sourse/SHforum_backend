@@ -4,11 +4,19 @@ import "gorm.io/gorm"
 
 type User struct {
 	gorm.Model
-	UserID   int64  `gorm:"not null;" json:"userid"`
-	Username string `gorm:"type:varchar(100);not null;" json:"username"`
-	Password string `gorm:"type:varchar(100);not null" json:"password"`
-	Email    string `gorm:"type:varchar(100);not null;unique" json:"email"`
+	UserID   int64    `gorm:"not null;" json:"userid"`
+	Username string   `gorm:"type:varchar(100);not null;" json:"username"`
+	Password string   `gorm:"type:varchar(100);not null" json:"password"`
+	Email    string   `gorm:"type:varchar(100);not null;unique" json:"email"`
+	Role     UserRole `gorm:"type:varchar(100);not null" json:"role"`
 }
+
+type UserRole string
+
+const (
+	Admin      UserRole = "admin"
+	CommonUser UserRole = "common_user"
+)
 
 type Follow struct {
 	UserID       int64 `gorm:"not null;" json:"userid"`        //用户

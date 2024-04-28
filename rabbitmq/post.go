@@ -42,6 +42,9 @@ func (r *RabbitMQ) PublishCreatePostMessage(userID int64, fans []int64, message 
 		Post:    post,
 	}
 	jsonbody, err := json.Marshal(mes)
+	if err != nil {
+		return
+	}
 	//2.发送消息
 	err = r.channel.PublishWithContext(ctx,
 		r.Exchange,
@@ -52,6 +55,9 @@ func (r *RabbitMQ) PublishCreatePostMessage(userID int64, fans []int64, message 
 			ContentType: "application/json",
 			Body:        jsonbody,
 		})
+	if err != nil {
+		return
+	}
 }
 
 // ConsumeCreatePostMessageByMysql Mysql消费端收到已创建贴子的消息

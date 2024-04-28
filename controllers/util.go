@@ -16,6 +16,7 @@ func randomInteger(length int) string {
 	return string(b)
 }
 
+// nolint
 func randomString(length int) string {
 	rand.Seed(time.Now().UnixNano())
 
