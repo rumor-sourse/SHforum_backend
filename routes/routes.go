@@ -36,6 +36,10 @@ func SetUp(mode string) *gin.Engine {
 			userRouter.POST("/follow", controllers.FollowHandler)
 			//取消关注
 			userRouter.POST("/unfollow", controllers.UnFollowHandler)
+			//更新用户信息
+			userRouter.POST("/update/:id", controllers.UpdateUserByIDHandler)
+			//私信
+			userRouter.POST("/message/:id", controllers.SendMessageHandler)
 		}
 	}
 	communityRouter := v1.Group("/community")
@@ -62,7 +66,7 @@ func SetUp(mode string) *gin.Engine {
 		//为某个贴子投票
 		postRouter.POST("/vote", controllers.PostVoteController)
 		//获取某个贴子的评论列表
-		postRouter.GET("/comments", controllers.GetCommentByPostIdHandler)
+		postRouter.GET("/comments/:id", controllers.GetCommentByPostIdHandler)
 		//获取某个贴子的热评
 		postRouter.GET("/hotcomment/:id", controllers.GetHotCommentByPostIdHandler)
 	}

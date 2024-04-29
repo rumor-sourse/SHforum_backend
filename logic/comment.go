@@ -14,21 +14,25 @@ import (
 )
 
 // GetCommentList 根据帖子id获取评论列表
-func GetCommentList(p *models.ParamCommentList) (data []*response.CommentResponse, err error) {
-	//从redis拿到所有的id
-	ids, err := redis.GetPostCommentIDsInOrder(p)
-	if err != nil {
-		return
-	}
-	if len(ids) == 0 {
-		zap.L().Warn("redis.GetPostCommentIDs(p) return 0 data")
-		return
-	}
-	// 根据id去数据库查询评论
-	comments, err := mysql.GetCommentListByIDs(ids)
-	if err != nil {
-		return
-	}
+func GetCommentList(pid int64) (data []*response.CommentResponse, err error) {
+	/*
+		//从redis拿到所有的id
+		ids, err := redis.GetPostCommentIDsInOrder(p)
+		if err != nil {
+			return
+		}
+		if len(ids) == 0 {
+			zap.L().Warn("redis.GetPostCommentIDs(p) return 0 data")
+			return
+		}
+		// 根据id去数据库查询评论
+		comments, err := mysql.GetCommentListByIDs(ids)
+		if err != nil {
+			return
+		}
+
+	*/
+	comments, err := mysql.GetCommentList(pid)
 	//组合数据
 	for _, comment := range comments {
 		co := &response.CommentResponse{

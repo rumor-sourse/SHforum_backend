@@ -8,6 +8,7 @@ import (
 	"SHforum_backend/rabbitmq"
 	"SHforum_backend/util/jwt"
 	"SHforum_backend/util/snowflake"
+	"go.uber.org/zap"
 )
 
 func SignUp(p *models.ParamSignUp) (err error) {
@@ -54,6 +55,32 @@ func Login(p *models.ParamLogin) (userresp *response.UserResponse, err error) {
 		Token:  token,
 	}
 	return
+}
+
+func UpdateUserByID(userID int64, currentUserID int64, p *models.ParamUpdateUser) (err error) {
+	//判断是否为管理员或本人
+	curruser, err := mysql.GetUserById(currentUserID)
+	if err != nil {
+		return err
+	}
+	if curruser.Role != models.Admin && curruser.UserID != userID {
+		zap.L().Error("UpdateUserByID failed：不是管理员或本人", zap.Error(err))
+	}
+	//TODO 修改密码的逻辑
+	err = mysql.UpdateUserByID(userID, p.Username)
+	if err != nil {
+		return err
+	}
+	return
+}
+
+func SendMessage(fromUserID int64, toUserID int64, p *models.ParamSendMessage) (err error) {
+
+	//发送消息
+	if err = mysql.SendMessage(fromUserID, toUserID, p.Title, p.Content); err != nil {
+		return err
+	}
+	return nil
 }
 
 /*func SendCode(email string, code string) (err error) {

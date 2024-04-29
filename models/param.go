@@ -20,6 +20,11 @@ type ParamLogin struct {
 	Password string `json:"password" binding:"required"`
 }
 
+type ParamUpdateUser struct {
+	Username string `json:"username"`
+	Password string `json:"password"`
+}
+
 type ParamVoteData struct {
 	PostID    string `json:"post_id" binding:"required"`              //贴子id
 	Direction int8   `json:"direction,string" binding:"oneof=1 0 -1"` //赞成票(1)还是反对票(-1)还是取消投票(0)
@@ -42,4 +47,9 @@ type ParamCommentList struct {
 	Size   int64  `json:"size" form:"size"`
 	Order  string `json:"order" form:"order" example:"score"`
 	PostID int64  `json:"post_id" form:"post_id"`
+}
+
+type ParamSendMessage struct {
+	Title   string `json:"title" binding:"required"`
+	Content string `json:"content" binding:"required"`
 }

@@ -156,3 +156,62 @@ func UnFollowHandler(c *gin.Context) {
 	}
 	ResponseSuccess(c, nil)
 }
+
+// UpdateUserByIDHandler 更新用户信息
+func UpdateUserByIDHandler(c *gin.Context) {
+	//获取参数
+	userIDStr := c.Param("id")
+	userID, err := strconv.ParseInt(userIDStr, 10, 64)
+	if err != nil {
+		zap.L().Error("userid parse error", zap.Error(err))
+		return
+	}
+	p := new(models.ParamUpdateUser)
+	if err := c.ShouldBindJSON(p); err != nil {
+		//请求参数有误，直接返回响应
+		zap.L().Error("UpdateUserByID with invalid param", zap.Error(err))
+		ResponseErrorWithMsg(c, CodeInvalidParam, err.Error())
+	}
+	//从请求中获取到当前发请求的用户的id
+	currentUserID, err := getCurrentUserID(c)
+	if err != nil {
+		zap.L().Error("getCurrentUserID failed", zap.Error(err))
+		ResponseErrorWithMsg(c, CodeInvalidParam, err.Error())
+	}
+	//业务处理
+	fmt.Println(userID, currentUserID, p.Username)
+	err = logic.UpdateUserByID(userID, currentUserID, p)
+	if err != nil {
+		return
+	}
+	ResponseSuccess(c, nil)
+}
+
+// SendMessageHandler 发送消息
+func SendMessageHandler(c *gin.Context) {
+	//获取参数
+	userIDStr := c.Param("id")
+	touserID, err := strconv.ParseInt(userIDStr, 10, 64)
+	if err != nil {
+		zap.L().Error("userid parse error", zap.Error(err))
+		return
+	}
+	p := new(models.ParamSendMessage)
+	if err := c.ShouldBindJSON(p); err != nil {
+		//请求参数有误，直接返回响应
+		zap.L().Error("SendMessage with invalid param", zap.Error(err))
+		ResponseErrorWithMsg(c, CodeInvalidParam, err.Error())
+	}
+	//从请求中获取到当前发请求的用户的id
+	currentUserID, err := getCurrentUserID(c)
+	if err != nil {
+		zap.L().Error("getCurrentUserID failed", zap.Error(err))
+		ResponseErrorWithMsg(c, CodeInvalidParam, err.Error())
+	}
+	//业务处理
+	err = logic.SendMessage(currentUserID, touserID, p)
+	if err != nil {
+		return
+	}
+	ResponseSuccess(c, nil)
+}

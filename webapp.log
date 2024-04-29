@@ -1,3 +1,85 @@
 {"level":"DEBUG","time":"2024-04-28T17:18:48.380+0800","caller":"SHforum_backend/main.go:57","msg":"logger init success..."}
 {"level":"INFO","time":"2024-04-28T17:19:30.617+0800","caller":"SHforum_backend/main.go:116","msg":"Shutdown Server ..."}
 {"level":"INFO","time":"2024-04-28T17:19:30.618+0800","caller":"SHforum_backend/main.go:125","msg":"Server exiting"}
+{"level":"DEBUG","time":"2024-04-29T09:47:34.639+0800","caller":"SHforum_backend/main.go:57","msg":"logger init success..."}
+{"level":"INFO","time":"2024-04-29T09:47:49.546+0800","caller":"logger/logger.go:75","msg":"/api/v1/post/comments","status":200,"method":"GET","path":"/api/v1/post/comments","query":"","ip":"::1","user-agent":"PostmanRuntime/7.37.3","errors":"","cost":0.0005017}
+{"level":"INFO","time":"2024-04-29T09:47:53.791+0800","caller":"logger/logger.go:75","msg":"/api/v1/user/login","status":200,"method":"POST","path":"/api/v1/user/login","query":"","ip":"::1","user-agent":"PostmanRuntime/7.37.3","errors":"","cost":0.001385}
+{"level":"WARN","time":"2024-04-29T09:48:06.322+0800","caller":"logic/comment.go:24","msg":"redis.GetPostCommentIDs(p) return 0 data"}
+{"level":"INFO","time":"2024-04-29T09:48:06.322+0800","caller":"logger/logger.go:75","msg":"/api/v1/post/comments","status":200,"method":"GET","path":"/api/v1/post/comments","query":"","ip":"::1","user-agent":"PostmanRuntime/7.37.3","errors":"","cost":0.0014387}
+{"level":"WARN","time":"2024-04-29T09:48:40.726+0800","caller":"logic/comment.go:24","msg":"redis.GetPostCommentIDs(p) return 0 data"}
+{"level":"INFO","time":"2024-04-29T09:48:40.727+0800","caller":"logger/logger.go:75","msg":"/api/v1/post/comments","status":200,"method":"GET","path":"/api/v1/post/comments","query":"","ip":"::1","user-agent":"PostmanRuntime/7.37.3","errors":"","cost":0.0003099}
+{"level":"WARN","time":"2024-04-29T09:52:36.846+0800","caller":"logic/comment.go:24","msg":"redis.GetPostCommentIDs(p) return 0 data"}
+{"level":"INFO","time":"2024-04-29T09:52:36.846+0800","caller":"logger/logger.go:75","msg":"/api/v1/post/comments","status":200,"method":"GET","path":"/api/v1/post/comments","query":"","ip":"::1","user-agent":"PostmanRuntime/7.37.3","errors":"","cost":0.0008485}
+{"level":"INFO","time":"2024-04-29T09:55:37.054+0800","caller":"SHforum_backend/main.go:116","msg":"Shutdown Server ..."}
+{"level":"INFO","time":"2024-04-29T09:55:37.055+0800","caller":"SHforum_backend/main.go:125","msg":"Server exiting"}
+{"level":"DEBUG","time":"2024-04-29T09:55:41.764+0800","caller":"SHforum_backend/main.go:57","msg":"logger init success..."}
+{"level":"INFO","time":"2024-04-29T09:55:47.849+0800","caller":"logger/logger.go:75","msg":"/api/v1/post/comments","status":200,"method":"GET","path":"/api/v1/post/comments","query":"","ip":"::1","user-agent":"PostmanRuntime/7.37.3","errors":"","cost":0.009161}
+{"level":"INFO","time":"2024-04-29T09:56:02.859+0800","caller":"logger/logger.go:75","msg":"/api/v1/post/comments","status":200,"method":"GET","path":"/api/v1/post/comments","query":"","ip":"::1","user-agent":"PostmanRuntime/7.37.3","errors":"","cost":0.0012756}
+{"level":"INFO","time":"2024-04-29T09:58:00.212+0800","caller":"SHforum_backend/main.go:116","msg":"Shutdown Server ..."}
+{"level":"INFO","time":"2024-04-29T09:58:00.212+0800","caller":"SHforum_backend/main.go:125","msg":"Server exiting"}
+{"level":"DEBUG","time":"2024-04-29T09:58:04.823+0800","caller":"SHforum_backend/main.go:57","msg":"logger init success..."}
+{"level":"INFO","time":"2024-04-29T09:58:34.064+0800","caller":"logger/logger.go:75","msg":"/api/v1/post/comments/45802406151331840","status":200,"method":"GET","path":"/api/v1/post/comments/45802406151331840","query":"","ip":"::1","user-agent":"PostmanRuntime/7.37.3","errors":"","cost":0.0009357}
+{"level":"INFO","time":"2024-04-29T10:08:17.998+0800","caller":"logger/logger.go:75","msg":"/api/v1/user/login","status":200,"method":"POST","path":"/api/v1/user/login","query":"","ip":"::1","user-agent":"PostmanRuntime/7.37.3","errors":"","cost":0.0110828}
+{"level":"INFO","time":"2024-04-29T10:08:38.502+0800","caller":"logger/logger.go:75","msg":"/api/v1/posts","status":200,"method":"GET","path":"/api/v1/posts","query":"page=1&size=5","ip":"::1","user-agent":"PostmanRuntime/7.37.3","errors":"","cost":0.0128132}
+{"level":"INFO","time":"2024-04-29T10:35:54.684+0800","caller":"SHforum_backend/main.go:116","msg":"Shutdown Server ..."}
+{"level":"INFO","time":"2024-04-29T10:35:54.685+0800","caller":"SHforum_backend/main.go:125","msg":"Server exiting"}
+{"level":"DEBUG","time":"2024-04-29T14:21:58.104+0800","caller":"SHforum_backend/main.go:57","msg":"logger init success..."}
+{"level":"INFO","time":"2024-04-29T14:22:07.653+0800","caller":"logger/logger.go:75","msg":"/api/v1/user/login","status":200,"method":"POST","path":"/api/v1/user/login","query":"","ip":"::1","user-agent":"PostmanRuntime/7.37.3","errors":"","cost":0.0018789}
+{"level":"INFO","time":"2024-04-29T14:22:19.139+0800","caller":"logger/logger.go:75","msg":"/api/v1/user/update/6738226236624896","status":200,"method":"POST","path":"/api/v1/user/update/6738226236624896","query":"","ip":"::1","user-agent":"PostmanRuntime/7.37.3","errors":"","cost":0.0004343}
+{"level":"INFO","time":"2024-04-29T14:24:03.373+0800","caller":"SHforum_backend/main.go:116","msg":"Shutdown Server ..."}
+{"level":"INFO","time":"2024-04-29T14:24:03.373+0800","caller":"SHforum_backend/main.go:125","msg":"Server exiting"}
+{"level":"DEBUG","time":"2024-04-29T14:24:08.212+0800","caller":"SHforum_backend/main.go:57","msg":"logger init success..."}
+{"level":"INFO","time":"2024-04-29T14:24:10.793+0800","caller":"logger/logger.go:75","msg":"/api/v1/user/update/6738226236624896","status":200,"method":"POST","path":"/api/v1/user/update/6738226236624896","query":"","ip":"::1","user-agent":"PostmanRuntime/7.37.3","errors":"","cost":0}
+{"level":"INFO","time":"2024-04-29T14:24:23.914+0800","caller":"logger/logger.go:75","msg":"/api/v1/user/update/6738226236624896","status":404,"method":"PUT","path":"/api/v1/user/update/6738226236624896","query":"","ip":"::1","user-agent":"PostmanRuntime/7.37.3","errors":"","cost":0}
+{"level":"INFO","time":"2024-04-29T14:25:31.148+0800","caller":"SHforum_backend/main.go:116","msg":"Shutdown Server ..."}
+{"level":"INFO","time":"2024-04-29T14:25:31.148+0800","caller":"SHforum_backend/main.go:125","msg":"Server exiting"}
+{"level":"DEBUG","time":"2024-04-29T14:25:35.679+0800","caller":"SHforum_backend/main.go:57","msg":"logger init success..."}
+{"level":"INFO","time":"2024-04-29T14:25:46.654+0800","caller":"logger/logger.go:75","msg":"/api/v1/user/update/6738226236624896","status":200,"method":"POST","path":"/api/v1/user/update/6738226236624896","query":"","ip":"::1","user-agent":"PostmanRuntime/7.37.3","errors":"","cost":0.0003463}
+{"level":"INFO","time":"2024-04-29T14:27:13.523+0800","caller":"SHforum_backend/main.go:116","msg":"Shutdown Server ..."}
+{"level":"INFO","time":"2024-04-29T14:27:13.524+0800","caller":"SHforum_backend/main.go:125","msg":"Server exiting"}
+{"level":"DEBUG","time":"2024-04-29T14:27:18.116+0800","caller":"SHforum_backend/main.go:57","msg":"logger init success..."}
+{"level":"INFO","time":"2024-04-29T14:27:26.351+0800","caller":"logger/logger.go:75","msg":"/api/v1/user/update/6738226236624896","status":200,"method":"POST","path":"/api/v1/user/update/6738226236624896","query":"","ip":"::1","user-agent":"PostmanRuntime/7.37.3","errors":"","cost":0}
+{"level":"INFO","time":"2024-04-29T14:27:42.852+0800","caller":"SHforum_backend/main.go:116","msg":"Shutdown Server ..."}
+{"level":"INFO","time":"2024-04-29T14:27:42.852+0800","caller":"SHforum_backend/main.go:125","msg":"Server exiting"}
+{"level":"DEBUG","time":"2024-04-29T14:27:52.471+0800","caller":"SHforum_backend/main.go:57","msg":"logger init success..."}
+{"level":"INFO","time":"2024-04-29T14:27:55.370+0800","caller":"logger/logger.go:75","msg":"/api/v1/user/update/6738226236624896","status":200,"method":"POST","path":"/api/v1/user/update/6738226236624896","query":"","ip":"::1","user-agent":"PostmanRuntime/7.37.3","errors":"","cost":0.0005265}
+{"level":"INFO","time":"2024-04-29T14:29:12.927+0800","caller":"SHforum_backend/main.go:116","msg":"Shutdown Server ..."}
+{"level":"INFO","time":"2024-04-29T14:29:12.928+0800","caller":"SHforum_backend/main.go:125","msg":"Server exiting"}
+{"level":"DEBUG","time":"2024-04-29T14:29:28.292+0800","caller":"SHforum_backend/main.go:57","msg":"logger init success..."}
+{"level":"INFO","time":"2024-04-29T14:29:30.127+0800","caller":"logger/logger.go:75","msg":"/api/v1/user/update/6738226236624896","status":200,"method":"POST","path":"/api/v1/user/update/6738226236624896","query":"","ip":"::1","user-agent":"PostmanRuntime/7.37.3","errors":"","cost":0.000264}
+{"level":"INFO","time":"2024-04-29T14:31:26.513+0800","caller":"SHforum_backend/main.go:116","msg":"Shutdown Server ..."}
+{"level":"INFO","time":"2024-04-29T14:31:26.514+0800","caller":"SHforum_backend/main.go:125","msg":"Server exiting"}
+{"level":"DEBUG","time":"2024-04-29T14:31:30.991+0800","caller":"SHforum_backend/main.go:57","msg":"logger init success..."}
+{"level":"ERROR","time":"2024-04-29T14:31:34.099+0800","caller":"controllers/user.go:179","msg":"getCurrentUserID failed","error":"用户未登录"}
+{"level":"INFO","time":"2024-04-29T14:31:34.099+0800","caller":"logger/logger.go:75","msg":"/api/v1/user/update/6738226236624896","status":200,"method":"POST","path":"/api/v1/user/update/6738226236624896","query":"","ip":"::1","user-agent":"PostmanRuntime/7.37.3","errors":"","cost":0.0005051}
+{"level":"INFO","time":"2024-04-29T14:32:48.580+0800","caller":"SHforum_backend/main.go:116","msg":"Shutdown Server ..."}
+{"level":"INFO","time":"2024-04-29T14:32:48.581+0800","caller":"SHforum_backend/main.go:125","msg":"Server exiting"}
+{"level":"DEBUG","time":"2024-04-29T14:32:53.070+0800","caller":"SHforum_backend/main.go:57","msg":"logger init success..."}
+{"level":"INFO","time":"2024-04-29T14:32:55.677+0800","caller":"logger/logger.go:75","msg":"/api/v1/user/login","status":200,"method":"POST","path":"/api/v1/user/login","query":"","ip":"::1","user-agent":"PostmanRuntime/7.37.3","errors":"","cost":0.0006579}
+{"level":"ERROR","time":"2024-04-29T14:33:10.818+0800","caller":"controllers/user.go:178","msg":"getCurrentUserID failed","error":"用户未登录"}
+{"level":"INFO","time":"2024-04-29T14:33:10.819+0800","caller":"logger/logger.go:75","msg":"/api/v1/user/update/6738226236624896","status":200,"method":"POST","path":"/api/v1/user/update/6738226236624896","query":"","ip":"::1","user-agent":"PostmanRuntime/7.37.3","errors":"","cost":0.0012451}
+{"level":"INFO","time":"2024-04-29T14:35:16.986+0800","caller":"SHforum_backend/main.go:116","msg":"Shutdown Server ..."}
+{"level":"INFO","time":"2024-04-29T14:35:16.988+0800","caller":"SHforum_backend/main.go:125","msg":"Server exiting"}
+{"level":"DEBUG","time":"2024-04-29T14:35:21.567+0800","caller":"SHforum_backend/main.go:57","msg":"logger init success..."}
+{"level":"ERROR","time":"2024-04-29T14:35:29.082+0800","caller":"controllers/user.go:178","msg":"getCurrentUserID failed","error":"用户未登录"}
+{"level":"INFO","time":"2024-04-29T14:35:29.083+0800","caller":"logger/logger.go:75","msg":"/api/v1/user/update/6738226236624896","status":200,"method":"POST","path":"/api/v1/user/update/6738226236624896","query":"","ip":"::1","user-agent":"PostmanRuntime/7.37.3","errors":"","cost":0.0012104}
+{"level":"INFO","time":"2024-04-29T14:36:21.077+0800","caller":"logger/logger.go:75","msg":"/api/v1/user/login","status":200,"method":"POST","path":"/api/v1/user/login","query":"","ip":"::1","user-agent":"PostmanRuntime/7.37.3","errors":"","cost":0.0015071}
+{"level":"ERROR","time":"2024-04-29T14:36:31.899+0800","caller":"controllers/user.go:178","msg":"getCurrentUserID failed","error":"用户未登录"}
+{"level":"INFO","time":"2024-04-29T14:36:31.900+0800","caller":"logger/logger.go:75","msg":"/api/v1/user/update/6738226236624896","status":200,"method":"POST","path":"/api/v1/user/update/6738226236624896","query":"","ip":"::1","user-agent":"PostmanRuntime/7.37.3","errors":"","cost":0.0014391}
+{"level":"INFO","time":"2024-04-29T14:40:36.882+0800","caller":"SHforum_backend/main.go:116","msg":"Shutdown Server ..."}
+{"level":"INFO","time":"2024-04-29T14:40:36.882+0800","caller":"SHforum_backend/main.go:125","msg":"Server exiting"}
+{"level":"DEBUG","time":"2024-04-29T14:40:40.432+0800","caller":"SHforum_backend/main.go:57","msg":"logger init success..."}
+{"level":"INFO","time":"2024-04-29T14:40:50.068+0800","caller":"logger/logger.go:75","msg":"/api/v1/user/login","status":200,"method":"POST","path":"/api/v1/user/login","query":"","ip":"::1","user-agent":"PostmanRuntime/7.37.3","errors":"","cost":0.0013526}
+{"level":"ERROR","time":"2024-04-29T14:40:59.106+0800","caller":"logic/user.go:68","msg":"UpdateUserByID failed：不是管理员或本人"}
+{"level":"INFO","time":"2024-04-29T14:40:59.115+0800","caller":"logger/logger.go:75","msg":"/api/v1/user/update/6738226236624896","status":200,"method":"POST","path":"/api/v1/user/update/6738226236624896","query":"","ip":"::1","user-agent":"PostmanRuntime/7.37.3","errors":"","cost":0.0102532}
+{"level":"INFO","time":"2024-04-29T14:49:03.040+0800","caller":"SHforum_backend/main.go:116","msg":"Shutdown Server ..."}
+{"level":"INFO","time":"2024-04-29T14:49:03.041+0800","caller":"SHforum_backend/main.go:125","msg":"Server exiting"}
+{"level":"DEBUG","time":"2024-04-29T14:49:08.154+0800","caller":"SHforum_backend/main.go:57","msg":"logger init success..."}
+{"level":"ERROR","time":"2024-04-29T14:50:45.990+0800","caller":"controllers/user.go:202","msg":"SendMessage with invalid param","error":"Key: 'ParamSendMessage.message' Error:Field validation for 'message' failed on the 'required' tag"}
+{"level":"INFO","time":"2024-04-29T14:50:46.002+0800","caller":"logger/logger.go:75","msg":"/api/v1/user/message/6738226236624896","status":200,"method":"POST","path":"/api/v1/user/message/6738226236624896","query":"","ip":"::1","user-agent":"PostmanRuntime/7.37.3","errors":"","cost":0.013181}
+{"level":"INFO","time":"2024-04-29T14:51:45.087+0800","caller":"SHforum_backend/main.go:116","msg":"Shutdown Server ..."}
+{"level":"INFO","time":"2024-04-29T14:51:45.088+0800","caller":"SHforum_backend/main.go:125","msg":"Server exiting"}
+{"level":"DEBUG","time":"2024-04-29T14:52:00.281+0800","caller":"SHforum_backend/main.go:57","msg":"logger init success..."}
+{"level":"INFO","time":"2024-04-29T14:52:12.759+0800","caller":"logger/logger.go:75","msg":"/api/v1/user/message/6738226236624896","status":200,"method":"POST","path":"/api/v1/user/message/6738226236624896","query":"","ip":"::1","user-agent":"PostmanRuntime/7.37.3","errors":"","cost":0.0122817}
+{"level":"INFO","time":"2024-04-29T14:58:03.508+0800","caller":"SHforum_backend/main.go:116","msg":"Shutdown Server ..."}
+{"level":"INFO","time":"2024-04-29T14:58:03.508+0800","caller":"SHforum_backend/main.go:125","msg":"Server exiting"}

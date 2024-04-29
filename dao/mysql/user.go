@@ -157,3 +157,13 @@ func GetFanList(userId int64) (fanList []*models.Fan, err error) {
 	}
 	return
 }
+
+// UpdateUserByID 更新用户信息
+func UpdateUserByID(userID int64, username string) (err error) {
+	//update user set username=? where user_id=?
+	result := db.Debug().Model(&models.User{}).Where("user_id=?", userID).Update("username", username)
+	if result.Error != nil {
+		return result.Error
+	}
+	return
+}
