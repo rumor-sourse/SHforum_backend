@@ -19,5 +19,6 @@ RUN go mod tidy
 # 将我们的代码编译成二进制可执行文件 bubble
 RUN go build -o shforum .
 
+
 # 需要运行的命令
-ENTRYPOINT ["/build/shforum"]
+ENTRYPOINT ["./shforum"]
