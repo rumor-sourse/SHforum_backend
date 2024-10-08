@@ -125,4 +125,4 @@ func main() {
 	zap.L().Info("Server exiting")
 }
 
-//go-wrk -t=8 -c=100 -n=100000 "http://localhost:8088/api/v1/posts?size=10"
+//go-wrk -t=80 -c=100 -n=30000 "http://localhost:8088/api/v1/posts?size=10"

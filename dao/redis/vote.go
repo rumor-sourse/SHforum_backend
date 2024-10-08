@@ -81,3 +81,34 @@ func VoteForPost(userID, postID string, value float64) error {
 	_, err := pipeline.Exec(ctx)
 	return err
 }
+
+/*论文写的
+func VoteForPost(uID, pID string, v float64) error {
+	// 查投票记录
+	postkey := getRedisKey(KeyPostVotedZSetPF + pID)
+	score := client.ZScore(ctx, postkey, uID).Val()
+	//如果这一次投票的值和之前的值一样，就提示不允许重复投票
+	if score == v {
+		zap.L().Error("重复投票")
+		return ErrorVoteRepeated
+	}
+	var dir float64
+	if v > score {
+		dir = 1
+	} else {
+		dir = -1
+	}
+	dif := math.Abs(score - v) //计算差值
+	pipeline := client.TxPipeline()
+	scorekey := getRedisKey(KeyPostScoreZSet)
+	pipeline.ZIncrBy(ctx, scorekey, dir*dif*scorePerVote, pID)
+	// 3、记录用户为该贴子投票的数据
+	if v == 0 {
+		pipeline.ZRem(ctx, postkey, pID)
+	} else {
+		pipeline.ZAdd(ctx, postkey, redis.Z{v, uID})
+	}
+	_, err := pipeline.Exec(ctx)
+	return err
+}
+*/
