@@ -1,16 +1,15 @@
 package main
 
 import (
-	"SHforum_backend/controllers"
-	"SHforum_backend/dao/mysql"
-	"SHforum_backend/dao/redis"
-	"SHforum_backend/es"
-	"SHforum_backend/logger"
-	"SHforum_backend/logic"
-	"SHforum_backend/rabbitmq"
+	"SHforum_backend/interval/dao/mysql"
+	"SHforum_backend/interval/dao/redis"
+	"SHforum_backend/interval/logic"
+	"SHforum_backend/interval/settings"
+	"SHforum_backend/pkg/es"
+	"SHforum_backend/pkg/logger"
+	"SHforum_backend/pkg/rabbitmq"
+	"SHforum_backend/pkg/snowflake"
 	"SHforum_backend/routes"
-	"SHforum_backend/settings"
-	"SHforum_backend/util/snowflake"
 	"context"
 	"fmt"
 	"go.uber.org/zap"
@@ -43,7 +42,7 @@ func main() {
 		fmt.Printf("init settings failed, err:%v\n", err)
 		return
 	}
-	//初始化日志
+	// 初始化日志
 	if err := logger.Init(settings.Conf.LogConfig, settings.Conf.Mode); err != nil {
 		fmt.Printf("init logger failed, err:%v\n", err)
 		return
@@ -55,56 +54,48 @@ func main() {
 		}
 	}(zap.L()) // 将缓冲区的日志追加到日志文件中
 	zap.L().Debug("logger init success...")
-	//初始化数据库MYSQL
+	// 初始化数据库MYSQL
 	if err := mysql.Init(settings.Conf.MySQLConfig); err != nil {
 		fmt.Printf("init mysql failed, err:%v\n", err)
 		return
 	}
-	//初始化Redis
+	// 初始化Redis
 	if err := redis.Init(settings.Conf.RedisConfig); err != nil {
 		fmt.Printf("init redis failed, err:%v\n", err)
 		return
 	}
 	defer redis.Close()
-	//初始胡Rabbitmq
-	if err := rabbitmq.InitRabbitMQ(settings.Conf.RabbitMQConfig); err != nil {
+	// 初始化Rabbitmq
+	if err := rabbitmq.Init(settings.Conf.RabbitMQConfig); err != nil {
 		fmt.Printf("init rabbitmq failed, err:%v\n", err)
 		return
 	}
-	//初始化Es
-	if err := es.InitEs(settings.Conf.EsConfig); err != nil {
+	// 初始化消费者
+	initConsumers()
+	// 初始化Es
+	if err := es.Init(settings.Conf.EsConfig); err != nil {
 		fmt.Printf("init es failed, err:%v\n", err)
 		return
 	}
-	//初始化雪花算法
+	// 初始化雪花算法
 	if err := snowflake.Init(settings.Conf.SnowFlakeConfig.StartTime); err != nil {
 		fmt.Printf("init snowflake failed, err:%v\n", err)
 		return
 	}
-	//初始化gin框架内置的校验器使用的翻译器
-	if err := controllers.InitTrans("zh"); err != nil {
-		fmt.Printf("init validator trans failed, err:%v\n", err)
-		return
-	}
-	//5、注册路由
+	// 注册路由
 	r := routes.SetUp(settings.Conf.Mode)
-	//6、启动服务（优雅关机）
+	// 启动服务（优雅关机）
 	srv := &http.Server{
 		Addr:    fmt.Sprintf(":%d", settings.Conf.Port),
 		Handler: r,
 	}
+
 	go func() {
 		// 开启一个goroutine启动服务
 		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
 			zap.L().Fatal("listen: %s\n", zap.Error(err))
 		}
 	}()
-	//开启MQ监听服务
-	go logic.MQReceiveCreatePostMessageByEs()
-	go logic.MQReceiveCreatePostMessageByMysql()
-	go logic.MQReceiveCodeMessage()
-	go logic.MQReceiveCreateCommentMessageByMysql()
-	go logic.MQReceiveUpdateCommentLikeMessgeByMysql()
 	// 等待中断信号来优雅地关闭服务器，为关闭服务器操作设置一个5秒的超时
 	quit := make(chan os.Signal, 1) // 创建一个接收信号的通道
 	// kill 默认会发送 syscall.SIGTERM 信号
@@ -125,4 +116,12 @@ func main() {
 	zap.L().Info("Server exiting")
 }
 
-//go-wrk -t=80 -c=100 -n=30000 "http://localhost:8088/api/v1/posts?size=10"
+// initConsumers 初始化消费者
+func initConsumers() {
+	//开启MQ监听服务
+	go logic.MQReceiveCreatePostMessageByEs()
+	go logic.MQReceiveCreatePostMessageByMysql()
+	go logic.MQReceiveCodeMessage()
+	go logic.MQReceiveCreateCommentMessageByMysql()
+	go logic.MQReceiveUpdateCommentLikeMessgeByMysql()
+}
