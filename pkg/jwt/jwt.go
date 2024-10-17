@@ -1,7 +1,7 @@
 package jwt
 
 import (
-	"SHforum_backend/interval/settings"
+	"SHforum_backend/internal/settings"
 	"errors"
 	"github.com/golang-jwt/jwt/v5"
 	"time"

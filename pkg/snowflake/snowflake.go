@@ -1,7 +1,7 @@
 package snowflake
 
 import (
-	"SHforum_backend/interval/settings"
+	"SHforum_backend/internal/settings"
 	sf "github.com/bwmarrin/snowflake"
 	"go.uber.org/zap"
 	"log"

@@ -1,10 +1,10 @@
 package main
 
 import (
-	"SHforum_backend/interval/dao/mysql"
-	"SHforum_backend/interval/dao/redis"
-	"SHforum_backend/interval/logic"
-	"SHforum_backend/interval/settings"
+	"SHforum_backend/internal/dao/mysql"
+	"SHforum_backend/internal/dao/redis"
+	"SHforum_backend/internal/logic"
+	"SHforum_backend/internal/settings"
 	"SHforum_backend/pkg/es"
 	"SHforum_backend/pkg/logger"
 	"SHforum_backend/pkg/rabbitmq"

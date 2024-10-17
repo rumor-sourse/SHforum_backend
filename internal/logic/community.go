@@ -1,8 +1,8 @@
 package logic
 
 import (
-	"SHforum_backend/interval/dao/mysql"
-	"SHforum_backend/interval/models/response"
+	"SHforum_backend/internal/dao/mysql"
+	"SHforum_backend/internal/models/response"
 )
 
 func GetCommunityList() (data []*response.CommunityResponse, err error) {

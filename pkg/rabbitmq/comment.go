@@ -1,8 +1,8 @@
 package rabbitmq
 
 import (
-	"SHforum_backend/interval/dao/mysql"
-	"SHforum_backend/interval/models"
+	"SHforum_backend/internal/dao/mysql"
+	"SHforum_backend/internal/models"
 	"context"
 	"encoding/json"
 	"fmt"

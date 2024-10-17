@@ -1,7 +1,7 @@
 package controllers
 
 import (
-	"SHforum_backend/interval/logic"
+	"SHforum_backend/internal/logic"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 	"strconv"

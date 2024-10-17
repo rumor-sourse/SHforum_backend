@@ -1,7 +1,7 @@
 package rabbitmq
 
 import (
-	"SHforum_backend/interval/settings"
+	"SHforum_backend/internal/settings"
 	"fmt"
 	amqp "github.com/rabbitmq/amqp091-go"
 	"go.uber.org/zap"

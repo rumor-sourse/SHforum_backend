@@ -1,7 +1,7 @@
 package middlewares
 
 import (
-	"SHforum_backend/interval/controllers"
+	"SHforum_backend/internal/controllers"
 	"SHforum_backend/pkg/jwt"
 	"github.com/gin-gonic/gin"
 	"strings"

@@ -1,7 +1,7 @@
 package redis
 
 import (
-	"SHforum_backend/interval/models"
+	"SHforum_backend/internal/models"
 	"github.com/redis/go-redis/v9"
 	"math"
 	"strconv"

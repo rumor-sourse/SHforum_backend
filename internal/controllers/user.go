@@ -1,9 +1,9 @@
 package controllers
 
 import (
-	"SHforum_backend/interval/dao/mysql"
-	"SHforum_backend/interval/logic"
-	"SHforum_backend/interval/models"
+	"SHforum_backend/internal/dao/mysql"
+	"SHforum_backend/internal/logic"
+	"SHforum_backend/internal/models"
 	"SHforum_backend/util/random"
 	"errors"
 	"fmt"

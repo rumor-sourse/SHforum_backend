@@ -1,7 +1,7 @@
 package redis
 
 import (
-	"SHforum_backend/interval/settings"
+	"SHforum_backend/internal/settings"
 	"context"
 	"fmt"
 	"github.com/go-redsync/redsync/v4"

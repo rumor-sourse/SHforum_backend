@@ -1,7 +1,7 @@
 package mysql
 
 import (
-	"SHforum_backend/interval/models"
+	"SHforum_backend/internal/models"
 	"crypto/md5"
 	"encoding/hex"
 	"errors"

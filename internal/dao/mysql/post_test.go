@@ -1,8 +1,8 @@
 package mysql
 
 import (
-	"SHforum_backend/interval/models"
-	"SHforum_backend/interval/settings"
+	"SHforum_backend/internal/models"
+	"SHforum_backend/internal/settings"
 	"testing"
 )
 

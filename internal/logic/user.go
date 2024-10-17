@@ -1,10 +1,10 @@
 package logic
 
 import (
-	"SHforum_backend/interval/dao/mysql"
-	"SHforum_backend/interval/dao/redis"
-	"SHforum_backend/interval/models"
-	"SHforum_backend/interval/models/response"
+	"SHforum_backend/internal/dao/mysql"
+	"SHforum_backend/internal/dao/redis"
+	"SHforum_backend/internal/models"
+	"SHforum_backend/internal/models/response"
 	"SHforum_backend/pkg/jwt"
 	"SHforum_backend/pkg/rabbitmq"
 	"SHforum_backend/pkg/snowflake"

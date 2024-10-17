@@ -1,7 +1,7 @@
 package mysql
 
 import (
-	"SHforum_backend/interval/models"
+	"SHforum_backend/internal/models"
 	"errors"
 	"go.uber.org/zap"
 	"gorm.io/gorm"

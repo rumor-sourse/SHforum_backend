@@ -1,7 +1,7 @@
 package rabbitmq
 
 import (
-	"SHforum_backend/interval/dao/redis"
+	"SHforum_backend/internal/dao/redis"
 	"SHforum_backend/pkg/email"
 	"context"
 	"encoding/json"

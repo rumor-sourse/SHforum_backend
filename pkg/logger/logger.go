@@ -1,7 +1,7 @@
 package logger
 
 import (
-	"SHforum_backend/interval/settings"
+	"SHforum_backend/internal/settings"
 	"github.com/gin-gonic/gin"
 	"net"
 	"net/http"

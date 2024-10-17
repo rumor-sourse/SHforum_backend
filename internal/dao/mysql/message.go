@@ -1,6 +1,6 @@
 package mysql
 
-import "SHforum_backend/interval/models"
+import "SHforum_backend/internal/models"
 
 // SendMessage 发送消息
 func SendMessage(user1 int64, user2 int64, title string, content string) (err error) {

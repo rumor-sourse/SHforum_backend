@@ -1,7 +1,7 @@
 package mysql
 
 import (
-	"SHforum_backend/interval/models"
+	"SHforum_backend/internal/models"
 	"gorm.io/gorm/clause"
 )
 

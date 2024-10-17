@@ -1,7 +1,7 @@
 package es
 
 import (
-	"SHforum_backend/interval/settings"
+	"SHforum_backend/internal/settings"
 	"fmt"
 	"github.com/olivere/elastic/v7"
 	"log"

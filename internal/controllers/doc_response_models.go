@@ -1,7 +1,7 @@
 package controllers
 
 import (
-	"SHforum_backend/interval/models/response"
+	"SHforum_backend/internal/models/response"
 )
 
 // 专门用来放接口文档用到的odel

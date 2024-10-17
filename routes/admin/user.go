@@ -1,7 +1,7 @@
 package admin
 
 import (
-	"SHforum_backend/interval/controllers"
+	"SHforum_backend/internal/controllers"
 	"SHforum_backend/middlewares"
 	"github.com/gin-gonic/gin"
 )

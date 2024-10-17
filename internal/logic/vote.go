@@ -1,8 +1,8 @@
 package logic
 
 import (
-	"SHforum_backend/interval/dao/redis"
-	"SHforum_backend/interval/models"
+	"SHforum_backend/internal/dao/redis"
+	"SHforum_backend/internal/models"
 	"go.uber.org/zap"
 	"strconv"
 )

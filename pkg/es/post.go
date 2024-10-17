@@ -1,7 +1,7 @@
 package es
 
 import (
-	"SHforum_backend/interval/models"
+	"SHforum_backend/internal/models"
 	"context"
 	"encoding/json"
 	"github.com/olivere/elastic/v7"
