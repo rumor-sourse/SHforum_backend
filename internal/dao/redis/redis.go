@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/go-redsync/redsync/v4"
 	"github.com/go-redsync/redsync/v4/redis/goredis/v9"
+	"github.com/redis/go-redis/extra/redisotel/v9"
 	goredislib "github.com/redis/go-redis/v9"
 	"sync"
 )
@@ -30,6 +31,15 @@ func Init(cfg *settings.RedisConfig) (err error) {
 			PoolSize: cfg.PoolSize,
 		})
 	})
+	// 启用 tracing
+	if err := redisotel.InstrumentTracing(client); err != nil {
+		panic(err)
+	}
+
+	// 启用 metrics
+	if err := redisotel.InstrumentMetrics(client); err != nil {
+		panic(err)
+	}
 	pool := goredis.NewPool(client)
 	RedSync = redsync.New(pool)
 	_, err = client.Ping(context.TODO()).Result()

@@ -5,11 +5,18 @@ import (
 	"SHforum_backend/internal/dao/redis"
 	"SHforum_backend/internal/models"
 	"SHforum_backend/internal/models/response"
+	"SHforum_backend/internal/settings"
+	rpc "SHforum_backend/pb"
 	"SHforum_backend/pkg/es"
 	"SHforum_backend/pkg/rabbitmq"
 	"SHforum_backend/pkg/snowflake"
+	"context"
 	"fmt"
 	"go.uber.org/zap"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials/insecure"
+	"strconv"
+	"time"
 )
 
 func CreatePost(p *models.Post) (err error) {
@@ -217,6 +224,27 @@ func GetPostList(p *models.ParamPostList) (data []*response.PostDetailResponse, 
 		return nil, err
 	}
 	return
+}
+
+func Share(longUrl string) (shortUrl string, err error) {
+	fmt.Println(longUrl)
+	target := settings.Conf.RpcServerConfig.Host + ":" + strconv.FormatInt(int64(settings.Conf.RpcServerConfig.Port), 10)
+	conn, err := grpc.Dial(target, grpc.WithTransportCredentials(insecure.NewCredentials()))
+	if err != nil {
+		zap.L().Error("grpc.Dial() failed", zap.Error(err))
+		return "", err
+	}
+	defer conn.Close()
+	c := rpc.NewConvertServiceClient(conn)
+
+	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
+	defer cancel()
+	r, err := c.Convert(ctx, &rpc.ConvertReq{LongUrl: longUrl})
+	if err != nil {
+		zap.L().Error("c.Convert() failed", zap.Error(err))
+		return "", err
+	}
+	return r.ShortUrl, nil
 }
 
 func MQSendCreatePostMessage(userID int64, post models.Post) {

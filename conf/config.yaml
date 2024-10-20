@@ -1,5 +1,6 @@
-name: "web_app"
+name: "SHforum"
 mode: "dev"
+host: "127.0.0.1"
 port: 8088
 version: "v0.0.1"
 snowflake:
@@ -51,3 +52,11 @@ rabbitmq:
 elasticsearch:
   host: "127.0.0.1"
   port: 9200
+
+rpc_server:
+  host: "127.0.0.1"
+  port: 8081
+
+jaeger:
+  host: "127.0.0.1"
+  http_collector_port: 4318

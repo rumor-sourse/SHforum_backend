@@ -30,8 +30,12 @@ func RegisterPostRouter(api *gin.RouterGroup) {
 		//为某个贴子投票
 		postRouter.POST("/vote", postController.PostVoteHandler)
 		//获取某个贴子的评论列表
-		postRouter.GET("/comments/:id", postController.GetCommentByPostIdHandler)
+		postRouter.GET("/:id/comments", postController.GetCommentByPostIdHandler)
 		//获取某个贴子的热评
-		postRouter.GET("/hotcomment/:id", postController.GetHotCommentByPostIdHandler)
+		postRouter.GET("/:id/hotcomment", postController.GetHotCommentByPostIdHandler)
+		//分享贴子
+		postRouter.GET("/:id/share", postController.SharePostHandler)
+		//分享评论
+		postRouter.GET("/:id/comment/:commentId/share", postController.ShareCommentHandler)
 	}
 }

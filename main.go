@@ -6,6 +6,7 @@ import (
 	"SHforum_backend/internal/logic"
 	"SHforum_backend/internal/settings"
 	"SHforum_backend/pkg/es"
+	"SHforum_backend/pkg/jaeger"
 	"SHforum_backend/pkg/logger"
 	"SHforum_backend/pkg/rabbitmq"
 	"SHforum_backend/pkg/snowflake"
@@ -13,11 +14,16 @@ import (
 	"context"
 	"fmt"
 	"go.uber.org/zap"
+	"log"
 	"net/http"
 	"os"
 	"os/signal"
 	"syscall"
 	"time"
+)
+
+var (
+	ctx = context.Background()
 )
 
 // Go Web通用脚手架
@@ -37,6 +43,7 @@ import (
 // @host 127.0.0.1
 // @BasePath /api/v1
 func main() {
+
 	// 加载配置文件
 	if err := settings.Init(); err != nil {
 		fmt.Printf("init settings failed, err:%v\n", err)
@@ -82,6 +89,18 @@ func main() {
 		fmt.Printf("init snowflake failed, err:%v\n", err)
 		return
 	}
+	// 初始化链路追踪
+	tp, err := jaeger.InitTracer(ctx)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	defer func() {
+		if err := tp.Shutdown(ctx); err != nil {
+			log.Fatal(err)
+		}
+	}()
+
 	// 注册路由
 	r := routes.SetUp(settings.Conf.Mode)
 	// 启动服务（优雅关机）

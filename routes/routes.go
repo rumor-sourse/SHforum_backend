@@ -2,6 +2,7 @@ package routes
 
 import (
 	_ "SHforum_backend/docs"
+	"SHforum_backend/internal/settings"
 	"SHforum_backend/middlewares"
 	"SHforum_backend/pkg/logger"
 	"SHforum_backend/routes/admin"
@@ -9,6 +10,8 @@ import (
 	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"
 	gs "github.com/swaggo/gin-swagger"
+	"go.opentelemetry.io/contrib/instrumentation/github.com/gin-gonic/gin/otelgin"
+	"go.opentelemetry.io/otel/trace"
 	"net/http"
 	"time"
 )
@@ -19,8 +22,14 @@ func SetUp(mode string) *gin.Engine {
 		gin.SetMode(gin.ReleaseMode)
 	}
 	r := gin.New()
-	r.Use(logger.GinLogger(), logger.GinRecovery(true))
-	middlewares.RateLimitMiddleware(time.Microsecond*time.Duration(200), 20000)
+	r.Use(logger.GinLogger(),
+		logger.GinRecovery(true),
+		middlewares.RateLimitMiddleware(time.Microsecond*time.Duration(200), 20000),
+		otelgin.Middleware(settings.Conf.Name),
+		func(c *gin.Context) {
+			c.Header("Trace-Id", trace.SpanFromContext(c.Request.Context()).SpanContext().TraceID().String())
+		})
+
 	// 注册swagger路由
 	r.GET("/swagger/*any", gs.WrapHandler(swaggerFiles.Handler))
 	api := r.Group("/api/v1")

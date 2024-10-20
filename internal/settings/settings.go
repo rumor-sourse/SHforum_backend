@@ -12,6 +12,7 @@ type AppConfig struct {
 	Name    string `mapstructure:"name"`
 	Mode    string `mapstructure:"mode"`
 	Version string `mapstructure:"version"`
+	Host    string `mapstructure:"host"`
 	Port    int    `mapstructure:"port"`
 
 	*SnowFlakeConfig `mapstructure:"snowflake"`
@@ -21,6 +22,8 @@ type AppConfig struct {
 	*RedisConfig     `mapstructure:"redis"`
 	*RabbitMQConfig  `mapstructure:"rabbitmq"`
 	*EsConfig        `mapstructure:"elasticsearch"`
+	*RpcServerConfig `mapstructure:"rpc_server"`
+	*JaegerConfig    `mapstructure:"jaeger"`
 }
 
 type SnowFlakeConfig struct {
@@ -74,6 +77,16 @@ type RabbitMQConfig struct {
 type EsConfig struct {
 	Host string `mapstructure:"host"`
 	Port int    `mapstructure:"port"`
+}
+
+type RpcServerConfig struct {
+	Host string `mapstructure:"host"`
+	Port int    `mapstructure:"port"`
+}
+
+type JaegerConfig struct {
+	Host              string `mapstructure:"host"`
+	HttpCollectorPort int    `mapstructure:"http_collector_port"`
 }
 
 func Init() (err error) {

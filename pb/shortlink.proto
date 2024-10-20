@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package rpc;
+option go_package = "./rpc";
+
+message ConvertReq {
+  string LongUrl = 1;
+}
+
+message ConvertResp {
+  string ShortUrl = 1;
+}
+
+service ConvertService {
+  rpc convert(ConvertReq) returns (ConvertResp);
+}

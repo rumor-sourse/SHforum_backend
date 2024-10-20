@@ -8,6 +8,7 @@ import (
 	"go.uber.org/zap"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
+	"gorm.io/plugin/opentelemetry/tracing"
 	"sync"
 )
 
@@ -26,6 +27,11 @@ func Init(cfg *settings.MySQLConfig) (err error) {
 		}), &gorm.Config{})
 		if err != nil {
 			zap.L().Error("connect DB failed, err:%v\n", zap.Error(err))
+			return
+		}
+		err = db.Use(tracing.NewPlugin(tracing.WithoutMetrics()))
+		if err != nil {
+			zap.L().Error("use tracing plugin failed", zap.Error(err))
 			return
 		}
 		sqlDB, err := db.DB()

@@ -3,8 +3,10 @@ package controllers
 import (
 	"SHforum_backend/internal/logic"
 	"SHforum_backend/internal/models"
+	"SHforum_backend/internal/settings"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
+	"net/url"
 	"strconv"
 )
 
@@ -243,4 +245,37 @@ func (pc *PostController) GetHotCommentByPostIdHandler(c *gin.Context) {
 	}
 	//返回数据
 	ResponseSuccess(c, data)
+}
+
+func (pc *PostController) SharePostHandler(c *gin.Context) {
+	longUrl := GetBaseShareUrl(c)
+	shortUrl, err := logic.Share(longUrl)
+	if err != nil {
+		zap.L().Error("GetShortURL failed", zap.Error(err))
+		ResponseError(c, CodeServerBusy)
+		return
+	}
+	ResponseSuccess(c, shortUrl)
+}
+
+func (pc *PostController) ShareCommentHandler(c *gin.Context) {
+	longUrl := GetBaseShareUrl(c)
+	shortUrl, err := logic.Share(longUrl)
+	if err != nil {
+		zap.L().Error("GetShortURL failed", zap.Error(err))
+		ResponseError(c, CodeServerBusy)
+		return
+	}
+	ResponseSuccess(c, shortUrl)
+}
+
+func GetBaseShareUrl(c *gin.Context) string {
+	//获取当前url
+	currentURL := c.Request.URL
+	longUrl := &url.URL{
+		Scheme: "http",
+		Host:   settings.Conf.Host + ":" + strconv.FormatInt(int64(settings.Conf.Port), 10),
+		Path:   currentURL.Path[:len(currentURL.Path)-len("/share")],
+	}
+	return longUrl.String()
 }
